@@ -1,0 +1,44 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// 组件首页
+		{
+			"path": "pages/index/components"
+		},
+		{
+			"path": "pages/index/template"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF",
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#909399",
+		"selectedColor": "#303133",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [{
+				"pagePath": "pages/index/components",
+				"iconPath": "static/image/tabBar/comTab.png",
+				"selectedIconPath": "static/image/tabBar/comTabSelect.png",
+				"text": "组件"
+			},
+
+			{
+				"pagePath": "pages/index/template",
+				"iconPath": "static/image/tabBar/temTab.png",
+				"selectedIconPath": "static/image/tabBar/temTabSelect.png",
+				"text": "模板"
+			},
+			{
+				"pagePath": "pages/index/template",
+				"iconPath": "static/image/tabBar/temTab.png",
+				"selectedIconPath": "static/image/tabBar/temTabSelect.png",
+				"text": "待定"
+			}
+		]
+	}
+}

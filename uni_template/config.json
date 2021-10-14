@@ -1,0 +1,44 @@
+{
+    "nav":[
+        {
+            "name": "导航组件",
+            "enName": "base",
+            "packages":[
+                {
+                    "name": "Navbar",
+                    "cName": "头部导航",
+                    "desc": "头部导航",
+                    "show": true,
+                    "path":"/pages/componentsA/navbar/index"
+                },
+                {
+                    "name": "Navbar",
+                    "cName": "头部导航",
+                    "desc": "头部导航",
+                    "show": true,
+                    "path":"/pages/componentsA/navbar/index'"
+                }
+            ]
+        },
+        {
+            "name": "操作反馈",
+            "enName": "base", 
+            "packages":[
+                {
+                    "name": "Navbar",
+                    "cName": "头部导航",
+                    "desc": "头部导航",
+                    "show": true,
+                    "path":"/pages/componentsA/navbar/index"
+                },
+                {
+                    "name": "Navbar",
+                    "cName": "头部导航",
+                    "desc": "头部导航",
+                    "show": true,
+                    "path":"/pages/componentsA/navbar/index'"
+                }
+            ]
+        }
+    ]
+}
