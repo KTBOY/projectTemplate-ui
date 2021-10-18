@@ -6,27 +6,33 @@
 		},
 		{
 			"path": "pages/index/template"
+		},
+		//折叠面板
+		{
+			"path": "pages/form/collapse/index",
+			"style": {
+				"navigationBarTitleText": "折叠面板"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uView",
 		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#FFFFFF",
-		"navigationStyle": "custom"
+		"backgroundColor": "#FFFFFF"
 	},
 	"tabBar": {
 		"color": "#909399",
 		"selectedColor": "#303133",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
-		"list": [{
+		"list": [
+			{
 				"pagePath": "pages/index/components",
 				"iconPath": "static/image/tabBar/comTab.png",
 				"selectedIconPath": "static/image/tabBar/comTabSelect.png",
 				"text": "组件"
 			},
-
 			{
 				"pagePath": "pages/index/template",
 				"iconPath": "static/image/tabBar/temTab.png",

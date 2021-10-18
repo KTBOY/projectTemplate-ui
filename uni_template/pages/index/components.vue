@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2021-10-14 19:07:52
+ * @LastEditTime: 2021-10-18 19:23:01
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\pages\index\components.vue
@@ -19,15 +19,17 @@
       <view class="nav-item" v-for="nav in nav" :key="nav">
         <view class="nav-name">{{ nav.name }}</view>
           <template  v-for="packageItem in nav.packages"  :key="packageItem">
-            <view class="nav-info"   v-if="packageItem.show">
-              <view>
-                <navigator :url="packageItem.path">
+            <view    v-if="packageItem.show">
+                <navigator :url="packageItem.path" class="nav-info">
+
                   <view>{{ packageItem.name }} {{ packageItem.cName }}</view>
-                </navigator>
-              </view>
-              <view>
-                <uni-icons type="forward" size="20"></uni-icons>
-              </view>
+
+                <view>
+                   <uni-icons type="forward" size="20"></uni-icons>
+                  <!-- <u-icon name="photo"></u-icon>
+				  <u-image width="100%" height="300rpx" src="https://cdn.uviewui.com/uview/example/fade.jpg'"></u-image> -->
+                </view>
+              </navigator>
             </view>
           </template>
       </view>

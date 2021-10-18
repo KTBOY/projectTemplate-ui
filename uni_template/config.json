@@ -39,6 +39,19 @@
                     "path":"/pages/componentsA/navbar/index'"
                 }
             ]
+        },
+        {
+            "name": "表单组件",
+            "enName": "base", 
+            "packages":[
+                {
+                    "name": "Collapse",
+                    "cName": "折叠面板",
+                    "desc": "折叠面板",
+                    "show": true,
+                    "path":"/pages/form/collapse/index"
+                }
+            ]
         }
     ]
 }
