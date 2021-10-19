@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-18 11:18:24
- * @LastEditTime: 2021-10-18 19:31:36
+ * @LastEditTime: 2021-10-19 15:33:25
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\components\form\collapse\collapse-item.vue
@@ -14,14 +14,8 @@
         <view class="title">{{ title }}</view>
       </view>
 
-      <view class="collapse-icon"   >
-         <uni-icons
-          type="arrowdown"
-          size="20"
-          :class="{ 'icon-active': isShow }"
-        ></uni-icons> 
-       	<!-- <u-icon :class="{ 'u-arrow-down-icon-active': isShow }"
-					 class="u-arrow-down-icon" name="arrow-down"></u-icon>  :class="{ 'icon-active': isShow }"-->
+      <view class="collapse-icon" :class="{ 'icon-active': isShow }">
+        <uni-icons type="arrowdown" size="20"></uni-icons>
       </view>
     </view>
 
@@ -47,6 +41,10 @@ const props = defineProps({
     type: String,
     default: "你好",
   },
+  index:{
+    type:Number,
+    
+  }
 });
 const height: any = ref(0);
 const isShow: Boolean = ref(false);
@@ -75,47 +73,37 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
+.title {
+}
 .collapse {
-  &-item {
-  }
   &-head {
     display: flex;
-    &-info {
-      > .title {
-        width: 600rpx;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-    }
-    &-icon {
-      transition: all 0.3s;
+  }
+  &-info {
+    > .title {
+      width: 600rpx;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
+  &-icon {
+    transition: all 0.3s;
+  }
+  .icon-active {
+    transform: rotate(90deg) !important;
+    transform-origin: center center !important;
+  }
 
+  // 内容
   &-body {
     overflow: hidden;
     transition: all 0.3s;
     > .content {
       overflow: hidden;
       font-size: 28rpx;
-      color: red;
       text-align: left;
     }
   }
-}
-.u-arrow-down-icon {
-  transition: all 0.3s;
-  margin-right: 20rpx;
-  margin-left: 14rpx;
-}
-
-.icon-active {
-  display: inline-block;
-  color: red;
-  transform: rotate(180deg) !important;
-  transform-origin: center center !important;
-}
-.collapse-info {
 }
 </style>

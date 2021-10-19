@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2021-10-18 19:23:01
+ * @LastEditTime: 2021-10-19 11:36:13
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\pages\index\components.vue
@@ -26,27 +26,11 @@
 
                 <view>
                    <uni-icons type="forward" size="20"></uni-icons>
-                  <!-- <u-icon name="photo"></u-icon>
-				  <u-image width="100%" height="300rpx" src="https://cdn.uviewui.com/uview/example/fade.jpg'"></u-image> -->
                 </view>
               </navigator>
             </view>
           </template>
       </view>
-
-      <!-- <ol v-for="_nav in nav" :key="_nav">
-        <li>{{ _nav.name }}</li>
-        <ul>
-          <template v-for="_package in _nav.packages" :key="_package">
-            <li v-if="_package.show">
-              <router-link :to="_package.name.toLowerCase()"
-                >{{ _package.name }}&nbsp;&nbsp;{{ _package.cName }}</router-link
-              >
-             <uni-icons type="forward" size="30"></uni-icons>
-            </li>
-          </template>
-        </ul>
-      </ol> -->
     </view>
   </view>
 </template>

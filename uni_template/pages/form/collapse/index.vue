@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-18 11:07:20
- * @LastEditTime: 2021-10-18 14:58:59
+ * @LastEditTime: 2021-10-19 14:55:19
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\pages\form\collapse\index.vue
@@ -12,7 +12,7 @@
     <Card>
       <view class="collapse-area">
         <Collapse>
-          <CollapseItem :title="item.head" v-for="(item,index) in itemList" :key="index">
+          <CollapseItem :title="item.head" :index="index" v-for="(item,index) in itemList" :key="index">
           {{item.body}}
           </CollapseItem>
         </Collapse>
@@ -62,6 +62,7 @@ export default defineComponent({
   padding: 15rpx 20rpx;
   &-text {
     color: #a59da6;
+    margin: 15rpx 0;
   }
 }
 </style>
