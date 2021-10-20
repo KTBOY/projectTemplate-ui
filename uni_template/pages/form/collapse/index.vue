@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-18 11:07:20
- * @LastEditTime: 2021-10-19 14:55:19
+ * @LastEditTime: 2021-10-20 17:55:44
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\pages\form\collapse\index.vue
@@ -12,31 +12,54 @@
     <Card>
       <view class="collapse-area">
         <Collapse>
-          <CollapseItem :title="item.head" :index="index" v-for="(item,index) in itemList" :key="index">
-          {{item.body}}
+          <CollapseItem
+            @change="itemChange"
+            :title="item.head"
+            :open="item.open"
+            :accordion="accordion"
+            :index="index"
+            v-for="(item, index) in itemList"
+            :key="index"
+          >
+            {{ item.body }}
           </CollapseItem>
         </Collapse>
       </view>
     </Card>
+    <view>
+      <uni-data-checkbox
+        v-model="value"
+        :localdata="range"
+        @change="change"
+        :multiple="false"
+      ></uni-data-checkbox>
+    </view>
   </view>
 </template>
-<script lang="ts">
-import { Vue, defineComponent } from "vue";
+<script>
+import {defineComponent, ref } from "vue";
 import Card from "@/components/form/card/index.vue";
 import Collapse from "@/components/form/collapse/index.vue";
 import CollapseItem from "@/components/form/collapse/collapse-item.vue";
-export default defineComponent({
+export default{
   components: {
     Card,
     Collapse,
     CollapseItem,
   },
+
   setup() {
-    const itemList: any[] = [
+    const value = ref(0);
+    const range = ref([
+      { value: 0, text: "基础用法" },
+      { value: 1, text: "手风琴" },
+    ]);
+    const accordion = ref(true);
+    const itemList = ref([
       {
         head: "赏识在于角度的转换",
         body: "只要我们正确择取一个合适的参照物乃至稍降一格去看待他人，值得赏识的东西便会扑面而来",
-        open: true,
+        open: false,
         disabled: true,
       },
       {
@@ -49,13 +72,31 @@ export default defineComponent({
         body: "但是据说雕刻大卫像所用的这块大理石，曾被多位雕刻家批评得一无是处，有些人认为这块大理石采凿得不好，有些人嫌它的纹路不够美",
         open: false,
       },
-    ];
+    ]);
+    function itemChange(val) {
+      itemList.value.forEach((item, index) => {
+        if (val == index) {
+          item.open = !item.open;
+        } else {
+          item.open = false;
+        }
+      });
+    }
+    function change(e) {
+      console.log(e);
+
+      accordion.value = e.detail.value == 0 ? true : false;
+    }
     return {
       itemList,
+      itemChange,
+      value,
+      range,
+      change,
+      accordion,
     };
   },
-
-});
+};
 </script>
 <style lang="scss" scoped>
 .collapse {
@@ -64,5 +105,8 @@ export default defineComponent({
     color: #a59da6;
     margin: 15rpx 0;
   }
+}
+.active {
+  color: red;
 }
 </style>

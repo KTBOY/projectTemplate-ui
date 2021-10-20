@@ -38,14 +38,14 @@
 import { defineComponent, reactive } from "vue";
 import { nav } from "@/config.json";
 //defineComponent:对setup的option参数进行封装，在ts下并且正确的类型推断，
-export default defineComponent({
+export default{
   name: "doc",
   setup() {
     return reactive({
       nav,
     });
   },
-});
+};
 </script>
 <style lang="scss" scoped>
 .index {

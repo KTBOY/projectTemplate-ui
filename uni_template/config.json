@@ -6,7 +6,7 @@
             "packages":[
                 {
                     "name": "Navbar",
-                    "cName": "头部导航",
+                    "cName": "自定义导航",
                     "desc": "头部导航",
                     "show": true,
                     "path":"/pages/componentsA/navbar/index"

@@ -11,7 +11,7 @@
 		{
 			"path": "pages/form/collapse/index",
 			"style": {
-				"navigationBarTitleText": "折叠面板"
+				"navigationBarTitleText": "test"
 			}
 		}
 	],

@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-13 17:07:47
- * @LastEditTime: 2021-10-18 19:23:41
+ * @LastEditTime: 2021-10-20 19:06:27
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\App.vue
