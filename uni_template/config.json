@@ -50,6 +50,14 @@
                     "desc": "折叠面板",
                     "show": true,
                     "path":"/pages/form/collapse/index"
+                },
+                {
+                    "name": " Picker",
+                    "cName": "选择器",
+                    "desc": "选择器",
+                    "show": true,
+                    "path":"/pages/form/picker/index"
+                   
                 }
             ]
         }

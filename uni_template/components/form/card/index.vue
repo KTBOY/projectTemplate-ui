@@ -13,7 +13,6 @@
 </template>
 <style lang="scss" scoped>
 .card {
-  margin: 0 auto;
   height: auto;
   background-color: #ffffff;
   border-radius: 20rpx;

@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2021-10-19 11:36:13
+ * @LastEditTime: 2021-10-27 16:45:50
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\pages\index\components.vue
@@ -21,9 +21,7 @@
           <template  v-for="packageItem in nav.packages"  :key="packageItem">
             <view    v-if="packageItem.show">
                 <navigator :url="packageItem.path" class="nav-info">
-
                   <view>{{ packageItem.name }} {{ packageItem.cName }}</view>
-
                 <view>
                    <uni-icons type="forward" size="20"></uni-icons>
                 </view>
@@ -48,6 +46,9 @@ export default{
 };
 </script>
 <style lang="scss" scoped>
+page{
+  background: #ffffff;
+}
 .index {
   height: 100%;
   width: 100%;
@@ -83,9 +84,10 @@ export default{
   }
   &-components {
     background: #f7f8fa;
-    border-radius: 60rpx 60rpx 0 0;
+    border-radius: 80rpx 80rpx 0 0;
     overflow: hidden;
     padding: 60rpx 50rpx;
+    height: auto;
     .nav-name {
       line-height: 40rpx;
       font-size: 26rpx;

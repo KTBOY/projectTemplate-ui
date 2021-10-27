@@ -7,11 +7,17 @@
 		{
 			"path": "pages/index/template"
 		},
-		//折叠面板
+		//表单组件
 		{
 			"path": "pages/form/collapse/index",
 			"style": {
-				"navigationBarTitleText": "test"
+				"navigationBarTitleText": "折叠面板"
+			}
+		},
+		{
+			"path":"pages/form/picker/index",
+			"style": {
+				"navigationBarTitleText": "Picker选择器"
 			}
 		}
 	],
