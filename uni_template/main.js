@@ -1,18 +1,17 @@
 /*
  * @Author: zlc
  * @Date: 2021-10-13 17:07:47
- * @LastEditTime: 2021-10-18 19:10:56
+ * @LastEditTime: 2021-10-29 20:20:59
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\main.ts
+ * @FilePath: \git项目\project-template\uni_template\main.js
  */
-import App from './App'
+import App from './App.vue'
 
 // #ifndef VUE3
 import Vue from 'vue'
-import uView from "uview-ui";
-Vue.use(uView);
-Vue.config.productionTip = false
+
+Vue.config.productionTip = true
 App.mpType = 'app'
 const app = new Vue({
     ...App
