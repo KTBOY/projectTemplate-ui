@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+@font-face {
+  font-family: uniicons;
+  src: url("../../uni_modules/uni-icons/components/uni-icons/uni.ttf") format("truetype");
+}
+.uni-icons[data-v-a2e81f6e] {
+  font-family: uniicons;
+  text-decoration: none;
+  text-align: center;
+}
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+body[data-v-6e6f4128] {
+  background: #ffffff;
+}
+.index[data-v-6e6f4128] {
+  height: 100%;
+  width: 100%;
+}
+.index-header[data-v-6e6f4128] {
+  width: 23.4375rem;
+  height: 7.3125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.index-header > img[data-v-6e6f4128] {
+  width: 3.75rem;
+  height: 3.75rem;
+  margin-right: 0.625rem;
+  flex-shrink: 0;
+}
+.index-header .info[data-v-6e6f4128] {
+  display: flex;
+  flex-direction: column;
+}
+.index-header .info h1[data-v-6e6f4128] {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  font-size: 1.0625rem;
+  color: #333333;
+}
+.index-header .info p[data-v-6e6f4128] {
+  height: 0.5625rem;
+  line-height: 0.5625rem;
+  font-size: 0.375rem;
+  color: #9a9b9d;
+}
+.index-components[data-v-6e6f4128] {
+  background: #f7f8fa;
+  border-radius: 2.5rem 2.5rem 0 0;
+  overflow: hidden;
+  padding: 1.875rem 1.5625rem;
+  height: auto;
+}
+.index-components .nav-name[data-v-6e6f4128] {
+  line-height: 1.25rem;
+  font-size: 0.8125rem;
+  color: #909ca4;
+  margin-bottom: 0.625rem;
+}
+.index-components .nav-info[data-v-6e6f4128] {
+  width: 100%;
+  height: 2.65625rem;
+  line-height: 2.65625rem;
+  padding: 0 0.3125rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1.5625rem;
+  background: #ffffff;
+  box-shadow: 0 0.0625rem 0.25rem 0 rgba(102, 102, 102, 0.06);
+  margin-bottom: 0.625rem;
+}

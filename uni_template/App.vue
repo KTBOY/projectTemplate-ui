@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-13 17:07:47
- * @LastEditTime: 2021-10-20 19:06:27
+ * @LastEditTime: 2021-10-29 17:08:57
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\App.vue
+ * @FilePath: \git项目\project-template\uni_template\App.vue
 -->
 <script>
 	export default {
@@ -23,9 +23,14 @@
 <style lang="scss">
 /* 扩展图标库 */
 @import '@/static/iconfont.css';
+
+
 page{
+
 	background: #f7f8fa;
+	
 }
+
 
 
 

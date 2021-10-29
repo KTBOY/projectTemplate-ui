@@ -5,7 +5,6 @@
  * @LastEditors: zlc
  * @Description: Picker选择器
  * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\components\form\picker\picker-basic-usage\index.vue
-
 -->
 <template>
   <view class="picker" v-if="modelValue" >
