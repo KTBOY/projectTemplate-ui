@@ -58,6 +58,14 @@
                     "show": true,
                     "path":"/pages/form/picker/index"
                    
+                },
+                {
+                    "name": " Step",
+                    "cName": "步骤条",
+                    "desc": "步骤条",
+                    "show": true,
+                    "path":"/pages/form/step/index"
+                   
                 }
             ]
         }

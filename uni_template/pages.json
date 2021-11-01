@@ -19,7 +19,13 @@
 			"style": {
 				"navigationBarTitleText": "Picker选择器"
 			}
-		}
+		},
+		{
+			"path":"pages/form/step/index",
+			"style": {
+				"navigationBarTitleText": "Step步骤条"
+			}
+		},
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

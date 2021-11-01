@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:33:51
- * @LastEditTime: 2021-10-29 19:26:25
+ * @LastEditTime: 2021-11-01 15:29:18
  * @LastEditors: zlc
  * @Description: picker选择器
  * @FilePath: \git项目\project-template\uni_template\pages\form\picker\index.vue
@@ -35,7 +35,6 @@ export default {
     function change(e){
         let {key}=e.detail.data
         buttonLocation.value=key
-        
     }
     return {
       show,
