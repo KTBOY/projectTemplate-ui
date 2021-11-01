@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:49:46
- * @LastEditTime: 2021-10-29 19:27:22
+ * @LastEditTime: 2021-11-01 17:10:01
  * @LastEditors: zlc
  * @Description: Picker选择器
  * @FilePath: \git项目\project-template\uni_template\components\form\picker\index.vue
@@ -29,10 +29,10 @@
         </view>
 
         <view class="picker-bottom" v-show="buttonLocation == 'bottom'">
-          <button class="cancel" hover-class="none" type="button">
+          <button class="cancel" hover-class="none" type="button" @click="handCancel">
             {{ cancelText }}
           </button>
-          <button class="confirm" hover-class="none" type="button">
+          <button class="confirm" hover-class="none" type="button" @click="handConfirm">
             {{ confirmText }}
           </button>
         </view>
@@ -88,10 +88,11 @@ const props = defineProps({
     default: 'bottom',
   },
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue','confirm','cancel'])
 const value = ref([0])
 const indicatorStyle = ref('height: 50px')
 const showPickerView = ref(false)
+const currenIndex=ref(0)
 //关闭picker
 function close() {
   showPickerView.value = false
@@ -99,14 +100,27 @@ function close() {
   setTimeout(() => {
     emit('update:modelValue', showPickerView.value)
   }, 100)
-  
 }
-
 
 function handleChange(e) {
+  console.log(e.currentTarget.dataset.value);
+  currenIndex.value=e.currentTarget.dataset.value
   console.log(e)
 }
-
+function handConfirm() {
+  let currenObject={
+    currenObject:props.range[currenIndex.value],
+    currenIndex:currenIndex.value
+  }
+  showPickerView.value=false
+  emit('update:modelValue', showPickerView.value)
+  emit('confirm',currenObject)
+}
+function handCancel(){
+  showPickerView.value=false
+  emit('update:modelValue', showPickerView.value)
+  emit('cancel')
+}
 /**
  * @description: 获取需要渲染key
  * @param {Object} item
@@ -117,14 +131,15 @@ function getItemValue(item, mode) {
   return getType(item) == 'object' ? item[props.rangeKey] : item
 }
 
-watch(
-  () => props.modelValue,
-  (newValue, oldValue) => {
+watch([() => props.modelValue],(newValue, oldValue) => {
+  console.log(newValue);
     setTimeout(() => {
-      showPickerView.value = newValue
+      showPickerView.value = newValue[0];
+     
     }, 100)
   }
 )
+
 </script>
 
 <style lang="scss" scoped>

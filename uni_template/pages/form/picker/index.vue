@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:33:51
- * @LastEditTime: 2021-11-01 15:29:18
+ * @LastEditTime: 2021-11-01 16:55:33
  * @LastEditors: zlc
  * @Description: picker选择器
  * @FilePath: \git项目\project-template\uni_template\pages\form\picker\index.vue
@@ -24,7 +24,7 @@ export default {
     const show = ref(false)
     const value = ref(0)
     const rangePickerList = ref([1, 2, 3])
-    const buttonLocation=ref('buttom')
+    const buttonLocation=ref('bottom')
     const range = ref([
       { value: 0, text: '底部按钮', key: 'bottom' },
       { value: 1, text: '顶部按钮', key: 'top' },
