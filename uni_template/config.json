@@ -66,6 +66,14 @@
                     "show": true,
                     "path":"/pages/form/step/index"
                    
+                },
+                {
+                    "name": " Step",
+                    "cName": "日历",
+                    "desc": "日历",
+                    "show": true,
+                    "path":"/pages/form/day/index"
+                   
                 }
             ]
         }

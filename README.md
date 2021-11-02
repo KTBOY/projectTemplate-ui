@@ -4,6 +4,10 @@
 整体采用vue3写法
 uni-app项目架构模板，demo示例、常用组件
 
+demoTest:实验阶段的ui库、工具、模板
+
+uni_template：正式阶段的ui库、工具、模板
+
 #### 软件架构
 软件架构说明
 

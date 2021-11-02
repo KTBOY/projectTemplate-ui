@@ -25,7 +25,12 @@
 			"style": {
 				"navigationBarTitleText": "Step步骤条"
 			}
-		},
+		},{
+			"path":"pages/form/day/index",
+			"style": {
+				"navigationBarTitleText": "demo日历"
+			}
+		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

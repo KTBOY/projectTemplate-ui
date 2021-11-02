@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import step from '@/components/form/steps/index'
+import step from "@/components/form/steps/index.vue"
 import { ref } from 'vue'
 export default {
   components: {

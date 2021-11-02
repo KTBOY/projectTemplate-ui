@@ -1,0 +1,66 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/chanyong/chanyong",
+			"style": {
+				"navigationBarTitleText": "常用组件"
+			}
+		},
+		
+		{
+			"path": "pages/chanyong/buzhoutiao/index",
+			"style": {
+				"navigationBarTitleText": "步骤条"
+			}
+			
+		},
+		{
+			"path": "pages/chanyong/shoufengq/index",
+			"style": {
+				"navigationBarTitleText": "手风琴"
+			}
+			
+		},
+		
+		
+		{
+			"path": "pages/upload/upload",
+			"style": {
+				"navigationBarTitleText": "图片上传"
+			}
+		},
+		{
+			"path": "pages/dohuemo/dohuemo",
+			"style": {
+				"navigationBarTitleText": "动画"
+			}
+		},
+		{
+			"path": "pages/tabDemo/copyTab",
+			"style": {
+				"navigationBarTitleText": "新闻"
+
+			}
+		},
+		{
+			"path": "pages/dohuemo/tipIcon",
+			"style": {
+				"navigationBarTitleText": "滑动隐藏"
+		
+			}
+		}
+		
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
