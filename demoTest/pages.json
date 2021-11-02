@@ -41,6 +41,7 @@
 				"navigationBarTitleText": "动画"
 			}
 		},
+		
 		{
 			"path": "pages/tabDemo/copyTab",
 			"style": {
@@ -52,6 +53,13 @@
 			"path": "pages/dohuemo/tipIcon",
 			"style": {
 				"navigationBarTitleText": "滑动隐藏"
+		
+			}
+		},
+		{
+			"path": "pages/dohuemo/popr",
+			"style": {
+				"navigationBarTitleText": "铺满弹出层"
 		
 			}
 		}

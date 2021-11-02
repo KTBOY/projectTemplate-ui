@@ -25,6 +25,11 @@
 				动画-滑动隐藏
 			</navigator>
 		</view>
+		<view class="text-area">
+			<navigator class="imgbtn" url="../dohuemo/popr">
+				动画-滑动隐藏弹出层
+			</navigator>
+		</view>
 	</view>
 </template>
 
