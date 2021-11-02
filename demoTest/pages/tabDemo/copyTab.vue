@@ -1,3 +1,12 @@
+<!-- 
+参考链接 
+ https://blog.csdn.net/m0_46442996/article/details/116983049?spm=1000.2123.3001.4430
+ 
+ 
+ -->
+
+
+
 <template>
 	<view class="tui-tabs">
 		<scroll-view id="tab-bar" scroll-x scroll-with-animation class="tui-scroll-h" :show-scrollbar="false" :scroll-into-view="scrollInto">
