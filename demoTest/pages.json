@@ -62,6 +62,13 @@
 				"navigationBarTitleText": "铺满弹出层"
 		
 			}
+		},
+		{
+			"path": "pages/data/rili",
+			"style": {
+				"navigationBarTitleText": "手写日历"
+		
+			}
 		}
 		
 	],
@@ -69,6 +76,10 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		 "app-plus": {  
+		            "bounce": "vertical",  
+		            "scrollIndicator": "none"  
+		        }  
 	}
 }

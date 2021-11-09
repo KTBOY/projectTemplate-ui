@@ -30,6 +30,11 @@
 				动画-滑动隐藏弹出层
 			</navigator>
 		</view>
+		<view class="text-area">
+			<navigator class="imgbtn" url="../data/rili">
+				手写日历
+			</navigator>
+		</view>
 	</view>
 </template>
 
