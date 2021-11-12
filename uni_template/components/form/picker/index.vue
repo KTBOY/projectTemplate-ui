@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:49:46
- * @LastEditTime: 2021-11-01 17:10:01
+ * @LastEditTime: 2021-11-12 17:56:51
  * @LastEditors: zlc
  * @Description: Picker选择器
  * @FilePath: \git项目\project-template\uni_template\components\form\picker\index.vue
@@ -52,7 +52,7 @@
  * @property {String} range-key 当range参数的元素为对象时，指定Object中的哪个key的值作为选择器显示内容
  * @event {Function} confirm 点击确定按钮，返回当前选择的值
  * @event {Function} cancel 点击取消按钮，返回当前选择的值
- * @example <u-picker v-model="show" mode="time"></u-picker>
+ * @example <pickerBasicUsage v-model="show"></pickerBasicUsage>
  */
 import { ref, reactive, toRefs, onMounted, useAttrs, getCurrentInstance, watch, nextTick, watchEffect } from 'vue'
 import { getType } from '@/utils/index.js'
@@ -101,12 +101,13 @@ function close() {
     emit('update:modelValue', showPickerView.value)
   }, 100)
 }
-
+//选中菜单值
 function handleChange(e) {
   console.log(e.currentTarget.dataset.value);
   currenIndex.value=e.currentTarget.dataset.value
   console.log(e)
 }
+//确定
 function handConfirm() {
   let currenObject={
     currenObject:props.range[currenIndex.value],
@@ -116,6 +117,7 @@ function handConfirm() {
   emit('update:modelValue', showPickerView.value)
   emit('confirm',currenObject)
 }
+//取消
 function handCancel(){
   showPickerView.value=false
   emit('update:modelValue', showPickerView.value)

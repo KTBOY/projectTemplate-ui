@@ -71,7 +71,7 @@
                     "name": " Step",
                     "cName": "日历",
                     "desc": "日历",
-                    "show": true,
+                    "show": false,
                     "path":"/pages/form/day/index"
                    
                 }
