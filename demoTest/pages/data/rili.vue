@@ -27,6 +27,7 @@ export default {
 			calendarData: [{ label: '日' }, { label: '一' }, { label: '二' }, { label: '三' }, { label: '四' }, { label: '五' }, { label: '六' }],
 			calendarDataTime: [], //日历补充数据
 			calendarDataTimeNew: [], //日历不补充数据
+			calendarDataTimeSix:[],//日历当前月和前面5个月
 			year: 0,
 			month: 0,
 			date: 0,
@@ -39,6 +40,9 @@ export default {
 		//this.getCalendarDate();
 		this.setSeventDay();
 		this.setAllData();
+		console.log(this.getMonthBetween('2020-12','2021-5'));//获取两个日期之间月份数
+		 console.log(this.GetPreMonthDay('2021-5',6));//获取两个当前月份的前5个月
+		 
 	},
 	methods: {
 		getNow() {
@@ -50,6 +54,13 @@ export default {
 			let firstTime = +new Date(this.year, this.month - 1, 1, 0, 0, 0);
 			console.log(firstTime);
 		},
+		
+		monthDaySix(){
+			this.calendarDataTimeSix=[]
+			
+		},
+		
+		
 		monthDay(month) {
 			if ([1, 3, 5, 7, 8, 10, 12].includes(month)) {
 				return 31;
@@ -204,6 +215,7 @@ export default {
 			}
 			
 		},
+		
 
 		getCalendarDate() {
 			//this.onData();
@@ -218,7 +230,55 @@ export default {
 				result.push(this.calendarDataTime.slice(index, index + 7));
 			}
 		},
+		
+		// 获取两个日期的之间的所有年月
 
+	getMonthBetween(start,end){  
+		var d1="20202", d2="202111";  //这两个日期的获取自己搞定
+		
+		
+		// var m1=parseInt(d1.substr(4,2))-1;
+		// var y2=parseInt(d2.substr(0,4));
+		// var m2=parseInt(d2.substr(4,2))-1;
+		// do{
+		//    var d=new Date(y1,m1++,1);
+		//    var y=d.getFullYear();
+		//    var m=d.getMonth()+1;
+		//    var s=y+(m<10?"0":"")+m;  //这个s就是要打印的日期字串
+		//    console.log(s);   //打印方法自己改
+		// }while(d<new Date(y2,m2,1));
+	 } ,
+
+ 
+
+		GetPreMonthDay(date, monthNum) {
+         var dateArr = date.split('-');
+         var year = dateArr[0]; //获取当前日期的年份
+         var month = dateArr[1]; //获取当前日期的月份
+         var day = dateArr[2]; //获取当前日期的日
+         var days = new Date(year, month, 0);
+         days = days.getDate(); //获取当前日期中月的天数
+         var year2 = year;
+         var month2 = parseInt(month) - monthNum;
+         if (month2 <= 0) {
+             var absM = Math.abs(month2);
+             year2 = parseInt(year2) - Math.ceil(absM / 12 == 0 ? 1 : parseInt(absM) / 12);
+             month2 = 12 - (absM % 12);
+         }
+         var day2 = day;
+         var days2 = new Date(year2, month2, 0);
+         days2 = days2.getDate();
+         if (day2 > days2) {
+             day2 = days2;
+         }
+         if (month2 < 10) {
+             month2 = '0' + month2;
+         }
+		 
+        // var t2 = year2 + '-' + month2 + '-' + day2;
+		 var t2 = year2 + '-' + month2 
+         return t2;
+     },
 		setAllData() {
 			for (var i = 1; i < 3; i++) {
 				this.month = i;
