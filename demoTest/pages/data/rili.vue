@@ -18,6 +18,7 @@
 <script>
 import uniCalendar from '@/components/c-calendar/c-calendar.vue';
 import calendarChange from '@/components/c-calendar/a.js';
+import {timeFormat,getMonthBetween} from '@/util/index.js';
 export default {
 	components: {
 		uniCalendar
@@ -38,13 +39,40 @@ export default {
 	onLoad() {
 		this.getNow();
 		//this.getCalendarDate();
-		this.setSeventDay();
-		this.setAllData();
-		console.log(this.getMonthBetween('2020-12','2021-5'));//获取两个日期之间月份数
-		 console.log(this.GetPreMonthDay('2021-5',6));//获取两个当前月份的前5个月
-		 
+		//this.setSeventDay();
+		//this.setAllData();
+		this.startRili();
+		//console.log(getMonthBetween('2020-12','2021-5'));//获取两个日期之间月份数
+		// console.log(this.GetPreMonthDay('2021-5',6));//获取两个当前月份的前5个月月份数
+		// console.log(this.aaa());//获取月份
+		
 	},
 	methods: {
+		
+		startRili(){
+			//1.获取当前日期
+			let now = new Date().getTime();
+			let month =timeFormat('mm',now);//当前月份
+			let endData =timeFormat('yyyy-mm-dd',now);//年月日
+			let nowDataYearAndMonth =timeFormat('yyyy-mm',now);//当前年月
+			
+			//2.获取开始日期月份
+			let startData=this.GetPreMonthDay(nowDataYearAndMonth,6);//5个月前的月份
+			
+			//获取开始日期-结束日期的所有月份
+			let allBetween=getMonthBetween(startData,endData)
+			console.log(allBetween)
+		},
+		
+		
+		aaa() {
+			var d = new Date('2010-5').getTime();
+			let month =timeFormat('mm', d);//当前月份
+			console.log(month)
+			//console.log(d.getFullYear() + " " + (d.getMonth() + 1) + " " + d.getDate());
+			return false;
+		 },
+
 		getNow() {
 			let now = new Date();
 			this.year = +now.getFullYear();
@@ -54,11 +82,7 @@ export default {
 			let firstTime = +new Date(this.year, this.month - 1, 1, 0, 0, 0);
 			console.log(firstTime);
 		},
-		
-		monthDaySix(){
-			this.calendarDataTimeSix=[]
-			
-		},
+
 		
 		
 		monthDay(month) {
@@ -231,23 +255,9 @@ export default {
 			}
 		},
 		
-		// 获取两个日期的之间的所有年月
 
-	getMonthBetween(start,end){  
-		var d1="20202", d2="202111";  //这两个日期的获取自己搞定
-		
-		
-		// var m1=parseInt(d1.substr(4,2))-1;
-		// var y2=parseInt(d2.substr(0,4));
-		// var m2=parseInt(d2.substr(4,2))-1;
-		// do{
-		//    var d=new Date(y1,m1++,1);
-		//    var y=d.getFullYear();
-		//    var m=d.getMonth()+1;
-		//    var s=y+(m<10?"0":"")+m;  //这个s就是要打印的日期字串
-		//    console.log(s);   //打印方法自己改
-		// }while(d<new Date(y2,m2,1));
-	 } ,
+
+
 
  
 
