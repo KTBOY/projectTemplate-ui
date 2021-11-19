@@ -3,6 +3,12 @@
  * type 时间格式（yyyy-mm-dd hh:ii:ss / mm-dd / hh:ii / yyyy-mm）可自定义
  * date 毫秒时间戳（1554954127000）
  * 使用：timeFormat('yyyy-mm-dd hh:ii:ss',1554954127000)
+ * 获取
+ * var d = new Date('2010-5').getTime();
+ * let month =timeFormat('yyyy-mm', d);//时间戳转换年月
+ * console.log(month)
+ * month=new Date(month).getTime();
+ * console.log(timeFormat('yyyy-mm', month))
  * 说明：紧支持毫秒级时间戳，传统秒级 Unix 时间戳需要乘以 1000 转换为毫秒
  */
 export function timeFormat(type, date) {
@@ -98,4 +104,21 @@ export function getYearBetween(start, end) {
 		startTime.setFullYear(startTime.getFullYear() + 1);
 	}
 	return result;
+}
+
+
+
+//根据某年某月计算出一个月的年月日
+export function getDaysInMonth(year, month) {
+  const daysOfMonth = [];
+  month = parseInt(month, 10);
+  const lastDayOfMonth = new Date(year, month, 0).getDate();
+  for (let i = 1; i <= lastDayOfMonth; i++) {
+    if (i < 10) {
+      daysOfMonth.push(year+"-"+month+"-"+"0" + i);
+    } else {
+      daysOfMonth.push(year+"-"+month+"-"+i);
+    }
+  }
+  return daysOfMonth;
 }
