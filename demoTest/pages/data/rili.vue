@@ -38,7 +38,7 @@ export default {
 	},
 	onLoad() {
 		this.getNow();
-		//this.getCalendarDate();
+		this.getCalendarDate();
 		//this.setSeventDay();
 		//this.setAllData();
 		this.startRili();

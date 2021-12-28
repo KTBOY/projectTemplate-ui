@@ -35,6 +35,11 @@
 				手写日历
 			</navigator>
 		</view>
+		<view class="text-area">
+			<navigator class="imgbtn" url="../data/jdt">
+				圆形进度条
+			</navigator>
+		</view>
 	</view>
 </template>
 

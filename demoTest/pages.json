@@ -69,6 +69,13 @@
 				"navigationBarTitleText": "手写日历"
 		
 			}
+		},
+		{
+			"path": "pages/data/jdt",
+			"style": {
+				"navigationBarTitleText": "手写进度条"
+		
+			}
 		}
 		
 	],
