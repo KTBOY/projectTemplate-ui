@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-18 11:18:24
- * @LastEditTime: 2021-10-20 17:55:54
+ * @LastEditTime: 2021-12-29 16:17:03
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\components\form\collapse\collapse-item.vue
+ * @FilePath: \git项目\project-template\uni_template\components\form\collapse\collapse-item.vue
 -->
 <template>
   <view :class="['collapse-item']" @click="handClick(index)">
@@ -36,11 +36,6 @@
     </view>
   </view>
 </template>
-
-
-
-
-
 <script setup>
 import {
   ref,
@@ -71,7 +66,7 @@ const props = defineProps({
 const emit = defineEmits(["change"]); //定义要给父组件使用的事件
 const height= ref(0); //折叠面板高度
 const isShow= ref(false); //是否开启折叠面板
-const domArrayData = ref([]);
+const domArrayData = reactive([]);
 /**
  * @description:点击展开折叠面板
  * @param {String|Number} index
@@ -79,7 +74,7 @@ const domArrayData = ref([]);
  */
 function handClick(index) {
   emit("change", index);
-  domArrayData.value.forEach((item) => {
+  domArrayData.forEach((item) => {
     if (item.id == index) {
       height.value = item.height;
       isShow.value = !isShow.value;
@@ -96,7 +91,7 @@ function querClassDom() {
   query
     .selectAll(".content")
     .boundingClientRect((data) => {
-      domArrayData.value.push(...data);
+      domArrayData.push(...data);
     })
     .exec();
 }

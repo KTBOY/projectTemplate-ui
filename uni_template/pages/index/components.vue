@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2021-10-27 16:45:50
+ * @LastEditTime: 2021-12-29 16:55:50
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \invitationf:\编辑器\舒克前端\git项目\project-template\uni_template\pages\index\components.vue
+ * @FilePath: \git项目\project-template\uni_template\pages\index\components.vue
 -->
 <template>
   <view class="index">
@@ -19,7 +19,7 @@
       <view class="nav-item" v-for="nav in nav" :key="nav">
         <view class="nav-name">{{ nav.name }}</view>
           <template  v-for="packageItem in nav.packages"  :key="packageItem">
-            <view    v-if="packageItem.show">
+            <view  v-if="packageItem.show">
                 <navigator :url="packageItem.path" class="nav-info">
                   <view>{{ packageItem.name }} {{ packageItem.cName }}</view>
                 <view>
@@ -48,6 +48,7 @@ export default{
 <style lang="scss" scoped>
 page{
   background: #ffffff;
+  padding-bottom: 80rpx;
 }
 .index {
   height: 100%;

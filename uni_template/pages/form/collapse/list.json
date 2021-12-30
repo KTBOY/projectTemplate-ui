@@ -1,0 +1,24 @@
+{
+    "nav":[
+        {
+            "name": "折叠面板",
+            "enName": "base",
+            "packages":[
+                {
+                    "name": "折叠面板1.0",
+                    "cName": "",
+                    "desc": "",
+                    "show": true,
+                    "path":"/pages/form/collapse/indexVerson/index01"
+                },
+                {
+                    "name": "折叠面板1.1",
+                    "cName": "",
+                    "desc": "",
+                    "show": true,
+                    "path":"/pages/form/collapse/indexVerson/index011"
+                }
+            ]
+        }
+    ]
+}

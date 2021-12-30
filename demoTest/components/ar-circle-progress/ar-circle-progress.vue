@@ -151,9 +151,10 @@ export default {
 				progress--;
 				if (progress < this.newPercent) return;
 			}
+		
 			setTimeout(() => {
 				// 定时器，为了让进度条有动画效果
-				this.drawCircleByProgress(progress);
+					this.drawCircleByProgress(progress);
 			}, time);
 		}
 	}
