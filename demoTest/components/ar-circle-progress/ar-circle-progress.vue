@@ -56,12 +56,12 @@ export default {
 		// 圆环线条的宽度，单位rpx
 		borderWidth: {
 			type: [Number, String],
-			default: 14
+			default: 6
 		},
 		// 整个圆形的宽度，单位rpx
 		width: {
 			type: [Number, String],
-			default: 200
+			default: 100
 		},
 		// 整个圆环执行一圈的时间，单位ms
 		duration: {
@@ -78,8 +78,8 @@ export default {
 		return {
 			canvasId: this.randomId(), //一个页面多个圆形进度
 			elId: this.randomId(),
-			widthPx: uni.upx2px(this.width), // 转成px后的整个组件的背景宽度
-			borderWidthPx: uni.upx2px(this.borderWidth), // 转成px后的圆环的宽度
+			widthPx: this.width, // 转成px后的整个组件的背景宽度
+			borderWidthPx:this.borderWidth, // 转成px后的圆环的宽度
 			startAngle: -Math.PI / 2, // canvas画圆的起始角度，默认为3点钟方向，定位到12点钟方向
 			progressContext: null, // 活动圆的canvas上下文
 			newPercent: 0, // 当动态修改进度值的时候，保存进度值的变化前后值，用于比较用
@@ -143,6 +143,7 @@ export default {
 			ctx.stroke();
 			ctx.draw();
 			// 增大了百分比
+			
 			if (this.newPercent > this.oldPercent) {
 				progress++;
 				if (progress > this.newPercent) return;
@@ -162,6 +163,9 @@ export default {
 </script>
 
 <style scoped>
+page{
+	
+}
   .circle-progress {
     position: relative;
     display: flex;
@@ -173,5 +177,6 @@ export default {
   }
   .canvas {
     position: absolute;
+	
   }
 </style>

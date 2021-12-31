@@ -8,6 +8,17 @@
     {
       "path": "pages/index/template"
     },
+
+     //操作反馈
+
+    // ====================start环形进度条============================
+    {
+      "path": "pages/animation/cricleProgress/index",
+      "style": {
+        "navigationBarTitleText": "环形进度条"
+      }
+    },
+     // ====================end环形进度条============================
     //表单组件
 
     // ====================start折叠面板============================
@@ -20,13 +31,13 @@
     {
       "path": "pages/form/collapse/indexVerson/index01",
       "style": {
-        "navigationBarTitleText": "折叠面板"
+        "navigationBarTitleText": "折叠面板1.0"
       }
     },
     {
       "path": "pages/form/collapse/indexVerson/index011",
       "style": {
-        "navigationBarTitleText": "折叠面板"
+        "navigationBarTitleText": "折叠面板1.1"
       }
     },
     // ====================end折叠面板============================

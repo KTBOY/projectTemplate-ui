@@ -25,11 +25,11 @@
             "enName": "base", 
             "packages":[
                 {
-                    "name": "Navbar",
-                    "cName": "头部导航",
-                    "desc": "头部导航",
+                    "name": "CricleProgress ",
+                    "cName": "环形进度条",
+                    "desc": "环形进度条",
                     "show": true,
-                    "path":"/pages/componentsA/navbar/index"
+                    "path":"/pages/animation/cricleProgress/index"
                 },
                 {
                     "name": "Navbar",
@@ -76,6 +76,26 @@
                    
                 }
             ]
-        }
+        },
+        {
+            "name": "动画组件",
+            "enName": "base", 
+            "packages":[
+                {
+                    "name": "环形进度条",
+                    "cName": "环形进度条",
+                    "desc": "环形进度条",
+                    "show": true,
+                    "path":""
+                },
+                {
+                    "name": "Navbar",
+                    "cName": "头部导航",
+                    "desc": "头部导航",
+                    "show": true,
+                    "path":"/pages/componentsA/navbar/index'"
+                }
+            ]
+        },
     ]
 }

@@ -3,7 +3,7 @@
 		<arprogress :percent="percent">
 			<text>{{ percent }}%</text>
 		</arprogress>
-		<button type="default" @longtap.stop="handJd()" @touchend.prevent="touchend" @touchstart.prevent="touchstart">点我</button>
+		 <button type="default" @longtap.stop="handJd()" @touchend.prevent="touchend" @touchstart.prevent="touchstart">点我</button>
 	</view>
 </template>
 
