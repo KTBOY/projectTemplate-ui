@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-18 11:07:20
- * @LastEditTime: 2021-12-31 11:44:13
+ * @LastEditTime: 2022-01-04 11:35:44
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \git项目\project-template\uni_template\pages\animation\cricleProgress\index.vue
@@ -11,7 +11,7 @@
     <list-pages :nav="nav"></list-pages>
   </view>
 </template>
-<script lang="ts">
+<script>
 import { defineComponent,reactive } from 'vue'
 import listPages from '@/components/list/listPages/index.vue'
 import { nav } from '@/pages/animation/cricleProgress/list.json'

@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2021-12-29 16:55:50
+ * @LastEditTime: 2022-01-04 14:47:05
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \git项目\project-template\uni_template\pages\index\components.vue
@@ -48,7 +48,7 @@ export default{
 <style lang="scss" scoped>
 page{
   background: #ffffff;
-  padding-bottom: 80rpx;
+  
 }
 .index {
   height: 100%;
@@ -88,7 +88,7 @@ page{
     border-radius: 80rpx 80rpx 0 0;
     overflow: hidden;
     padding: 60rpx 50rpx;
-    height: auto;
+    height: 100%;
     .nav-name {
       line-height: 40rpx;
       font-size: 26rpx;

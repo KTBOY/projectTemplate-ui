@@ -88,6 +88,7 @@ export default {
 	methods: {
 		getSwiperHeight(){
 			this.sheight = 48*this.normalDateList.length;
+			console.log(this.normalDateList)
 			console.log(this.sheight)
 		},
 		toggle() {

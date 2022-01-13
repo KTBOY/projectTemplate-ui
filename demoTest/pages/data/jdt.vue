@@ -63,7 +63,11 @@ export default {
 				clearInterval(this.endTime);
 			}
 			this.time = setInterval(() => {
-				this.percent+=2;
+				if(this.percent<100){
+					this.percent+=2;
+					
+				}
+				
 				
 			}, 100);
 		}, 

@@ -18,6 +18,12 @@
         "navigationBarTitleText": "环形进度条"
       }
     },
+    {
+      "path": "pages/animation/cricleProgress/indexVerson/index01",
+      "style": {
+        "navigationBarTitleText": "环形进度条1.0"
+      }
+    },
      // ====================end环形进度条============================
     //表单组件
 

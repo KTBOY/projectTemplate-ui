@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-12-29 16:59:24
- * @LastEditTime: 2021-12-29 17:39:05
+ * @LastEditTime: 2022-01-04 11:58:23
  * @LastEditors: zlc
  * @Description: 列表组件
  * @FilePath: \git项目\project-template\uni_template\components\list\listPages\index.vue
@@ -23,7 +23,7 @@
     </view>
   </view>
 </template>
-<script lang="ts">
+<script>
 import {defineComponent} from "vue"
 
 export default defineComponent({
