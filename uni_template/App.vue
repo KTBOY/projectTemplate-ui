@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-13 17:07:47
- * @LastEditTime: 2021-10-29 17:08:57
+ * @LastEditTime: 2022-01-18 16:26:36
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \git项目\project-template\uni_template\App.vue
@@ -26,9 +26,10 @@
 
 
 page{
-
 	background: #f7f8fa;
-	
+	--popover-white-background-color--:#2878ff;
+	padding-top: 30px;
+
 }
 
 

@@ -78,24 +78,18 @@
             ]
         },
         {
-            "name": "动画组件",
+            "name": "数据录入",
             "enName": "base", 
             "packages":[
                 {
-                    "name": "环形进度条",
-                    "cName": "环形进度条",
-                    "desc": "环形进度条",
+                    "name": "Popover",
+                    "cName": "气泡弹出框",
+                    "desc": "气泡弹出框",
                     "show": true,
-                    "path":""
-                },
-                {
-                    "name": "Navbar",
-                    "cName": "头部导航",
-                    "desc": "头部导航",
-                    "show": true,
-                    "path":"/pages/componentsA/navbar/index'"
+                    "path":"/pages/dataEntry/popover/index"
                 }
+
             ]
-        },
+        }
     ]
 }

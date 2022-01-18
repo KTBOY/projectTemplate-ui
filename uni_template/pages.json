@@ -64,7 +64,23 @@
       "style": {
         "navigationBarTitleText": "demo日历"
       }
+    },
+    //数据录入
+    // ====================start气泡弹出框============================
+    {
+      "path": "pages/dataEntry/popover/index",
+      "style": {
+        "navigationBarTitleText": "Popover气泡弹出框"
+      }
+    },
+    {
+      "path": "pages/dataEntry/popover/indexVerson/index01",
+      "style": {
+        "navigationBarTitleText": "Popover气泡弹出框"
+      }
     }
+    // ====================end气泡弹出框============================
+
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
