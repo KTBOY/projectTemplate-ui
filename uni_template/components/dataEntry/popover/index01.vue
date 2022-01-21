@@ -1,20 +1,20 @@
 <!--
  * @Author: zlc
  * @Date: 2022-01-18 15:39:16
- * @LastEditTime: 2022-01-20 17:01:27
+ * @LastEditTime: 2022-01-21 19:12:48
  * @LastEditors: zlc
  * @Description: 气泡弹出框1.0
  * @FilePath: \git项目\project-template\uni_template\components\dataEntry\popover\index01.vue
 -->
 <template>
-  <view class="popover">
+  <view class="popover" @click.stop="openPopover">
     <view ref="reference" class="reference"> <slot name="reference"></slot></view>
-    <view :class="['popover-card', popoverContent]" :style="getStyle">
+    <view :class="['popover-card', popoverContent,getThemStyle]" :style="getStyle" v-show="visible">
       <view :class="popoverArrow" :style="getArrowStyle"> </view>
       <slot name="content"></slot>
       <view class="title-item" v-for="(item, index) in list" :key="index">
         <!-- <slot v-if="item.icon"> <nut-icon class="item-img" :name="item.icon"></nut-icon></slot> -->
-        <view class="title-name">{{ item.name }}</view>
+        <view class="title-name" @click="handleGetName(item)">{{ item.name }}</view>
       </view>
     </view>
   </view>
@@ -24,19 +24,52 @@ import { onMounted, defineProps, toRefs, computed, reactive } from 'vue'
 import { getSystemInfoCalendarSelectorQuery } from '@/utils/uniApi.js'
 
 const props = defineProps({
+  //列表
   list: {
     type: Array,
     default: [{}],
   },
+  //使用的箭头方向
   location: {
     type: String,
     default: 'bottom',
   },
+  //控制弹框显示隐藏
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+  //控制使用弹框风格
+  theme: {
+    type: String,
+    default: 'light',
+  },
 })
-const { location } = toRefs(props)
-
+const { location, visible, theme } = toRefs(props)
+const emit = defineEmits(['update:visible', 'choose'])
 const state = reactive({
   popoverElement: {}, //内容Dom数据
+})
+//  const update = (val: boolean) => {
+//       emit('update', val);
+//       emit('update:visible', val);
+//     };
+function handleGetName(value) {
+  emit('choose', value)
+  
+}
+
+function openPopover(){
+ // emit('update:visible', true)
+  emit('update:visible', !visible.value)
+}
+//计算弹框颜色状态
+const getThemStyle = computed(() => {
+  const prefixCls = 'popoverTheme'
+  return {
+    [prefixCls]: true,
+    [`${prefixCls}--${theme.value}`]: theme.value,
+  }
 })
 
 //计算内容使用的方向
@@ -90,26 +123,42 @@ const getArrowStyle = computed(() => {
     style.left = state.popoverElement.width / 2 + 'px'
     style.top = -20 + 'px'
   }
-  console.log(style)
   return style
 })
 onMounted(async () => {
   let res = await getSystemInfoCalendarSelectorQuery('.popoverContent')
+  setTimeout(() => {
+    console.log(res)
+  },100)
   state.popoverElement = res
-  console.log(res)
+  
   console.log(props.list)
 })
 </script>
+
 <style lang="scss" scope>
+$popover-white-background-color: rgba(255, 255, 255, 1) !default;
+$popover-dark-background-color: rgba(75, 76, 77, 1) !default;
+.popover {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+
 .popover-card {
-  background-color: #4b4c4d;
   opacity: 1;
   font-size: 14px;
   font-family: PingFangSC;
   font-weight: normal;
-  color: #ffffff;
-  display: inline-block;
   border-radius: 10px;
+}
+.popoverTheme--light {
+  background-color: $popover-white-background-color;
+  color:'#000000';
+}
+.popoverTheme--dark {
+  background-color: $popover-dark-background-color;
+  color: #ffffff;
 }
 .popoverContent--left,
 .popoverContent--right,
@@ -137,6 +186,7 @@ onMounted(async () => {
     width: 100%;
   }
 }
+
 .popoverContent--bottom {
   .popoverArrow--bottom {
     position: absolute;
