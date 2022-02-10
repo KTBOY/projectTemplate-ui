@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-01-18 15:39:16
- * @LastEditTime: 2022-01-21 19:12:48
+ * @LastEditTime: 2022-02-10 15:12:54
  * @LastEditors: zlc
  * @Description: 气泡弹出框1.0
  * @FilePath: \git项目\project-template\uni_template\components\dataEntry\popover\index01.vue
@@ -9,18 +9,20 @@
 <template>
   <view class="popover" @click.stop="openPopover">
     <view ref="reference" class="reference"> <slot name="reference"></slot></view>
-    <view :class="['popover-card', popoverContent,getThemStyle]" :style="getStyle" v-show="visible">
-      <view :class="popoverArrow" :style="getArrowStyle"> </view>
-      <slot name="content"></slot>
-      <view class="title-item" v-for="(item, index) in list" :key="index">
-        <!-- <slot v-if="item.icon"> <nut-icon class="item-img" :name="item.icon"></nut-icon></slot> -->
-        <view class="title-name" @click="handleGetName(item)">{{ item.name }}</view>
+    <template v-if="showPopup">
+      <view :class="[popoverContent, getThemStyle]" :style="getStyle">
+        <view :class="popoverArrow" :style="getArrowStyle"> </view>
+        <slot name="content"></slot>
+        <view class="title-item" v-for="(item, index) in list" :key="index">
+          <!-- <slot v-if="item.icon"> <nut-icon class="item-img" :name="item.icon"></nut-icon></slot> -->
+          <view class="title-name" @click="handleGetName(item)">{{ item.name }}</view>
+        </view>
       </view>
-    </view>
+    </template>
   </view>
 </template>
 <script setup>
-import { onMounted, defineProps, toRefs, computed, reactive } from 'vue'
+import { onMounted, defineProps, toRefs, computed, reactive, watch, ref } from 'vue'
 import { getSystemInfoCalendarSelectorQuery } from '@/utils/uniApi.js'
 
 const props = defineProps({
@@ -45,24 +47,45 @@ const props = defineProps({
     default: 'light',
   },
 })
-const { location, visible, theme } = toRefs(props)
-const emit = defineEmits(['update:visible', 'choose'])
+const { location, theme } = toRefs(props)
+const emit = defineEmits(['update', 'update:visible', 'choose', 'close'])
+const showPopup = ref(props.visible)
 const state = reactive({
   popoverElement: {}, //内容Dom数据
 })
-//  const update = (val: boolean) => {
-//       emit('update', val);
-//       emit('update:visible', val);
-//     };
+
+watch(
+  () => props.visible,
+  (value) => {
+    showPopup.value = value
+  }
+)
+onMounted(async () => {
+  //获取弹出框由内容撑开的盒子元素
+  let res = await getSystemInfoCalendarSelectorQuery('.reference')
+  state.popoverElement = res
+})
+
+//更新子组件状态v-model
+function update(val) {
+  emit('update', val)
+  emit('update:visible', val)
+}
 function handleGetName(value) {
   emit('choose', value)
-  
 }
 
-function openPopover(){
- // emit('update:visible', true)
-  emit('update:visible', !visible.value)
+//打开冒泡弹出框
+function openPopover(event) {
+  update(!props.visible)
 }
+const closePopover = (event) => {
+  event.stopPropagation()
+  event.preventDefault()
+  emit('close')
+  emit('update:visible', false)
+}
+
 //计算弹框颜色状态
 const getThemStyle = computed(() => {
   const prefixCls = 'popoverTheme'
@@ -109,6 +132,7 @@ const getStyle = computed(() => {
 
 //计算箭头位置
 const getArrowStyle = computed(() => {
+  console.log(state)
   const style = {}
   if (location.value == 'top') {
     style.bottom = -20 + 'px'
@@ -125,15 +149,6 @@ const getArrowStyle = computed(() => {
   }
   return style
 })
-onMounted(async () => {
-  let res = await getSystemInfoCalendarSelectorQuery('.popoverContent')
-  setTimeout(() => {
-    console.log(res)
-  },100)
-  state.popoverElement = res
-  
-  console.log(props.list)
-})
 </script>
 
 <style lang="scss" scope>
@@ -145,16 +160,9 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
   margin-right: 20px;
 }
 
-.popover-card {
-  opacity: 1;
-  font-size: 14px;
-  font-family: PingFangSC;
-  font-weight: normal;
-  border-radius: 10px;
-}
 .popoverTheme--light {
   background-color: $popover-white-background-color;
-  color:'#000000';
+  color: '#000000';
 }
 .popoverTheme--dark {
   background-color: $popover-dark-background-color;
@@ -166,26 +174,41 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
 .popoverContent {
   position: relative;
   margin: 15px;
+  opacity: 1;
+  font-size: 14px;
+  font-family: PingFangSC;
+  font-weight: normal;
+  border-radius: 10px;
+  padding-top: 0.5px;
+  .title-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    margin: 8px;
+    border-bottom: 1px solid #e5e5e5;
+    // &:first-child(1) {
+    //   margin-top: 15px;
+    //   color:blueviolet;
+    // }
+    &:last-child {
+      margin-bottom: 2px;
+      border-bottom: none;
+    }
+    .title-name {
+      margin-right: 12px;
+      margin-left: 8px;
+      width: 100%;
+    }
+
+    &:first-child {
+      color: red;
+    }
+  }
 }
-.title-item {
-  display: flex;
-  align-items: center;
-  padding-bottom: 8px;
-  margin: 8px;
-  border-bottom: 1px solid #ffffff;
-  &:first-child {
-    margin-top: 15px;
-  }
-  &:last-child {
-    margin-bottom: 2px;
-    border-bottom: none;
-  }
-  .title-name {
-    margin-right: 12px;
-    margin-left: 8px;
-    width: 100%;
-  }
-}
+// .title-item:first-child {
+//     margin-top: 15px;
+
+// }
 
 .popoverContent--bottom {
   .popoverArrow--bottom {
@@ -195,7 +218,7 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-top: 10px solid transparent;
-    border-bottom: 10px solid #4b4c4d;
+    border-bottom: 10px solid $popover-dark-background-color;
   }
 }
 .popoverContent--top {
@@ -204,14 +227,14 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
     top: auto;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 10px solid #4b4c4d;
+    border-top: 10px solid $popover-dark-background-color;
     border-bottom: 10px solid transparent;
   }
 }
 .popoverContent--left {
   .popoverArrow--left {
     position: absolute;
-    border-left: 10px solid #4b4c4d;
+    border-left: 10px solid $popover-dark-background-color;
     border-right: 10px solid transparent;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
@@ -221,7 +244,43 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
   .popoverArrow--right {
     position: absolute;
     border-left: 10px solid transparent;
-    border-right: 10px solid #4b4c4d;
+    border-right: 10px solid $popover-dark-background-color;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+}
+.popoverTheme--light {
+  .popoverArrow--bottom {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid $popover-white-background-color;
+  }
+
+  .popoverArrow--top {
+    position: absolute;
+    top: auto;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid $popover-white-background-color;
+    border-bottom: 10px solid transparent;
+  }
+
+  .popoverArrow--left {
+    position: absolute;
+    border-left: 10px solid $popover-white-background-color;
+    border-right: 10px solid transparent;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
+  .popoverArrow--right {
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid $popover-white-background-color;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
   }
