@@ -1,0 +1,166 @@
+html,
+body {
+	margin: 0;
+	box-sizing: border-box;
+	height: 100vh;
+	width: 100vw;
+	padding: 0
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box
+}
+
+input,
+textarea,
+button {
+
+	outline: none;
+}
+
+input,
+textarea,
+select,
+button,
+table {
+	font-size: inherit;
+	font-family: inherit;
+	line-height: inherit;
+	resize: none
+}
+.container {
+   width: 100%;
+   height: 100%;
+   background-image: url(../img/bg.png);
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: 100% 100%;
+   box-sizing: border-box;
+   padding: 10vh 5vw;
+   background-color: #ff9f2f;
+}
+
+
+.text_area li input::-webkit-input-placeholder {
+	color: #959595;
+}
+
+.container .title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+
+}
+.container .title .titleImg1 {
+	height: 1rem;
+	width: 1rem;
+}
+.container .title .titleImg2 {
+	height: 1rem;
+	width: 3.5rem;
+}
+
+.text_area li input::-webkit-input-placeholder {
+	color: #959595;
+}
+
+.text_area{
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+
+ .text_area input {
+	height: 0.7rem;
+	border-radius: 4px;
+	border: 1px solid #c8cccf;
+	color: #6a6f77;
+	-web-kit-appearance: none;
+	-moz-appearance: none;
+	outline: 0;
+	padding: 0 1em;
+	text-decoration: none;
+	width: 2.8rem;
+	margin: 0 5px;
+}
+
+.text_area button {
+	width:1rem;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	background: #ff9f2f;
+	border: 0 none;
+	color: #FFF;
+	font-size: 0.3rem;
+	text-align: center;
+	border-radius: 4px;
+}
+
+
+
+
+
+.totady_pers {
+    font-size: 30px;
+    color: white;
+    font-weight: 600;
+}
+
+.bm_content {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    position: relative;
+	/* text-align: center; */
+	margin: 0.3rem auto;
+	
+	
+}
+#tb1{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-flow: wrap;
+}
+#tb2{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-flow: wrap;
+	
+}
+.ellipsis{
+	width: 50%;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	
+}
+.name{
+	width: 50%;
+}
+
+.table{
+	margin-left: 0.1rem;
+}
+.ellipsis{
+	border-bottom: 0.05rem dashed #4c9be0;
+}
+.no_msg {
+	font-size: 1rem;
+	width: 7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #ccc
+}
+
+
+
+
+
+
