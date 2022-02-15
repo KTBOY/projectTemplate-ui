@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-11-02 10:58:34
- * @LastEditTime: 2021-11-02 14:46:28
+ * @LastEditTime: 2022-02-11 11:38:31
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \git项目\project-template\uni_template\pages\form\day\index.vue
+ * @FilePath: \git项目\project-template\demoTest\pages\data\rili.vue
 -->
 <template>
 	<view>
@@ -39,11 +39,11 @@ export default {
 	onLoad() {
 		this.getNow();
 		this.getCalendarDate();
-		//this.setSeventDay();
+		this.setSeventDay();
 		//this.setAllData();
-		this.startRili();
+		//this.startRili();
 		//console.log(getMonthBetween('2020-12','2021-5'));//获取两个日期之间月份数
-		// console.log(this.GetPreMonthDay('2021-5',6));//获取两个当前月份的前5个月月份数
+		//console.log(this.GetPreMonthDay('2021-5',6));//获取两个当前月份的前5个月月份数
 		//console.log(this.aaa());//获取月份
 	},
 	methods: {
@@ -116,82 +116,85 @@ export default {
 			}
 		},
 
-		// getCalendarDate() {
-		// 	// 获取上一月天数
-		// 	let firstDay = new Date(this.year + '-' + this.month + '-' + '01').getDay();
-		// 	let num = Number.parseInt(firstDay);
-		// 	//获取当前月份的天数
-		// 	let nowDays = this.monthDay(this.month);
-		// 	//获取上一月月份
-		// 	let lastMonth = this.month - 1 > 0 ? this.month - 1 : 12;
-		// 	//获取上一月天数
-		// 	let lastDays = this.monthDay(lastMonth);
-		// 	//补上月
-		// 	for (let index = 0; index < num; index++) {
-		// 		let obj = {
-		// 			label: lastDays - num + index + 1,
-		// 			labelKo: ' ',
-		// 			isToDay: `${this.year}年${lastMonth}月${lastDays - num + index + 1}日`,
-		// 			isToDayReg: `${this.year}/${lastMonth}/${lastDays - num + index + 1}`,
-		// 			calendarChange:calendarChange.solar2lunar(this.year,lastMonth,lastDays - num + index + 1)
+		getCalendarDate() {
+			// 获取上一月天数
+			let firstDay = new Date(this.year + '-' + this.month + '-' + '01').getDay();
+			let num = Number.parseInt(firstDay);
+			//获取当前月份的天数
+			let nowDays = this.monthDay(this.month);
+			//获取上一月月份
+			let lastMonth = this.month - 1 > 0 ? this.month - 1 : 12;
+			//获取上一月天数
+			let lastDays = this.monthDay(lastMonth);
+			//补上月
+			for (let index = 0; index < num; index++) {
+				let obj = {
+					label: lastDays - num + index + 1,
+					labelKo: ' ',
+					isToDay: `${this.year}年${lastMonth}月${lastDays - num + index + 1}日`,
+					isToDayReg: `${this.year}/${lastMonth}/${lastDays - num + index + 1}`,
+					calendarChange:calendarChange.solar2lunar(this.year,lastMonth,lastDays - num + index + 1)
+					
 
-		// 		};
-		// 		this.calendarData.push({ label: lastDays - num + index + 1 });
-		// 		this.calendarDataTime.push({ label: lastDays - num + index + 1 }); //补上月和下月
-		// 		this.calendarDataTimeNew.push(obj);
-		// 	}
-		// 	let newObj={}
-		// 	//补当月
-		// 		for (let index = 0; index < nowDays; index++) {
-		// 			let obj={}
-		// 			let allDataObj = {
-		// 				isToDay: `${this.year}年${this.month}月${index + 1}日`,
-		// 				isToDayReg: `${this.year}/${this.month}/${index + 1}`,
-		// 				calendarChange:calendarChange.solar2lunar(this.year,this.month,this.date),
-		// 				label:index + 1,
+				};
+				this.calendarData.push({ label: lastDays - num + index + 1 });
+				this.calendarDataTime.push({ label: lastDays - num + index + 1 }); //补上月和下月
+				this.calendarDataTimeNew.push(obj);
+			}
+			let newObj={}
+			//补当月
+				for (let index = 0; index < nowDays; index++) {
+					let obj={}
+					let allDataObj = {
+						isToDay: `${this.year}年${this.month}月${index + 1}日`,
+						isToDayReg: `${this.year}/${this.month}/${index + 1}`,
+						calendarChange:calendarChange.solar2lunar(this.year,this.month,this.date),
+						label:index + 1,
 
-		// 			};
-		// 			obj.labelData=`${this.year}年${this.month}月`
-		// 			if(newObj[obj.labelData]){
-		// 				newObj[obj.labelData].allData.push(allDataObj)
-		// 				newObj[obj.labelData].data.push(allDataObj)
-		// 			}else{
-		// 				newObj[obj.labelData]={allData:[allDataObj]}
-		// 				newObj[obj.labelData].data=[]
-		// 			}
+					};
+					obj.labelData=`${this.year}年${this.month}月`
+					if(newObj[obj.labelData]){
+						newObj[obj.labelData].allData.push(allDataObj)
+						newObj[obj.labelData].data.push(allDataObj)
+					}else{
+						newObj[obj.labelData]={allData:[allDataObj]}
+						newObj[obj.labelData].data=[]
+					}
 
-		// 			this.calendarData.push({ label: index + 1 });
-		// 			this.calendarDataTime.push({ label: index + 1 });
-		// 			//this.calendarDataTimeNew.push(obj);
-		// 		}
+					this.calendarData.push({ label: index + 1 });
+					this.calendarDataTime.push({ label: index + 1 });
+					//this.calendarDataTimeNew.push(obj);
+				}
 
-		// 	console.log(newObj)
-		// 	console.log('========', this.calendarDataTimeNew);
-		// 	/*
-		//     1.一个篇幅42个格子（7x6=42）,如果还没能整除于0，表示还有空格子，然后7-余数=剩下格子
-		//     2.一个篇幅35个格子（7x5=35）,如果还没能整除于0，表示还有空格子，然后5-余数=剩下格子
-		//     */
-		// 	if (this.calendarData.length % 7 != 0) {
-		// 		let surplusDay = 7 - (this.calendarData.length % 7);
-		// 		for (let index = 0; index < surplusDay; index++) {
-		// 			this.calendarData.push({ label: index + 1 });
-		// 		}
-		// 	}
-		// 	if (this.calendarDataTime.length % 5 != 0) {
-		// 		let surplusDay = 5 - (this.calendarDataTime.length % 5);
-		// 		for (let index = 0; index < surplusDay; index++) {
-		// 			this.calendarDataTime.push({ label: index + 1 });
-		// 			this.calendarDataTimeNew.push({ label: ' '});
-		// 		}
-		// 	}
+			
+			console.log('========', this.calendarDataTimeNew);
+			/*
+		    1.一个篇幅42个格子（7x6=42）,如果还没能整除于0，表示还有空格子，然后7-余数=剩下格子
+		    2.一个篇幅35个格子（7x5=35）,如果还没能整除于0，表示还有空格子，然后5-余数=剩下格子
+		    */
+			if (this.calendarData.length % 7 != 0) {
+				let surplusDay = 7 - (this.calendarData.length % 7);
+				for (let index = 0; index < surplusDay; index++) {
+					this.calendarData.push({ label: index + 1 });
+				}
+			}
+			if (this.calendarDataTime.length % 5 != 0) {
+				let surplusDay = 5 - (this.calendarDataTime.length % 5);
+				for (let index = 0; index < surplusDay; index++) {
+					this.calendarDataTime.push({ label: index + 1 });
+					this.calendarDataTimeNew.push({ label: ' '});
+				}
+			}
 
-		// 	// console.log(num,firstDay,nowDays,lastDays,this.month,this.year);
-		// 	// console.log(this.calendarData);
-		// 	// console.log(this.calendarDataTime);
-		// },
+			console.log(num,firstDay,nowDays,lastDays,this.month,this.year);
+			console.log(this.calendarData);
+			console.log(this.calendarDataTime);
+			console.log(newObj)
+		},
 
 		//遍历当前月份所有数据
 		allData() {
+			console.log("123");
 			let firstDay = new Date(this.year + '-' + this.month + '-' + '01').getDay();
 			let num = Number.parseInt(firstDay);
 			//获取当前月份的天数
@@ -237,29 +240,33 @@ export default {
 			}
 
 			//遍历下个月天数
-			if (this.newObj[obj.labelData].allData.length % 7 != 0) {
-				let surplusDay = 7 - (this.calendarDataTime.length % 7);
-				for (let index = 0; index < surplusDay; index++) {
-					allDataObj = {
-						isToDay: `${this.year}年${this.month + 1}月${index + 1}日`,
-						isToDayReg: `${this.year}/${this.month + 1}/${index + 1}`,
-						calendarChange: calendarChange.solar2lunar(this.year, this.month + 1, index + 1),
-						label: index + 1,
-						labelKo: ' '
-					};
-					if (this.newObj[obj.labelData]) {
-						this.newObj[obj.labelData].allData.push(allDataObj);
-					}
-				}
-			}
+			// if (this.newObj[obj.labelData].allData.length % 7 != 0) {
+			// 	let surplusDay = 7 - (this.calendarDataTime.length % 7);
+			// 	for (let index = 0; index < surplusDay; index++) {
+			// 		allDataObj = {
+			// 			isToDay: `${this.year}年${this.month + 1}月${index + 1}日`,
+			// 			isToDayReg: `${this.year}/${this.month + 1}/${index + 1}`,
+			// 			calendarChange: calendarChange.solar2lunar(this.year, this.month + 1, index + 1),
+			// 			label: index + 1,
+			// 			labelKo: ' '
+			// 		};
+			// 		if (this.newObj[obj.labelData]) {
+			// 			this.newObj[obj.labelData].allData.push(allDataObj);
+			// 		}
+			// 	}
+			// }
+			//console.log(this.newObj);
 		},
 
-		getCalendarDate() {
-			//this.onData();
-			this.allData();
-			//this.lastData();
-			console.log(this.newObj);
-		},
+		// getCalendarDate() {
+		// 	//this.onData();
+		// 	this.allData();
+		// 	//this.lastData();
+		// 	setTimeout(() => {
+		// 		console.log(this.newObj);
+		// 	},100)
+			
+		//},
 		//截取每个星期的7天
 		setSeventDay() {
 			let result = [];

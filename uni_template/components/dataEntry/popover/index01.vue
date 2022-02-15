@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-01-18 15:39:16
- * @LastEditTime: 2022-02-10 15:12:54
+ * @LastEditTime: 2022-02-10 15:50:27
  * @LastEditors: zlc
  * @Description: 气泡弹出框1.0
  * @FilePath: \git项目\project-template\uni_template\components\dataEntry\popover\index01.vue
@@ -186,10 +186,6 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
     padding-bottom: 8px;
     margin: 8px;
     border-bottom: 1px solid #e5e5e5;
-    // &:first-child(1) {
-    //   margin-top: 15px;
-    //   color:blueviolet;
-    // }
     &:last-child {
       margin-bottom: 2px;
       border-bottom: none;
@@ -205,10 +201,6 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
     }
   }
 }
-// .title-item:first-child {
-//     margin-top: 15px;
-
-// }
 
 .popoverContent--bottom {
   .popoverArrow--bottom {

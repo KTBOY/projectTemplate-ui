@@ -78,7 +78,15 @@
 			}
 		}
 		
-	],
+	    ,{
+            "path" : "pages/list/list",
+            "style" : {
+                "enablePullDownRefresh": true,
+                "navigationBarTitleText": "商品列表"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
