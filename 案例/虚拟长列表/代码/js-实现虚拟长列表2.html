@@ -49,17 +49,22 @@
 		.infinite-list-phantom {
 		  position: absolute;
 		  left: 0;
-		  top: 0;
+		  bottom: 0;
 		  right: 0;
 		  z-index:1;
 		}
+		
 		
 		.infinite-list {
 		  left: 0;
 		  right: 0;
 		  top: 0;
 		  position: absolute;
-		  text-align: center;
+		  text-align: center;	
+		}
+		.infinite-list-item{
+			height:60px;
+			line-height: 60px;
 		}
 	</style>
 
@@ -68,39 +73,10 @@
 		<div id="app">
 			<div class="content">
 				<div class="infinite-list-container">
-					<div class="infinite-list-phantom" :style="{ height: listHeight + 'px' }"></div>
+					<div class="infinite-list-phantom"></div>
 					<div class="infinite-list">
-						<!-- <div ref="items"
-                        class="infinite-list-item" 
-                        v-for="item in visibleData" 
-                        :key="item.id"
-                        :style="{ height: itemSize + 'px',lineHeight: itemSize + 'px' }"
-                      >{{ item.value }}</div> -->
 					</div>
-					<div class="item item-box1" valign=top>
-						<div>123456789</div>
-						<div>123456789</div>
-						<div>123456789</div>
-						<div>123456789</div>
-					</div>
-					<div class="item item-box2" valign=top>
-						<div>66623456789</div>
-						<div>66623456789</div>
-						<div>123456789</div>
-						<div>123456789</div>
-					</div>
-					<div class="item item-box1" valign=top>
-						<div>123456789</div>
-						<div>123456789</div>
-						<div>123456789</div>
-						<div>123456789</div>
-					</div>
-					<div class="item item-box2" valign=top>
-						<div>66623456789</div>
-						<div>66623456789</div>
-						<div>123456789</div>
-						<div>123456789</div>
-					</div>
+
 				</div>
 			</div>
 
@@ -117,74 +93,75 @@
 		const windowHeight = document.documentElement.clientHeight
 		const itemSize = 60; //每一项的高度
 		const listData = [];
-		const visibleData=0
+		let  visibleData=[]
 		const state = {
 			start: "",
 			end: "",
 			startOffset: "",
 			//可视区域高度
 			screenHeight:0,
-			visibleCount:0//可显示列表在视窗
+			visibleCount:0//可显示列表在视窗的数量
 		}
-		console.log(state.screenHeight)
-		//数据区域
-		for (let i = 0; i < 100000; i++) {
-			listData.push({
-				id: i,
-				value: i
-			});
-		}
-
-		const listHeight = listData.length * itemSize; //列表总高度
-		console.log(listData)
+		
 		$(".content").css('height', `${windowHeight}px`)
 		$(".content").css('width', `${windowWidth}px`)
-		//可显示的列表项数
+		getListData();//获取模拟数据
+		const listHeight = listData.length * itemSize; //列表总高度
+		//$(".infinite-list-phantom").css('height', `${listHeight}px`)
+
+		
 		  
 		$('.infinite-list-container').scroll(function(e) {
 			let scrollTop=$(this)[0].scrollTop
+			console.log($(this)[0].scrollTop)
 			//此时的开始索引
-			state.start = Math.floor(scrollTop /itemSize);
+			state.start = Math.floor(scrollTop /itemSize);//返回一个最大整数的数字索引
 			state.end=state.start + state.visibleCount
 			state.startOffset = scrollTop - (scrollTop % itemSize);
 			$('.infinite-list').css('transform',`translate3d(0,${state.startOffset}px,0)`)
 			getVisibleData()
-			console.log(state.startOffset)
 		})
+		
+		function getListData(){
+			//数据区域
+			for (let i = 0; i < 100000; i++) {
+				listData.push({
+					id: i,
+					value: i
+				});
+			}
+			
+		}
 		
 		//获取每次可视区域能看到多少条数据
 		function getVisibleCount(){
-			state.visibleCount= Math.ceil(state.screenHeight / itemSize)
+			state.visibleCount= Math.ceil(state.screenHeight / itemSize);//大于或等于给定数字的最小整数。
 			console.log(state)
 		}
 		
-		//页面渲染获取页面高度以及初始化索引计算位置
+		//页面初始化渲染获取页面高度以及初始化索引计算位置
 		function getIndexNumber(){
 			state.screenHeight=document.documentElement.clientHeight
 			state.start=0;
 			state.end=state.start + Math.ceil(state.screenHeight / itemSize)
 		}
-		function getVisibleData(){
 		
-			visibleData=listData.slice(0, 14))
-			console.log(Math.min(state.end,listData.length))
-			console.log(listData.length)
-			console.log(state.end)
-			console.log(state.start)
+		//渲染数据
+		function getVisibleData(){
+			visibleData=listData.slice(state.start,Math.min(state.end,listData.length)+1);//因为10条数据无法撑开容器，需要增加一条，如果item足够大，那么久不需要，或者增加元素空数据标签撑破容器，但是底部会留白
+			var linkItem
+			visibleData.forEach((item,index)=>{
+				if(linkItem){
+					linkItem+=`<div class="infinite-list-item">${item.id}</div>`; //创建一个节点	
+				}else{
+					linkItem=`<div class="infinite-list-item">${item.id}</div>`; //创建一个节点	
+				}	 
+				$(".infinite-list").html(linkItem); //将这个节点加入到table中			
+			})
 		}
 		
-		
-		
-		$(function () {
-		      $.each(visibleData, function (key, value) { //遍历这个数组，调用匿名函数进行处理
-		        var link = $(`<div
-                        class="infinite-list-item" 
-                        :key="item.id"
-                        :style="{ height: itemSize + 'px',lineHeight: itemSize + 'px' }"
-                      >${value.id}/div>`); //创建一个节点
-		        $(".infinite-list-item").append(link); //将这个节点加入到table中
-		      })
-		    })
+
+		   
 
 		getIndexNumber();
 		getVisibleCount();
