@@ -24,14 +24,8 @@
 			height: 2rem;
 			background-color: beige;
 			overflow-y: auto;
-			
 			position: relative;
 		}
-
-		.item {
-			text-align: center;
-		}
-
 		.infinite-list-container {
 			overflow: hidden;
 		}
@@ -45,21 +39,18 @@
 		}
 
 
-		.infinite-list {
-			left: 0;
-			right: 0;
-			top: 0;
-			position: absolute;
-			text-align: center;
-		}
 
-		.infinite-list-item1 {
+		.infinite-list1 {
+			height: 60px;
+			line-height: 60px;
+
+		}
+		.infinite-list2 {
 			height: 60px;
 			line-height: 60px;
 		}
-		.infinite-list-item2 {
-			height: 60px;
-			line-height: 60px;
+		.infinite-list-item1{
+			
 		}
 	</style>
 	<body>
@@ -71,7 +62,7 @@
 			<div id="app">
 				<div class="content">
 					<div class="infinite-list-container">
-						<!-- <div class="infinite-list-phantom"></div> -->
+						 <!-- <div class="infinite-list-phantom"></div> -->
 						<div class="infinite-list1">
 							
 						</div>
@@ -100,14 +91,16 @@
 		const speed = 30; //速度
 
 		var listData = []
+		var listData2 = []
 		var  visibleData=[]
-		const itemSize = 30; //每一项的高度
+		
+		const itemSize = 60; //每一项的高度
 		var state = {
 			start: "",
 			end: "",
 			startOffset: "",
 			//可视区域高度
-			screenHeight:120,
+			screenHeight:100,
 			visibleCount:0//可显示列表在视窗的数量
 
 
@@ -119,40 +112,41 @@
 		getListData()
 		const listHeight = listData.length * itemSize; //列表总高度
 		$(".infinite-list1").css('height', `${listHeight}px`)
+		$(".infinite-list2").css('height', `${listHeight}px`)
 
-		
+	
+
+		//开始滚动
 		function autoScroll(){
-			console.log(l1.offsetHeight)
-			console.log(content)
-			
-		
 			if (l1.offsetHeight > content.offsetHeight) {
-				console.log('开始滚动')
-				//l2.innerHTML = l1.innerHTML; //克隆list1的数据，使得list2和list1的数据一样
-				scrollMove = setInterval(scrollup, 60); //数值越大，滚动速度越慢
-				console.log(scrollMove)
+				//l2.innerHTML = l1.innerHTML; //克隆list1的数据，使得list2和list1的数据一样--无缝滚动方案1
+				listData2=listData		
+				scrollMove = setInterval(scrollup, 30); //数值越大，滚动速度越慢
 				content.onmouseover = function() {
 					// clearInterval(scrollMove)
 				}
 			}
 		}
+		
 		function scrollup(){
-			
 			if(content.scrollTop >= l1.offsetHeight){
-				
+				content.scrollTop=0
+				$('.infinite-list1').css('transform',`translate3d(0,0,0)`)
 			}else{
-					content.scrollTop++;
-					console.log(content.scrollTop++)
-					state.start = Math.floor(content.scrollTop /itemSize);//返回一个最大整数的数字索引
-					console.log(content.scrollTop / itemSize)
-					state.end=state.start + state.visibleCount;
-					state.startOffset = content.scrollTop - (content.scrollTop % itemSize);
-					$('.infinite-list1').css('transform',`translate3d(0,${state.startOffset}px,0)`)
-					getVisibleData();
-
+				content.scrollTop++;
+				state.start = Math.floor(content.scrollTop /itemSize);//返回一个最大整数的数字索引
+				state.end=state.start + state.visibleCount;
+				state.startOffset = content.scrollTop - (content.scrollTop % itemSize);
+				$('.infinite-list1').css('transform',`translate3d(0,${state.startOffset}px,0)`)
+				getVisibleData();
+				//当滚到最后一条数据的时候合并在listData（要提前复制一份数据）---------解决无缝滚动方案2（解决方案1闪烁的问题）
+				if(state.end==listData.length-1){
+					listData=listData.concat(listData2)
+					console.log('合并')
+				}
+			
 				
-				
-				
+					
 			}
 		}
 
@@ -169,29 +163,24 @@
 
 		//渲染数据
 		function getVisibleData(){
-
 			visibleData1=listData.slice(state.start,Math.min(state.end,listData.length)+1);//因为10条数据无法撑开容器，需要增加一条，如果item足够大，那么久不需要，或者增加元素空数据标签撑破容器，但是底部会留白
-			console.log(state.start)
-			console.log(Math.min(state.end,listData.length)+1)
-			console.log(visibleData1)
 			var linkItem1
-
 			visibleData1.forEach((item,index)=>{
 				if(linkItem1){
 					linkItem1+=`<div class="infinite-list-item1">${item.id}</div>`; //创建一个节点	
 				}else{
 					linkItem1=`<div class="infinite-list-item1">${item.id}</div>`; //创建一个节点	
 				}	 
-				$(".infinite-list1").html(linkItem1); //将这个节点加入到table中			
+				$(".infinite-list1").html(linkItem1);
 			})
 
 		}
 		
 		function getListData() {
 			//数据区域
-			for (let i = 0; i < 300; i++) {
+			for (let i = 0; i <6; i++) {
 				listData.push({
-					id: i,
+					id: i+'asfasf',
 					value: i
 				});
 			}
