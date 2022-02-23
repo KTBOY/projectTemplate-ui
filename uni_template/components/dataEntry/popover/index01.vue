@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-01-18 15:39:16
- * @LastEditTime: 2022-02-10 15:50:27
+ * @LastEditTime: 2022-02-23 17:34:43
  * @LastEditors: zlc
  * @Description: 气泡弹出框1.0
  * @FilePath: \git项目\project-template\uni_template\components\dataEntry\popover\index01.vue
@@ -14,7 +14,9 @@
         <view :class="popoverArrow" :style="getArrowStyle"> </view>
         <slot name="content"></slot>
         <view class="title-item" v-for="(item, index) in list" :key="index">
-          <!-- <slot v-if="item.icon"> <nut-icon class="item-img" :name="item.icon"></nut-icon></slot> -->
+          <slot v-if="item.icon">
+            <uni-icons class="item-img" :type="item.icon" size="30"></uni-icons>
+          </slot>
           <view class="title-name" @click="handleGetName(item)">{{ item.name }}</view>
         </view>
       </view>
@@ -47,6 +49,7 @@ const props = defineProps({
     default: 'light',
   },
 })
+
 const { location, theme } = toRefs(props)
 const emit = defineEmits(['update', 'update:visible', 'choose', 'close'])
 const showPopup = ref(props.visible)
@@ -115,24 +118,28 @@ const popoverArrow = computed(() => {
 //计算内容方向
 const getStyle = computed(() => {
   const style = {}
+  setTimeout(() => {
+    console.log(state)
+  }, 200)
+
   if (location.value == 'top') {
-    style.bottom = state.elHeight + 10 + 'px'
+    style.bottom = state.popoverElement.height + 5 + 'px'
+    style.left = 0 + 'px'
   } else if (location.value == 'right') {
     style.top = 0 + 'px'
-    style.right = -state.elWidth + 'px'
+    style.right = -state.popoverElement.width+ 20 + 'px'
   } else if (location.value == 'left') {
     style.top = 0 + 'px'
-    style.left = -state.elWidth + 'px'
+    style.left = -state.popoverElement.width + 20 + 'px'
   } else {
     style.top = state.elHeight + 10 + 'px'
   }
-
+  console.log(style)
   return style
 })
 
 //计算箭头位置
 const getArrowStyle = computed(() => {
-  console.log(state)
   const style = {}
   if (location.value == 'top') {
     style.bottom = -20 + 'px'
@@ -147,6 +154,7 @@ const getArrowStyle = computed(() => {
     style.left = state.popoverElement.width / 2 + 'px'
     style.top = -20 + 'px'
   }
+
   return style
 })
 </script>
@@ -157,7 +165,8 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
 .popover {
   display: inline-block;
   vertical-align: top;
-  margin-right: 20px;
+  margin: 0 20px 20px 0;
+  position: relative;
 }
 
 .popoverTheme--light {
@@ -172,14 +181,15 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
 .popoverContent--right,
 .popoverContent--top,
 .popoverContent {
-  position: relative;
-  margin: 15px;
+  position: absolute;
+  margin: 15px 0;
   opacity: 1;
   font-size: 14px;
   font-family: PingFangSC;
   font-weight: normal;
   border-radius: 10px;
   padding-top: 0.5px;
+  z-index: 12;
   .title-item {
     display: flex;
     align-items: center;
@@ -241,6 +251,8 @@ $popover-dark-background-color: rgba(75, 76, 77, 1) !default;
     border-bottom: 8px solid transparent;
   }
 }
+
+//明亮状态
 .popoverTheme--light {
   .popoverArrow--bottom {
     position: absolute;

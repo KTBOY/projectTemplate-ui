@@ -7,37 +7,31 @@
  * @FilePath: \git项目\project-template\uni_template\App.vue
 -->
 <script>
-	export default {
-		onLaunch: function() {
-			console.log('App Launch')
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		}
-	}
+export default {
+  onLaunch: function () {
+    console.log("App Launch");
+  },
+  onShow: function () {
+    console.log("App Show");
+  },
+  onHide: function () {
+    console.log("App Hide");
+  },
+};
 </script>
 
 <style lang="scss">
 /* 扩展图标库 */
-@import '@/static/iconfont.css';
+@import "@/static/iconfont.css";
 
-
-page{
-	background: #f7f8fa;
-	--popover-white-background-color--:#2878ff;
-	--page-padding--:15px;
-	
-
+page {
+  background: #f7f8fa;
+  --popover-white-background-color--: #2878ff;
+  --page-padding--: 15px;
 }
-h3{
-	margin-bottom:15rpx;
+.demo-title {
+  margin: 15rpx 0;
 }
-
-
-
 
 /*每个页面公共css */
 * {
@@ -48,6 +42,4 @@ h3{
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-
-
 </style>
