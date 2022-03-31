@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:49:46
- * @LastEditTime: 2021-11-12 17:56:51
+ * @LastEditTime: 2022-02-24 10:46:29
  * @LastEditors: zlc
  * @Description: Picker选择器
  * @FilePath: \git项目\project-template\uni_template\components\form\picker\index.vue
@@ -97,15 +97,22 @@ const currenIndex=ref(0)
 function close() {
   showPickerView.value = false
   //需要等动画结束了去更新父组件
-  setTimeout(() => {
-    emit('update:modelValue', showPickerView.value)
-  }, 100)
+    update('confirm')
+  
 }
 //选中菜单值
 function handleChange(e) {
   console.log(e.currentTarget.dataset.value);
   currenIndex.value=e.currentTarget.dataset.value
   console.log(e)
+}
+//更新子组件状态v-model
+function update(val) {
+  emit(val, showPickerView.value)
+  setTimeout(() => {
+     emit('update:modelValue', showPickerView.value)
+  },200)
+ 
 }
 //确定
 function handConfirm() {
@@ -114,14 +121,12 @@ function handConfirm() {
     currenIndex:currenIndex.value
   }
   showPickerView.value=false
-  emit('update:modelValue', showPickerView.value)
-  emit('confirm',currenObject)
+  update('confirm')
 }
 //取消
 function handCancel(){
   showPickerView.value=false
-  emit('update:modelValue', showPickerView.value)
-  emit('cancel')
+  update('cancel')
 }
 /**
  * @description: 获取需要渲染key
@@ -137,7 +142,6 @@ watch([() => props.modelValue],(newValue, oldValue) => {
   console.log(newValue);
     setTimeout(() => {
       showPickerView.value = newValue[0];
-     
     }, 100)
   }
 )
@@ -208,9 +212,11 @@ watch([() => props.modelValue],(newValue, oldValue) => {
       width: 300rpx;
       border: none;
       border-radius: 150rpx;
+      line-height: 100rpx;
     }
     > .confirm {
       background: $uni-color-primary;
+     
     }
     > .cancel {
       background: #bbbbbdfc;

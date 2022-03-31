@@ -29,7 +29,7 @@
                     "cName": "环形进度条",
                     "desc": "环形进度条",
                     "show": true,
-                    "path":"/pages/animation/cricleProgress/index"
+                    "path":"/pages/feedback/cricleProgress/index"
                 },
                 {
                     "name": "Navbar",

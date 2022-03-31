@@ -1,4 +1,11 @@
 {
+  "easycom": {
+    "autoscan": true, 
+    "custom": {
+      "^tui-(.*)": "@/components/traoUi/components/thorui/tui-$1/tui-$1.vue"
+    }
+},
+
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     // 组件首页
@@ -13,13 +20,13 @@
 
     // ====================start环形进度条============================
     {
-      "path": "pages/animation/cricleProgress/index",
+      "path": "pages/feedback/cricleProgress/index",
       "style": {
         "navigationBarTitleText": "环形进度条"
       }
     },
     {
-      "path": "pages/animation/cricleProgress/indexVerson/index01",
+      "path": "pages/feedback/cricleProgress/indexVerson/index01",
       "style": {
         "navigationBarTitleText": "环形进度条1.0"
       }

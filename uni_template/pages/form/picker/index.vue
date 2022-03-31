@@ -1,16 +1,22 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:33:51
- * @LastEditTime: 2021-11-01 16:55:33
+ * @LastEditTime: 2022-02-24 11:49:13
  * @LastEditors: zlc
  * @Description: picker选择器
  * @FilePath: \git项目\project-template\uni_template\pages\form\picker\index.vue
 -->
 <template>
-  <view class="picker">
-    <button type="button" @click="handShowPicker">打开</button>
-    <uni-data-checkbox v-model="value"  :localdata="range" @change="change" :multiple="false"></uni-data-checkbox>
-    <pickerBasicUsage v-model="show" :buttonLocation="buttonLocation" :range="rangePickerList"></pickerBasicUsage>
+  <view class="demo">
+    <div class="demo-title">基础用法</div>
+      <div class="demo-layout">
+        <tui-button width="200rpx" @click="handShowPicker">底部按钮</tui-button>
+        <tui-button width="200rpx" @click="handShowPicker">头部按钮</tui-button>
+      </div>
+      
+      <button type="button" >打开</button>
+      <!-- <uni-data-checkbox v-model="value"  :localdata="range" @change="change" :multiple="false"></uni-data-checkbox>
+      <pickerBasicUsage v-model="show" :buttonLocation="buttonLocation" :range="rangePickerList"></pickerBasicUsage> -->
   </view>
 </template>
 <script>
@@ -51,9 +57,14 @@ export default {
 
 <style lang="scss" scoped>
 //$uni-color-primary
-.picker {
-  button {
-    z-index: 1;
+.demo {
+  padding: var(--page-padding--);
+  &-layout{
+    display: flex;
+    justify-content:space-between;
   }
+}
+.demo-layout{
+
 }
 </style>

@@ -1,13 +1,13 @@
 /*
  * @Author: zlc
  * @Date: 2021-10-13 17:07:47
- * @LastEditTime: 2021-10-29 20:20:59
+ * @LastEditTime: 2022-02-24 11:15:54
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \git项目\project-template\uni_template\main.js
  */
 import App from './App.vue'
-
+//import './static/js/componentImport'
 // #ifndef VUE3
 import Vue from 'vue'
 

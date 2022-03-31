@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-01-18 15:39:16
- * @LastEditTime: 2022-02-23 17:34:43
+ * @LastEditTime: 2022-02-23 18:58:28
  * @LastEditors: zlc
  * @Description: 气泡弹出框1.0
  * @FilePath: \git项目\project-template\uni_template\components\dataEntry\popover\index01.vue
@@ -132,7 +132,7 @@ const getStyle = computed(() => {
     style.top = 0 + 'px'
     style.left = -state.popoverElement.width + 20 + 'px'
   } else {
-    style.top = state.elHeight + 10 + 'px'
+    style.top = state.popoverElement.height + 10 + 'px'
   }
   console.log(style)
   return style

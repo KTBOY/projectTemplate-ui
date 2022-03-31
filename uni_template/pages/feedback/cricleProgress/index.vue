@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-18 11:07:20
- * @LastEditTime: 2022-01-04 11:35:44
+ * @LastEditTime: 2022-02-24 10:30:22
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \git项目\project-template\uni_template\pages\animation\cricleProgress\index.vue
+ * @FilePath: \git项目\project-template\uni_template\pages\feedback\cricleProgress\index.vue
 -->
 <template>
   <view class="collapse">
@@ -14,7 +14,7 @@
 <script>
 import { defineComponent,reactive } from 'vue'
 import listPages from '@/components/list/listPages/index.vue'
-import { nav } from '@/pages/animation/cricleProgress/list.json'
+import { nav } from '@/pages/feedback/cricleProgress/list.json'
 export default defineComponent({
   components: {
     'list-pages': listPages,
