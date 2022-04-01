@@ -11,8 +11,9 @@
     <view class="index-header">
       <img src="../../static/image/commer/aa.jpg" alt="" />
       <view class="info">
-        <h1>实验</h1>
-        <text>Vue3+Ts+Vite简易组件</text>
+        <text>简易组件</text>
+		<text>界面设计参考京东ui、thorUi</text>
+		<text>组件在实现过程参考了京东ui、thorUi、uni.app</text>
       </view>
     </view>
     <view class="index-components">
@@ -21,7 +22,7 @@
           <template  v-for="packageItem in nav.packages"  :key="packageItem">
             <view  v-if="packageItem.show">
                 <navigator :url="packageItem.path" class="nav-info">
-                  <view>{{ packageItem.name }} {{ packageItem.cName }}</view>
+                  <view class="child-name">{{ packageItem.name }} {{ packageItem.cName }}</view>
                 <view>
                    <uni-icons type="forward" size="20"></uni-icons>
                 </view>
@@ -94,6 +95,7 @@ page{
       font-size: 26rpx;
       color: rgba(144, 156, 164, 1);
       margin-bottom: 20rpx;
+	 
     }
     .nav-info {
       width: 100%;
@@ -107,6 +109,12 @@ page{
       background: #ffffff;
       box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(102, 102, 102, 0.06);
       margin-bottom: 20rpx;
+	  .child-name{
+			font-size: 15px;
+	  	    font-weight: 700;
+	  	    display: block;
+	  	    color: #333;	  
+	  	}
     }
   }
 }

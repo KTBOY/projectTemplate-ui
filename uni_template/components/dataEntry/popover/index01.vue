@@ -7,17 +7,17 @@
  * @FilePath: \git项目\project-template\uni_template\components\dataEntry\popover\index01.vue
 -->
 <template>
-  <view class="popover" @click.stop="openPopover">
-    <view ref="reference" class="reference"> <slot name="reference"></slot></view>
+  <view class="popover"  @click.stop="openPopover">
+    <view ref="reference" class="reference" > <slot name="reference"></slot></view>
     <template v-if="showPopup">
-      <view :class="[popoverContent, getThemStyle]" :style="getStyle">
+      <view :class="[popoverContent, getThemStyle]" :style="getStyle" >
         <view :class="popoverArrow" :style="getArrowStyle"> </view>
         <slot name="content"></slot>
         <view class="title-item" v-for="(item, index) in list" :key="index">
           <slot v-if="item.icon">
             <uni-icons class="item-img" :type="item.icon" size="30"></uni-icons>
           </slot>
-          <view class="title-name" @click="handleGetName(item)">{{ item.name }}</view>
+          <view class="title-name" @click.stop="handleGetName(item)">{{ item.name }}</view>
         </view>
       </view>
     </template>
@@ -74,8 +74,10 @@ function update(val) {
   emit('update', val)
   emit('update:visible', val)
 }
+//点击每一项
 function handleGetName(value) {
   emit('choose', value)
+  update(!props.visible)
 }
 
 //打开冒泡弹出框
@@ -83,8 +85,8 @@ function openPopover(event) {
   update(!props.visible)
 }
 const closePopover = (event) => {
-  event.stopPropagation()
-  event.preventDefault()
+  // event.stopPropagation()
+  // event.preventDefault()
   emit('close')
   emit('update:visible', false)
 }
@@ -123,16 +125,16 @@ const getStyle = computed(() => {
   }, 200)
 
   if (location.value == 'top') {
-    style.bottom = state.popoverElement.height + 5 + 'px'
+    style.bottom = state.popoverElement.height+ 'px'
     style.left = 0 + 'px'
   } else if (location.value == 'right') {
     style.top = 0 + 'px'
-    style.right = -state.popoverElement.width+ 20 + 'px'
+    style.right = -state.popoverElement.width+ 10 + 'px'
   } else if (location.value == 'left') {
     style.top = 0 + 'px'
-    style.left = -state.popoverElement.width + 20 + 'px'
+    style.left = -state.popoverElement.width + 10 + 'px'
   } else {
-    style.top = state.popoverElement.height + 10 + 'px'
+    style.top = state.popoverElement.height + 'px'
   }
   console.log(style)
   return style
