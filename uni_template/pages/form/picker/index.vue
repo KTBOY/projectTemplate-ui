@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-27 16:33:51
- * @LastEditTime: 2022-02-24 11:49:13
+ * @LastEditTime: 2022-04-02 14:15:56
  * @LastEditors: zlc
  * @Description: picker选择器
  * @FilePath: \git项目\project-template\uni_template\pages\form\picker\index.vue
@@ -10,13 +10,10 @@
   <view class="demo">
     <div class="demo-title">基础用法</div>
       <div class="demo-layout">
-        <tui-button width="200rpx" @click="handShowPicker">底部按钮</tui-button>
-        <tui-button width="200rpx" @click="handShowPicker">头部按钮</tui-button>
+        <tui-button width="200rpx" @click="handShowPicker('bottom')" >底部按钮</tui-button>
+        <tui-button width="200rpx" @click="handShowPicker('top')">头部按钮</tui-button>
       </div>
-      
-      <button type="button" >打开</button>
-      <!-- <uni-data-checkbox v-model="value"  :localdata="range" @change="change" :multiple="false"></uni-data-checkbox>
-      <pickerBasicUsage v-model="show" :buttonLocation="buttonLocation" :range="rangePickerList"></pickerBasicUsage> -->
+      <pickerBasicUsage v-model="show" :buttonLocation="buttonLocation" :range="rangePickerList"></pickerBasicUsage>
   </view>
 </template>
 <script>
@@ -35,8 +32,10 @@ export default {
       { value: 0, text: '底部按钮', key: 'bottom' },
       { value: 1, text: '顶部按钮', key: 'top' },
     ])
-    function handShowPicker() {
+    function handShowPicker(e) {
+   
       show.value = !show.value
+      buttonLocation.value=e
     }
     function change(e){
         let {key}=e.detail.data

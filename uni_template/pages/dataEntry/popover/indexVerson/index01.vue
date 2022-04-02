@@ -8,7 +8,7 @@
 -->
 <template>
   <view class="demo">
-    <div class="demo-title">基础用法</div>
+    <view class="demo-title">基础用法</view>
     <popover :list="list" v-model:visible="visible.lightTheme" @choose="chooseItem">
       <template #reference>
         <tui-button width="200rpx"> 明朗风格</tui-button>
@@ -19,13 +19,13 @@
         <tui-button width="200rpx">暗黑风格</tui-button>
       </template>
     </popover>
-    <div class="demo-title">选项配置</div>
+    <view class="demo-title">选项配置</view>
     <popover :list="listIcons" v-model:visible="visible.showIcons" @choose="chooseItem">
       <template #reference>
         <tui-button width="200rpx"> 展示图标</tui-button>
       </template>
     </popover>
-    <div class="demo-title">位置自定义</div>
+    <view class="demo-title">位置自定义</view>
     <popover :list="list" location="top" v-model:visible="visible.locationTop" @choose="chooseItem">
       <template #reference>
         <tui-button width="200rpx"> 向上弹出</tui-button>

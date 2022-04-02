@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2022-01-04 14:47:05
+ * @LastEditTime: 2022-04-02 15:31:41
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \git项目\project-template\uni_template\pages\index\components.vue
@@ -11,9 +11,8 @@
     <view class="index-header">
       <img src="../../static/image/commer/aa.jpg" alt="" />
       <view class="info">
-        <text>简易组件</text>
-		<text>界面设计参考京东ui、thorUi</text>
-		<text>组件在实现过程参考了京东ui、thorUi、uni.app</text>
+	    	<text>界面设计参考京东ui、thorUi</text>
+		    <text>组件在实现过程参考了京东ui、thorUi、uni.app</text>
       </view>
     </view>
     <view class="index-components">
@@ -58,8 +57,10 @@ page{
     width: 750rpx;
     height: 234rpx;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     > img {
       width: 120rpx;
