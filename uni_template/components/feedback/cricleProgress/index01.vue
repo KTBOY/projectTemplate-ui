@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-01-04 10:49:05
- * @LastEditTime: 2022-01-04 14:41:51
+ * @LastEditTime: 2022-04-02 18:05:37
  * @LastEditors: zlc
  * @Description: 进度条
  * @FilePath: \git项目\project-template\uni_template\components\feedback\cricleProgress\index01.vue
@@ -102,7 +102,7 @@ export default {
       () => props.percent,
       (nVal, oVal) => {
         if (nVal > 100) nVal = 100
-        if (nVal < 0) oVal = 0
+        if (nVal <= 0) oVal = 0
         data.newPercent = nVal
         data.oldPercent = oVal
         setTimeout(() => {

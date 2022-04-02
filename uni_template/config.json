@@ -32,11 +32,11 @@
                     "path":"/pages/feedback/cricleProgress/index"
                 },
                 {
-                    "name": "Navbar",
-                    "cName": "头部导航",
-                    "desc": "头部导航",
+                    "name": "IndexList",
+                    "cName": "字母索引",
+                    "desc": "字母索引",
                     "show": true,
-                    "path":"/pages/componentsA/navbar/index'"
+                    "path":"/pages/feedback/indexList/index01"
                 }
             ]
         },
