@@ -8,21 +8,26 @@
 -->
 <template>
   <view class="index-list">
-    <view class="list-box">
+    <view class="list-box state-container" :style="{height:`${state.windowData.windowHeight}px`}">
       <view class="left-box">
-        <scroll-view :scroll-y="true" @scroll="handleScroll" :scroll-into-view="state.type === 0 ? '' : `list-item-${state.currenIndex}`">
-          <view class="list-item" v-for="(item,index) in testList" :key="index" :id="`list-item-${state.currenIndex}`">
+        <scroll-view :style="{height:`${state.windowData.windowHeight}px`}" :scroll-y="true" @scroll="handleScroll" :scroll-into-view="state.type == 0 ? '' : `item-${state.currenIndex}`">
+          <view class="list-item" v-for="(item,index) in testList" :key="index" :id="`item-${index}`">
             <view class="data-list-title">{{ item.letter }}</view>
             <view>
-              <view @click="onSelect(item)" class="data-list-content-item" v-for="(k, l) in item.data" :key="l">{{ k }}</view>
+              <view class="data-list-content-item" v-for="(k, l) in item.data" :key="l">{{ k }}</view>
             </view>
+          </view>
+          <view class="fill-last" :style="{ height: state.currenMoveData.fillHeight + 'px' }">
+
           </view>
         </scroll-view>
       </view>
       <view class="right-box">
-        <view class="block-list" @touchstart="handleTouchstart" @touchmove="handleTouchmove" @touchend="handleTouchend">
-<!--         <view class="focus-block">{{ testList[currenIndex].letter }}</view>-->
-          <view class="block" v-for="(item, index) in testList" :key="index">{{ item.letter }}</view>
+        <view class="block-list"  @touchmove="handleTouchmove" @touchend="handleTouchend" @touchstart="handleTouchstart" >
+          <view class="focus-block"
+          :style="{transform:`translateY(${state.moveData.moveY}px)`}"
+          >{{ testList[state.currenIndex].letter }}</view>
+          <view class="block" v-for="(item, index) in testList" :key="index" >{{ item.letter }}</view>
         </view>
       </view>
     </view>
@@ -32,56 +37,91 @@
 <script setup>
 import { onMounted, defineProps, toRefs, computed, reactive, watch, ref,nextTick} from 'vue'
 import city from './city.js'
+
 const testList= reactive(city)
 const state = reactive({
   type:0,
   currenIndex:0,//索引
   windowData:{},//屏幕相关
-  currenData:{},
+  currenMoveData:{},
   moveData:{}
 })
 
 watch(testList,async (newVal,oldVla)=>{
- await nextTick()
+   await nextTick()
 	 let query=uni.createSelectorQuery().in(this)
-	 query.selectAll('.block-list').boundingClientRect(data => {
-		 state.currenData.ListTop=data[0].top;//获取该dom距离屏幕顶部的距离
+	 query.select('.block-list').boundingClientRect(data => {
+		 state.currenMoveData.ListTop=data.top;//获取该dom距离屏幕顶部的距离
 	 }).exec();
 	 query.selectAll('.block').boundingClientRect(data => {
-		  state.currenData.currenHeight=data[0].height;//获取每一个item
-		  state.moveData.maxMoveY=data[0].height * (data.height - 1)
+		  state.currenMoveData.currenHeight=data[0].height;//获取每一个item
+		  state.moveData.lastMoveY=data[0].height * (data.length - 1);//获取最后一个y轴
 	 }).exec();
- 
+   query.selectAll('.list-item').boundingClientRect(data=>{
+     console.log(data)
+     state.moveData.listTopArray=data.map(item=>{
+       return item.top
+     })
+     /*
+     * 此写法，适用商品分类等业务，普通的字母索引使用，会导致底部留白
+     * */
+     let last = data[data.length - 1]?.height
+     if (last< state.windowData.windowHeight) {
+       //state.currenMoveData.fillHeight = state.windowData.windowHeight - last
+     }
+   }).exec();
+  console.log('获取成功')
 },{immediate:true})
 
 function  handleTouchstart(e){
   state.type=1
-  console.log(state.currenData)
   /*
   * 1.获取当前触摸的y轴 - 当前列表距离屏幕的高度//获取当前相对于当前列表y轴距离
   * 2.获取每一个块的高度，需要除2， 因为获取的是物理高度，在uni.app中是rpx单位 ，
-  * 3.uni.upx2px转化为rpx像素，但是uni.app官方已经废弃该api了，也可以进行直接state.currenData.currenHeight/2
+  * 3.uni.upx2px转化为rpx像素，但是uni.app官方已经废弃该api了，也可以进行直接state.currenMoveData.currenHeight/2
   * */
-  let moveY=e.changedTouches[0].clientY -state.currenData.ListTop - uni.upx2px(state.currenData.currenHeight)//转换
-  state.currenIndex=Math.round(moveY/ state.currenData.currenHeight)
-  console.log(state.currenIndex)
+  let moveY=e.changedTouches[0].clientY -state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight)//转换
+  state.currenIndex=Math.round(moveY/ state.currenMoveData.currenHeight)
+  state.moveData.moveY=state.currenIndex * state.currenMoveData.currenHeight
+
+}
+function  handleTouchmove(e){
+  state.type= 2;
+  let moveY=e.changedTouches[0].clientY -state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight)
+  if(moveY>= state.moveData.lastMoveY ||moveY<0) return
+  state.currenIndex=Math.round(moveY/ state.currenMoveData.currenHeight)
+  state.moveData.moveY=state.currenIndex * state.currenMoveData.currenHeight
 }
 function  handleTouchend(){
-
+  state.type= 0;
 }
-function  handleTouchmove(){
 
-}
-function handleScroll(){
+function handleScroll(e){
+  if(state.type==1||state.type==2) return
+  let scrollTop = e.detail.scrollTop
+  for (let i=state.moveData.listTopArray.length - 1; i >= 0; i--){
+    if(scrollTop+2>=state.moveData.listTopArray[i]){
+      state.currenIndex=i;
+      state.moveData.moveY=state.currenIndex * state.currenMoveData.currenHeight
+      break;
+    }
+  }
+
 
 }
 onMounted(()=>{
-  state.windowData.windowHeight=uni.upx2px(uni.getSystemInfoSync().windowHeight)
+
+  state.windowData.windowHeight=uni.getSystemInfoSync().windowHeight
   console.log( state.windowData)
 })
 </script>
-<style lang="scss" scoped>
+<style lang="less">
+page {
+  // background-color: #ededed;
+  height: 100%;
+}
 .index-list{
+  height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
