@@ -4,7 +4,7 @@
  * @LastEditTime: 2022-04-06 11:18:15
  * @LastEditors: zlc
  * @Description: 字母索引1.0使用
- * @FilePath: \git项目\project-template\uni_template\pages\feedback\indexList\index01.vue
+ * @FilePath: \git项目\project-template\uni_template\pages\feedback\indexList\index.vue
 -->
 <template>
   <view>

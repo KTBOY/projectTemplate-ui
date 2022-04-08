@@ -8,16 +8,6 @@
 -->
 <template>
   <view class="collapse">
-    <view class="demo-title">基础用法</view>
-    <Card>
-      <view class="collapse-area">
-        <Collapse>
-          <CollapseItem @change="itemChange" :title="item.head" :open="item.open" :accordion="true" :index="index" v-for="(item, index) in itemList" :key="index">
-            {{ item.body }}
-          </CollapseItem>
-        </Collapse>
-      </view>
-    </Card>
     <view class="demo-title">手风琴</view>
      <Card>
       <view class="collapse-area">

@@ -19,13 +19,13 @@
       <view class="nav-item" v-for="nav in nav" :key="nav">
         <view class="nav-name">{{ nav.name }}</view>
           <template  v-for="packageItem in nav.packages"  :key="packageItem">
-            <view  v-if="packageItem.show">
-                <navigator :url="packageItem.path" class="nav-info">
-                  <view class="child-name">{{ packageItem.name }} {{ packageItem.cName }}</view>
+            <view  v-if="packageItem.show" @click="handleRouter(nav,packageItem)">
+                <view  class="nav-info">
+                  <view class="child-name">{{ packageItem.enName }} {{ packageItem.cName }}</view>
                 <view>
                    <uni-icons type="forward" size="20"></uni-icons>
                 </view>
-              </navigator>
+              </view>
             </view>
           </template>
       </view>
@@ -39,8 +39,15 @@ import { nav } from "@/config.json";
 export default{
   name: "doc",
   setup() {
+    function handleRouter(nav,packageItem){
+      uni.setStorageSync('moduleData',packageItem)
+      uni.navigateTo({
+        url:packageItem.pathList?packageItem.pathList:'/pages/index/list'
+      })
+    }
     return reactive({
       nav,
+      handleRouter
     });
   },
 };
@@ -91,6 +98,7 @@ page{
     overflow: hidden;
     padding: 60rpx 50rpx;
     height: 100%;
+	
     .nav-name {
       line-height: 40rpx;
       font-size: 26rpx;
@@ -108,8 +116,13 @@ page{
       justify-content: space-between;
       border-radius: 50rpx;
       background: #ffffff;
-      box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(102, 102, 102, 0.06);
+      //box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(245, 245, 245, 0.1);
       margin-bottom: 20rpx;
+	  // -webkit-border-radius: 70px;
+	  // border-radius: 70px;
+	  // -webkit-box-shadow: 8px 8px 21px#ffffff, -8px -8px 21px #ffffff;
+	  // box-shadow: 8px 8px 21px #ffffff, -8px -8px 21px #ffffff;
+	  box-shadow: 0 1px 4px #6666660f;
 	  .child-name{
 			font-size: 15px;
 	  	    font-weight: 700;

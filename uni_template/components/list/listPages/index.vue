@@ -8,8 +8,8 @@
 -->
 <template>
 	<view class="list-pages">
-		<view class="nav-item" v-for="nav in nav" :key="nav">
-			<view class="nav-name">{{ nav.name }}</view>
+		<view class="nav-item">
+			<view class="nav-name">{{ nav.cName }}</view>
 			<template v-for="packageItem in nav.packages" :key="packageItem">
 				<view v-if="packageItem.show">
 					<view class="nav-info" :url="packageItem.path" @click="handlerPageRouter(packageItem)">
@@ -34,17 +34,15 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		console.log(props.nav);
-		function handlerPageRouter(val){
+		console.log(props.nav.cName);
+		function handlerPageRouter(val) {
 			uni.navigateTo({
-				url: val.path,
-				
+				url: val.path
 			});
-			
 		}
-		return{
+		return {
 			handlerPageRouter
-		}
+		};
 	}
 });
 </script>

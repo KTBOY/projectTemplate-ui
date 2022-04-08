@@ -1,28 +1,65 @@
 <!--
  * @Author: zlc
- * @Date: 2021-10-18 11:07:20
- * @LastEditTime: 2022-02-24 10:30:22
+ * @Date: 2021-12-31 11:07:16
+ * @LastEditTime: 2022-01-04 14:44:34
  * @LastEditors: zlc
- * @Description: 
- * @FilePath: \git项目\project-template\uni_template\pages\feedback\cricleProgress\index.vue
+ * @Description: 环形进度条1.0
+ * @FilePath: \git项目\project-template\uni_template\pages\animation\cricleProgress\indexVerson\index01.vue
 -->
 <template>
-  <view class="collapse">
-    <list-pages :nav="nav"></list-pages>
+  <view class="cricleProgress">
+    <view class="cricleProgress-info">
+      <cricleProgress :percent="percent">
+        <text>{{ percent }}%</text>
+      </cricleProgress>
+    </view>
+    <button type="default" @touchend.prevent="touchend" @touchstart.prevent="touchstart">点我</button>
   </view>
 </template>
 <script>
-import { defineComponent,reactive } from 'vue'
-import listPages from '@/components/list/listPages/index.vue'
-import { nav } from '@/pages/feedback/cricleProgress/list.json'
-export default defineComponent({
+import cricleProgress from '@/components/feedback/cricleProgress/index01.vue'
+import { reactive, toRefs } from 'vue'
+export default {
   components: {
-    'list-pages': listPages,
+    cricleProgress,
   },
   setup() {
-    return reactive({
-      nav,
+    const data = reactive({
+      percent: 20,
+      endTime: 0,
+      time: 0,
     })
+    const touchend = (e) => {
+      data.endTime = setInterval(() => {
+        if (data.percent == 0) {
+          clearInterval(data.endTime)
+        } else {
+          data.percent -= 2
+          clearInterval(data.time)
+        }
+      }, 100)
+    }
+    const touchstart = (e) => {
+      if (data.endTime >= 0) {
+        clearInterval(data.endTime)
+      }
+      data.time = setInterval(() => {
+        if (data.percent < 100) {
+          data.percent += 2
+        }
+      }, 100)
+    }
+    return {
+      ...toRefs(data),
+      touchend,
+      touchstart
+
+    }
   },
-})
+}
 </script>
+<style lang="scss">
+.cricleProgress-info{
+  
+}
+</style>

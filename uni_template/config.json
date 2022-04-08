@@ -8,14 +8,14 @@
                     "name": "Navbar",
                     "cName": "自定义导航",
                     "desc": "头部导航",
-                    "show": true,
+                    "show": false,
                     "path":"/pages/componentsA/navbar/index"
                 },
                 {
                     "name": "Navbar",
                     "cName": "头部导航",
                     "desc": "头部导航",
-                    "show": true,
+                    "show": false,
                     "path":"/pages/componentsA/navbar/index'"
                 }
             ]
@@ -25,18 +25,40 @@
             "enName": "base", 
             "packages":[
                 {
-                    "name": "CricleProgress ",
+                    "enName": "CricleProgress ",
                     "cName": "环形进度条",
                     "desc": "环形进度条",
                     "show": true,
-                    "path":"/pages/feedback/cricleProgress/index"
+                    "path":"/pages/feedback/cricleProgress/index",
+					"pathList": "/pages/index/list",
+					"packages":[
+						{
+						    "name": "环形进度条1.0",
+						    "show": true,
+						    "path":"/pages/feedback/cricleProgress/index"
+						}
+					]
                 },
                 {
-                    "name": "IndexList",
+                    "enName": "IndexList",
                     "cName": "字母索引",
                     "desc": "字母索引",
+					"name": "字母索引",
                     "show": true,
-                    "path":"/pages/feedback/indexList/index01"
+                    "path":"/pages/feedback/indexList/index",
+                    "pathList": "/pages/index/list",
+					"packages":[
+					    {
+					        "name": "字母索引",
+					        "show": true,
+					        "path":"/pages/feedback/indexList/index"
+					    },
+						{
+						    "name": "字母索引地区模式",
+						    "show": true,
+						    "path":"/pages/feedback/indexList/indexRegion"
+						}
+					]
                 }
             ]
         },
@@ -45,30 +67,60 @@
             "enName": "base", 
             "packages":[
                 {
-                    "name": "Collapse",
+                    "enName": "Collapse",
                     "cName": "折叠面板",
                     "desc": "折叠面板",
                     "show": true,
-                    "path":"/pages/form/collapse/index"
+                    "path":"/pages/form/collapse/index",
+					"pathList": "/pages/index/list",
+					"packages":[
+					    {
+					        "name": "折叠面板",
+					        "show": true,
+					        "path":"/pages/form/collapse/index"
+					    },
+						{
+						    "name": "手风琴模式",
+						    "show": true,
+						    "path":"/pages/form/collapse/indexAccordion"
+						}
+					]
                 },
                 {
-                    "name": " Picker",
+                    "enName": " Picker",
                     "cName": "选择器",
                     "desc": "选择器",
                     "show": true,
-                    "path":"/pages/form/picker/index"
+                    "path":"/pages/form/picker/index",
+					"pathList": "/pages/index/list",
+					"packages":[
+					    {
+					        "name": "选择器",
+					        "show": true,
+					        "path":"/pages/form/picker/index"
+					    }
+
+					]
                    
                 },
                 {
-                    "name": " Step",
+                    "enName": " Step",
                     "cName": "步骤条",
                     "desc": "步骤条",
                     "show": true,
-                    "path":"/pages/form/step/index"
+                    "path":"/pages/form/step/index",
+					"packages":[
+					    {
+					        "name": "步骤条",
+					        "show": true,
+					        "path":"/pages/form/step/index"
+					    }
+					
+					]
                    
                 },
                 {
-                    "name": " Step",
+                    "enName": " Step",
                     "cName": "日历",
                     "desc": "日历",
                     "show": false,
@@ -82,11 +134,19 @@
             "enName": "base", 
             "packages":[
                 {
-                    "name": "Popover",
+                    "enName": "Popover",
                     "cName": "气泡弹出框",
                     "desc": "气泡弹出框",
                     "show": true,
-                    "path":"/pages/dataEntry/popover/index"
+                    "path":"/pages/dataEntry/popover/index",
+					"pathList": "/pages/index/list",
+					"packages":[
+					    {
+					        "name": "气泡弹出框",
+					        "show": true,
+					        "path":"/pages/dataEntry/popover/index"
+					    }
+					]
                 }
 
             ]
