@@ -11,7 +11,7 @@ export default {
 	},
 	setup(props) {
 		const headerCitys = ref([
-			{
+		{
 				name: '中国'
 			},
 			{

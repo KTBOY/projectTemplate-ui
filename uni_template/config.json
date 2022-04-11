@@ -150,6 +150,28 @@
                 }
 
             ]
-        }
+        },
+      {
+        "name": "特色组件",
+        "enName": "features",
+        "packages":[
+          {
+            "enName": "ImageColorRecognition",
+            "cName": "图片颜色识别",
+            "desc": "图片颜色识别",
+            "show": true,
+            "path":"",
+            "pathList": "/pages/index/list",
+            "packages":[
+              {
+                "name": "图片颜色识别",
+                "show": true,
+                "path":"/pages/features/imageColorRecognit/index"
+              }
+            ]
+          }
+
+        ]
+      }
     ]
 }

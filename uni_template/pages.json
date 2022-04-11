@@ -95,6 +95,15 @@
     }
     // ====================end气泡弹出框============================
 
+    //特色组件
+    // ====================start图片颜色识别============================
+    {
+      "path": "pages/features/imageColorRecognit/index",
+      "style": {
+        "navigationBarTitleText": "imageColorRecognit图片颜色识别"
+      }
+    }
+    // ====================end图片颜色识别============================
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
