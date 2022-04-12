@@ -1,17 +1,14 @@
 <!--
  * @Author: zlc
- * @Date: 2022-04-02 17:31:52
- * @LastEditTime: 2022-04-13 00:45:17
+ * @Date: 2022-04-12 22:50:12
+ * @LastEditTime: 2022-04-12 23:06:28
  * @LastEditors: zlc
- * @Description: 字母索引1.0版
- * @FilePath: \gogogogo\project-template\uni_template\components\feedback\indexList\index01.vue
+ * @Description: 
+ * @FilePath: \gogogogo\project-template\uni_template\components\feedback\indexList\index02.vue
 -->
 <template>
   <view class="index-list">
-    <view class="region" v-if="region.length">
-      <view class="region-item" v-for="(item, index) in region"> {{ item.name }}</view>
-    </view>
-    <view class="list-box state-container" :style="{ height: `${state.windowData.windowHeight}px` }" v-if="testList.length">
+    <view class="list-box state-container">
       <view class="left-box">
         <scroll-view :style="{ height: `${state.windowData.windowHeight}px` }" :scroll-y="true" @scroll="handleScroll" :scroll-into-view="state.type == 0 ? '' : `item-${state.currenIndex}`">
           <view class="list-item" v-for="(item, index) in testList" :key="index" :id="`item-${index}`">
@@ -36,107 +33,49 @@
 <script setup>
 import { onMounted, defineProps, toRefs, computed, reactive, watch, ref, nextTick } from 'vue'
 import city from './city.js'
-const props = defineProps({
-  //列表
-  region: {
-    type: Array,
-    default: [{}],
-  },
-})
-//const testist= reactive(city)
-const testList = ref([])
+const testList = ref(city)
 const state = reactive({
   type: 0,
   currenIndex: 0, //索引
   windowData: {}, //屏幕相关
   currenMoveData: {},
-  regionData:{}
+  regionData: {},
 })
 const query = uni.createSelectorQuery().in(this)
 watch(testList, async (newVal, oldVla) => {
   await nextTick()
-  query.select('.block-list').boundingClientRect((data) => {
+  query
+    .select('.block-list')
+    .boundingClientRect((data) => {
       state.currenMoveData.ListTop = data.top //获取该dom距离屏幕顶部的距离
     })
     .exec()
-  query.selectAll('.block').boundingClientRect((data) => {
+  query
+    .selectAll('.block')
+    .boundingClientRect((data) => {
       state.currenMoveData.currenHeight = data[0].height //获取每一个item
       state.currenMoveData.lastMoveY = data[0].height * (data.length - 1) //获取最后一个y轴
-    }).exec()
-  query.selectAll('.list-item').boundingClientRect((data) => {
+    })
+    .exec()
+  query
+    .selectAll('.list-item')
+    .boundingClientRect((data) => {
       state.currenMoveData.listTopArray = data.map((item) => {
         return item.top
-    })
+      })
       /*
        * 此写法，适用商品分类等业务，普通的字母索引使用，如果最后一个数据较少会导致底部留白
        * */
       let last = data[data.length - 1].height
-      // let a=[{name:'1'},{name2:'1'}]
-      // let b={
-      //   name:'aaa'
-      // }
-      // //console.log(a[1]?.name1);
-      //  console.log(b?.name);
       if (last < state.windowData.windowHeight) {
         //state.currenMoveData.fillHeight = state.windowData.windowHeight - last
       }
-    }).exec()
+    })
+    .exec()
   console.log('获取成功')
 })
-
-function handleTouchstart(e) {
-  state.type = 1
-  /*
-   * 1.获取当前相对于当前列表y轴距离=获取当前触摸的y轴 - 当前列表距离屏幕的高度
-   * 2.获取每一个块的高度，需要除2， 因为获取的是物理高度，在uni.app中是rpx单位 ，
-   * 3.uni.upx2px转化为rpx像素，但是uni.app官方已经废弃该api了，也可以进行直接state.currenMoveData.currenHeight/2
-   * */
-  let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight) //转换
-  state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight)
-  state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight
-}
-function handleTouchmove(e) {
-  state.type = 2
-  let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight)
-  if (moveY >= state.currenMoveData.lastMoveY || moveY < 0) return
-  state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight)
-  state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight
-}
-function handleTouchend() {
-  state.type = 0
-}
-
-function handleScroll(e) {
-  /*
-   * 防止触摸滚动的时候也运行scroll-view滚动函数，以免获取的索引不正确并且频繁更新页面
-   * 但在商品分类业务，比如有大量图片的时候，需要监听scroll-view滚动函数，点击的时候，改函数也是需要触发的
-   * 所以这种情况下，需要禁用代码state.type
-   * */
-  if (state.type == 1 || state.type == 2) return
-  let scrollTop = e.detail.scrollTop
-  for (let i = state.currenMoveData.listTopArray.length - 1; i >= 0; i--) {
-    if (scrollTop + 2 >= state.currenMoveData.listTopArray[i]) {
-      state.currenIndex = i
-      state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight
-      break
-    }
-  }
-}
-
-function getCityDomData(){
-  query.select('.region').boundingClientRect((data)=>{
-    state.regionData.height= data.height ||0
-  }).exec()
-}
-onMounted(() => {
-  getCityDomData()
-  setTimeout(() => {
-    testList.value = city
-   
-  }, 1000)
-  state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height
-})
 </script>
+
 <style lang="less">
 page {
   // background-color: #ededed;
