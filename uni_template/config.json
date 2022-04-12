@@ -164,9 +164,14 @@
             "pathList": "/pages/index/list",
             "packages":[
               {
-                "name": "图片颜色识别",
+                "name": "图片颜色识别renderjs H5端、APP端",
                 "show": true,
                 "path":"/pages/features/imageColorRecognit/index"
+              },
+              {
+                "name": "图片颜色识别 多端",
+                "show": true,
+                "path":"/pages/features/imageColorRecognit/indexAll"
               }
             ]
           }

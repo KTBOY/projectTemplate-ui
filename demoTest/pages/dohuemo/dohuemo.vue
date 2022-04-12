@@ -7,7 +7,7 @@
 		</swiper>
 
 
-		<view class="">滚动提示</view>
+		<view class="">滚动提示进阶</view>
 		<view class="nav">
 			<!-- <view  v-for="item in msg" :class="{anim:animate==true}" :style="styleObject" ref='rollul' >
 				<text>{{item.name}}</text>
@@ -107,6 +107,7 @@ export default {
 				setTimeout(()=>{
 					this.msg.push(this.msg[0])
 					this.msg.shift()
+					console.log(this.msg)
 					this.styleObject={
 						transition:'none',
 						transform:`translateY(-${0}%)`

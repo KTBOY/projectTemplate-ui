@@ -1,83 +1,274 @@
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-.card[data-v-41b3d3d3] {
-  height: auto;
-  background-color: #ffffff;
-  border-radius: 0.625rem;
-  padding: 0.625rem 0.46875rem;
-  box-shadow: 0 0 0.3125rem #d4d4d4;
+
+.tui-btn-primary[data-v-5f043dd0] {
+	background: #5677fc !important;
+	color: #fff;
 }
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-.collapse-head[data-v-60f91fb1] {
-  display: flex;
+.tui-shadow-primary[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(86, 119, 252, 0.2);
 }
-.collapse-info > .title[data-v-60f91fb1] {
-  width: 18.75rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.tui-btn-danger[data-v-5f043dd0] {
+	background: #eb0909 !important;
+	color: #fff;
 }
-.collapse-icon[data-v-60f91fb1] {
-  transition: all 0.3s;
+.tui-shadow-danger[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(235, 9, 9, 0.2);
 }
-.collapse .icon-active[data-v-60f91fb1] {
-  transform: rotate(90deg) !important;
-  transform-origin: center center !important;
+.tui-btn-warning[data-v-5f043dd0] {
+	background: #fc872d !important;
+	color: #fff;
 }
-.collapse-body[data-v-60f91fb1] {
-  overflow: hidden;
-  transition: all 0.3s;
+.tui-shadow-warning[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(252, 135, 45, 0.2);
 }
-.collapse-body > .content[data-v-60f91fb1] {
-  overflow: hidden;
-  font-size: 0.875rem;
-  text-align: left;
+.tui-btn-green[data-v-5f043dd0] {
+	background: #07c160 !important;
+	color: #fff;
 }
+.tui-shadow-green[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(7, 193, 96, 0.2);
+}
+.tui-btn-blue[data-v-5f043dd0] {
+	background: #007aff !important;
+	color: #fff;
+}
+.tui-shadow-blue[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(0, 122, 255, 0.2);
+}
+.tui-btn-white[data-v-5f043dd0] {
+	background: #fff !important;
+	color: #333 !important;
+}
+.tui-btn-gray[data-v-5f043dd0] {
+	background: #bfbfbf !important;
+	color: #fff !important;
+}
+.tui-btn-black[data-v-5f043dd0] {
+	background: #333 !important;
+	color: #fff !important;
+}
+.tui-btn-brown[data-v-5f043dd0]{
+	background: #ac9157 !important;
+	color: #fff !important;
+}
+.tui-btn-gray-black[data-v-5f043dd0] {
+	background: #f2f2f2 !important;
+	color: #333;
+}
+.tui-btn-gray-primary[data-v-5f043dd0] {
+	background: #f2f2f2 !important;
+	color: #5677fc !important;
+}
+.tui-gray-primary-hover[data-v-5f043dd0] {
+	background: #d9d9d9 !important;
+}
+.tui-btn-gray-green[data-v-5f043dd0] {
+	background: #f2f2f2 !important;
+	color: #07c160 !important;
+}
+.tui-gray-green-hover[data-v-5f043dd0] {
+	background: #d9d9d9 !important;
+}
+.tui-btn-gray-danger[data-v-5f043dd0] {
+	background: #f2f2f2 !important;
+	color: #eb0909 !important;
+}
+.tui-gray-danger-hover[data-v-5f043dd0] {
+	background: #d9d9d9 !important;
+}
+.tui-btn-gray-warning[data-v-5f043dd0] {
+	background: #f2f2f2 !important;
+	color: #fc872d !important;
+}
+.tui-gray-warning-hover[data-v-5f043dd0] {
+	background: #d9d9d9 !important;
+}
+.tui-shadow-gray[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(191, 191, 191, 0.2);
+}
+.tui-hover-gray[data-v-5f043dd0] {
+	background: #f7f7f9 !important;
+}
+.tui-black-hover[data-v-5f043dd0] {
+	background: #555 !important;
+	color: #e5e5e5 !important;
+}
+.tui-brown-hover[data-v-5f043dd0]{
+	background: #A37F49 !important;
+	color: #e5e5e5 !important;
+}
+
+/* button start*/
+.tui-btn[data-v-5f043dd0] {
+	width: 100%;
+	position: relative;
+	border: 0 !important;
+	border-radius: 0.1875rem;
+	padding-left: 0;
+	padding-right: 0;
+	overflow: visible;
+}
+.tui-btn[data-v-5f043dd0]::after {
+	content: '';
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	transform-origin: 0 0;
+	transform: scale(0.5, 0.5) translateZ(0);
+	box-sizing: border-box;
+	left: 0;
+	top: 0;
+	border-radius: 0.375rem;
+	border: 0;
+}
+.tui-text-bold[data-v-5f043dd0] {
+	font-weight: bold;
+}
+.tui-btn-white[data-v-5f043dd0]::after {
+	border: 1px solid #bfbfbf;
+}
+.tui-white-hover[data-v-5f043dd0] {
+	background: #e5e5e5 !important;
+	color: #2e2e2e !important;
+}
+.tui-dark-disabled[data-v-5f043dd0] {
+	opacity: 0.6 !important;
+	color: #fafbfc !important;
+}
+.tui-dark-disabled-outline[data-v-5f043dd0] {
+	opacity: 0.5 !important;
+}
+.tui-gray-disabled[data-v-5f043dd0] {
+	background: #f3f3f3 !important;
+	color: #919191 !important;
+	box-shadow: none;
+}
+.tui-outline-hover[data-v-5f043dd0] {
+	opacity: 0.5;
+}
+.tui-primary-hover[data-v-5f043dd0] {
+	background: #4a67d6 !important;
+	color: #e5e5e5 !important;
+}
+.tui-primary-outline[data-v-5f043dd0]::after {
+	border: 1px solid #5677fc !important;
+}
+.tui-primary-outline[data-v-5f043dd0] {
+	color: #5677fc !important;
+	background: transparent;
+}
+.tui-danger-hover[data-v-5f043dd0] {
+	background: #c80808 !important;
+	color: #e5e5e5 !important;
+}
+.tui-danger-outline[data-v-5f043dd0] {
+	color: #eb0909 !important;
+	background: transparent;
+}
+.tui-danger-outline[data-v-5f043dd0]::after {
+	border: 1px solid #eb0909 !important;
+}
+.tui-warning-hover[data-v-5f043dd0] {
+	background: #d67326 !important;
+	color: #e5e5e5 !important;
+}
+.tui-warning-outline[data-v-5f043dd0] {
+	color: #fc872d !important;
+	background: transparent;
+}
+.tui-warning-outline[data-v-5f043dd0]::after {
+	border: 1px solid #fc872d !important;
+}
+.tui-green-hover[data-v-5f043dd0] {
+	background: #06ad56 !important;
+	color: #e5e5e5 !important;
+}
+.tui-green-outline[data-v-5f043dd0] {
+	color: #07c160 !important;
+	background: transparent;
+}
+.tui-green-outline[data-v-5f043dd0]::after {
+	border: 1px solid #07c160 !important;
+}
+.tui-blue-hover[data-v-5f043dd0] {
+	background: #0062cc !important;
+	color: #e5e5e5 !important;
+}
+.tui-blue-outline[data-v-5f043dd0] {
+	color: #007aff !important;
+	background: transparent;
+}
+.tui-blue-outline[data-v-5f043dd0]::after {
+	border: 1px solid #007aff !important;
+}
+.tui-btn-gradual[data-v-5f043dd0] {
+	background: linear-gradient(90deg, rgb(255, 89, 38), rgb(240, 14, 44)) !important;
+	color: #fff !important;
+}
+.tui-shadow-gradual[data-v-5f043dd0] {
+	box-shadow: 0 0.3125rem 0.4375rem 0 rgba(235, 9, 9, 0.15);
+}
+.tui-gray-hover[data-v-5f043dd0] {
+	background: #a3a3a3 !important;
+	color: #898989;
+}
+.tui-gradual-hover[data-v-5f043dd0] {
+	background: linear-gradient(90deg, #d74620, #cd1225) !important;
+	color: #fff !important;
+}
+.tui-gray-outline[data-v-5f043dd0] {
+	color: #999 !important;
+	background: transparent !important;
+}
+.tui-white-outline[data-v-5f043dd0] {
+	color: #fff !important;
+	background: transparent !important;
+}
+.tui-black-outline[data-v-5f043dd0] {
+	background: transparent !important;
+	color: #333 !important;
+}
+.tui-gray-outline[data-v-5f043dd0]::after {
+	border: 1px solid #ccc !important;
+}
+.tui-white-outline[data-v-5f043dd0]::after {
+	border: 1px solid #fff !important;
+}
+.tui-black-outline[data-v-5f043dd0]::after {
+	border: 1px solid #333 !important;
+}
+.tui-brown-outline[data-v-5f043dd0] {
+	color: #ac9157 !important;
+	background: transparent;
+}
+.tui-brown-outline[data-v-5f043dd0]::after {
+	border: 1px solid #ac9157 !important;
+}
+
+/*圆角 */
+.tui-fillet[data-v-5f043dd0] {
+	border-radius: 1.5625rem;
+}
+.tui-btn-white.tui-fillet[data-v-5f043dd0]::after {
+	border-radius: 3.0625rem;
+}
+.tui-outline-fillet[data-v-5f043dd0]::after {
+	border-radius: 3.0625rem;
+}
+
+/*平角*/
+.tui-rightAngle[data-v-5f043dd0] {
+	border-radius: 0;
+}
+.tui-btn-white.tui-rightAngle[data-v-5f043dd0]::after {
+	border-radius: 0;
+}
+.tui-outline-rightAngle[data-v-5f043dd0]::after {
+	border-radius: 0;
+}
+.tui-btn__link[data-v-5f043dd0]::after {
+	border: 0 !important;
+}
+
 /**
  * 这里是uni-app内置的常用样式变量
  *
@@ -633,30 +824,126 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.collapse-head[data-v-219afd5c] {
+.popover[data-v-1b229217] {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 20px 20px 0;
+  position: relative;
+}
+.popoverTheme--light[data-v-1b229217] {
+  background-color: white;
+  color: "#000000";
+}
+.popoverTheme--dark[data-v-1b229217] {
+  background-color: #4b4c4d;
+  color: #ffffff;
+}
+.popoverContent--left[data-v-1b229217],
+.popoverContent--right[data-v-1b229217],
+.popoverContent--top[data-v-1b229217],
+.popoverContent[data-v-1b229217] {
+  position: absolute;
+  margin: 15px 0;
+  opacity: 1;
+  font-size: 14px;
+  font-family: PingFangSC;
+  font-weight: normal;
+  border-radius: 10px;
+  padding-top: 0.5px;
+  z-index: 12;
+}
+.popoverContent--left .title-item[data-v-1b229217],
+.popoverContent--right .title-item[data-v-1b229217],
+.popoverContent--top .title-item[data-v-1b229217],
+.popoverContent .title-item[data-v-1b229217] {
   display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+  margin: 8px;
+  border-bottom: 1px solid #e5e5e5;
 }
-.collapse-info > .title[data-v-219afd5c] {
-  width: 18.75rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.popoverContent--left .title-item[data-v-1b229217]:last-child,
+.popoverContent--right .title-item[data-v-1b229217]:last-child,
+.popoverContent--top .title-item[data-v-1b229217]:last-child,
+.popoverContent .title-item[data-v-1b229217]:last-child {
+  margin-bottom: 2px;
+  border-bottom: none;
 }
-.collapse-icon[data-v-219afd5c] {
-  transition: all 0.3s;
+.popoverContent--left .title-item .title-name[data-v-1b229217],
+.popoverContent--right .title-item .title-name[data-v-1b229217],
+.popoverContent--top .title-item .title-name[data-v-1b229217],
+.popoverContent .title-item .title-name[data-v-1b229217] {
+  margin-right: 12px;
+  margin-left: 8px;
+  width: 100%;
 }
-.collapse .icon-active[data-v-219afd5c] {
-  transform: rotate(90deg) !important;
-  transform-origin: center center !important;
+.popoverContent--left .title-item[data-v-1b229217]:first-child,
+.popoverContent--right .title-item[data-v-1b229217]:first-child,
+.popoverContent--top .title-item[data-v-1b229217]:first-child,
+.popoverContent .title-item[data-v-1b229217]:first-child {
+  color: red;
 }
-.collapse-body[data-v-219afd5c] {
-  overflow: hidden;
-  transition: all 0.3s;
+.popoverContent--bottom .popoverArrow--bottom[data-v-1b229217] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #4b4c4d;
 }
-.collapse-body > .content[data-v-219afd5c] {
-  overflow: hidden;
-  font-size: 0.875rem;
-  text-align: left;
+.popoverContent--top .popoverArrow--top[data-v-1b229217] {
+  position: absolute;
+  top: auto;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #4b4c4d;
+  border-bottom: 10px solid transparent;
+}
+.popoverContent--left .popoverArrow--left[data-v-1b229217] {
+  position: absolute;
+  border-left: 10px solid #4b4c4d;
+  border-right: 10px solid transparent;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.popoverContent--right .popoverArrow--right[data-v-1b229217] {
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid #4b4c4d;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.popoverTheme--light .popoverArrow--bottom[data-v-1b229217] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+.popoverTheme--light .popoverArrow--top[data-v-1b229217] {
+  position: absolute;
+  top: auto;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid white;
+  border-bottom: 10px solid transparent;
+}
+.popoverTheme--light .popoverArrow--left[data-v-1b229217] {
+  position: absolute;
+  border-left: 10px solid white;
+  border-right: 10px solid transparent;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.popoverTheme--light .popoverArrow--right[data-v-1b229217] {
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid white;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
 }
 /**
  * 这里是uni-app内置的常用样式变量
@@ -682,13 +969,40 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.collapse[data-v-549afc32] {
-  padding: 0.46875rem 0.625rem;
+.buttonType--default[data-v-50b745d8] {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding: 0.3125rem 0.46875rem;
 }
-.collapse-text[data-v-549afc32] {
-  color: #a59da6;
-  margin: 0.46875rem 0;
-}
-.active[data-v-549afc32] {
-  color: red;
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.demo[data-v-c1a801d0] {
+  padding: var(--page-padding--);
 }

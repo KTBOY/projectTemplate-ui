@@ -92,13 +92,19 @@
       "style": {
         "navigationBarTitleText": "Popover气泡弹出框"
       }
-    }
+    },
     // ====================end气泡弹出框============================
 
     //特色组件
     // ====================start图片颜色识别============================
     {
       "path": "pages/features/imageColorRecognit/index",
+      "style": {
+        "navigationBarTitleText": "imageColorRecognit图片颜色识别"
+      }
+    },
+    {
+      "path": "pages/features/imageColorRecognit/indexAll",
       "style": {
         "navigationBarTitleText": "imageColorRecognit图片颜色识别"
       }

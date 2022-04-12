@@ -52,12 +52,12 @@
 
 <script>
 	import UploadCom from "@/pages/upload/components/uploadCom.vue"
-	import ImageCropper from "@/components/invinbg-image-cropper/invinbg-image-cropper.vue";
+	
 	
 export default {
 	components:{
 		UploadCom,
-		ImageCropper
+
 	},
 	data() {
 		return {

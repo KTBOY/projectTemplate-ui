@@ -1,24 +1,26 @@
 <template>
-  <view class="imageColorRecognit" @click="renderScript.emitImage" :imageUrl="imageUrl" :change:imageUrl="renderScript.receiveMsg"> </view>
+  <view class="imageColorRecognit"  :imageUrl="imageUrl" :change:imageUrl="renderScript.receiveMsg"> </view>
 </template>
 
 <script setup>
 import { onMounted, defineProps, defineEmits, computed } from 'vue'
 import emitImageData from './index.js'
-import { state, mutations } from '@/components/features/imageColorRecognit/store.js'
+//import { state, mutations } from './store.js'
 const props = defineProps({
+  //只接受远端图片
   imageUrl: {
     type: String,
+	default:""
   },
 })
 const emit = defineEmits(['receiveRenderData'])
-const itemActive = computed(() => {
+/* const itemActive = computed(() => {
   return state.selectActive
-})
+}) */
 function receiveRenderData(val) {
-  // console.log('receiveRenderData-->', emitImageData);普通数据更新
-  // console.log('itemActive-->', itemActive.value);//响应式数据更新
-  emit('receiveRenderData', itemActive.value)
+ console.log('receiveRenderData-->', emitImageData);//普通数据更新@click="renderScript.emitImage"
+//  console.log('itemActive-->', itemActive.value);//响应式数据更新
+ emit('receiveRenderData',emitImageData)
 }
 
 onMounted(() => {
@@ -30,17 +32,12 @@ onMounted(() => {
 
 <script module="renderScript" lang="renderjs">
 import emitImageData from "./index.js"
-import { state, mutations } from '@/components/features/imageColorRecognit/store.js'
+//import { state, mutations } from './store.js'
 export default{
-  imageUrl:null,
   data(){
     return{
       imgSrc:''
     }
-  },
-  mounted(){
-
-
   },
   methods:{
   // 接收逻辑层发送的数据
@@ -48,11 +45,10 @@ export default{
     console.log('newValue', newValue)
     this.imgSrc=newValue
     this.emitImage()
-
   },
 
   emitImage(e, ownerVm){
-	 // var imgSrc = "http://yd.ymyimi.cn:9001/api/yid/1629430898298.png"
+	 var imgSrc = "http://yd.ymyimi.cn:9001/api/yid/1629430898298.png"
 	  const imgEle = document.createElement('img')
 	  const canvas = document.createElement('canvas')
 	  imgEle.src = this.imgSrc+ '?' + new Date().getTime();
@@ -112,7 +108,8 @@ export default{
         rightNearestColor:rightNearestColor,
       }
       emitImageData.imageData=imageData
-      mutations.setSelectActive(imageData)
+      console.log("数据更新了");
+     // mutations.setSelectActive(imageData)
    // ownerVm.callMethod('receiveRenderData', imageData)
     }
   }
