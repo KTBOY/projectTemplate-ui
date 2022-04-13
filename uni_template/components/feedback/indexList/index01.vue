@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2022-04-02 17:31:52
- * @LastEditTime: 2022-04-13 00:45:17
+ * @LastEditTime: 2022-04-13 16:26:40
  * @LastEditors: zlc
  * @Description: 字母索引1.0版
- * @FilePath: \gogogogo\project-template\uni_template\components\feedback\indexList\index01.vue
+ * @FilePath: \git项目\project-template\uni_template\components\feedback\indexList\index01.vue
 -->
 <template>
   <view class="index-list">
@@ -40,7 +40,7 @@ const props = defineProps({
   //列表
   region: {
     type: Array,
-    default: [{}],
+    default: [],
   },
 })
 //const testist= reactive(city)
@@ -129,12 +129,14 @@ function getCityDomData(){
   }).exec()
 }
 onMounted(() => {
-  getCityDomData()
+  if(props.region.length){
+     getCityDomData()
+  }
   setTimeout(() => {
     testList.value = city
    
   }, 1000)
-  state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height
+  state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight 
 })
 </script>
 <style lang="less">
@@ -196,7 +198,7 @@ page {
   }
 
   .right-box {
-    position: absolute;
+    position:absolute ;
     top: 50%;
     transform: translateY(-50%);
     right: 10rpx;
