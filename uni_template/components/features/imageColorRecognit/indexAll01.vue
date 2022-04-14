@@ -105,7 +105,7 @@ function getImageColorData() {
 onMounted(() => {
 	setTimeout(()=>{
 		getImageColorData();
-	},2000)
+	},5000)
 	
 });
 </script>

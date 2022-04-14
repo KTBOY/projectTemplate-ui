@@ -2831,11 +2831,12 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     props: {
       region: {
         type: Array,
-        default: [{}]
+        default: []
       }
     },
     setup(__props) {
-      const testList = vue.ref([]);
+      const props = __props;
+      const testList = vue.reactive(citys);
       const state = vue.reactive({
         type: 0,
         currenIndex: 0,
@@ -2846,23 +2847,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       const query = uni.createSelectorQuery().in(this);
       vue.watch(testList, async (newVal, oldVla) => {
         await vue.nextTick();
-        query.select(".block-list").boundingClientRect((data) => {
-          state.currenMoveData.ListTop = data.top;
-        }).exec();
-        query.selectAll(".block").boundingClientRect((data) => {
-          state.currenMoveData.currenHeight = data[0].height;
-          state.currenMoveData.lastMoveY = data[0].height * (data.length - 1);
-        }).exec();
-        query.selectAll(".list-item").boundingClientRect((data) => {
-          var _a;
-          state.currenMoveData.listTopArray = data.map((item) => {
-            return item.top;
-          });
-          let last = (_a = data[data.length - 1]) == null ? void 0 : _a.height;
-          if (last < state.windowData.windowHeight)
-            ;
-        }).exec();
-        formatAppLog("log", "at components/feedback/indexList/index01.vue:78", "\u83B7\u53D6\u6210\u529F");
+        formatAppLog("log", "at components/feedback/indexList/index01.vue:60", "\u83B7\u53D6\u6210\u529F");
       });
       function handleTouchstart(e) {
         state.type = 1;
@@ -2898,12 +2883,37 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
           state.regionData.height = data.height || 0;
         }).exec();
       }
-      vue.onMounted(() => {
-        getCityDomData();
-        setTimeout(() => {
-          testList.value = citys;
-        }, 1e3);
-        state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height;
+      function getIndexListDomData() {
+        return new Promise((resolve, reject) => {
+          query.select(".block-list").boundingClientRect((data) => {
+            state.currenMoveData.ListTop = data.top;
+          }).exec();
+          query.selectAll(".block").boundingClientRect((data) => {
+            state.currenMoveData.currenHeight = data[0].height;
+            state.currenMoveData.lastMoveY = data[0].height * (data.length - 1);
+          }).exec();
+          query.selectAll(".list-item").boundingClientRect((data) => {
+            state.currenMoveData.listTopArray = data.map((item) => {
+              return item.top;
+            });
+            let last = data[data.length - 1].height;
+            if (last < state.windowData.windowHeight)
+              ;
+          }).exec();
+          resolve(state.currenMoveData);
+        });
+      }
+      vue.onMounted(async () => {
+        if (props.region.length) {
+          getCityDomData();
+        }
+        await vue.nextTick();
+        await getIndexListDomData();
+        if (state.regionData.height) {
+          state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height;
+        } else {
+          state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight;
+        }
       });
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("view", { class: "index-list" }, [
@@ -2915,7 +2925,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
               return vue.openBlock(), vue.createElementBlock("view", { class: "region-item" }, vue.toDisplayString(item.name), 1);
             }), 256))
           ])) : vue.createCommentVNode("v-if", true),
-          testList.value.length ? (vue.openBlock(), vue.createElementBlock("view", {
+          vue.unref(testList).length ? (vue.openBlock(), vue.createElementBlock("view", {
             key: 1,
             class: "list-box state-container",
             style: vue.normalizeStyle({ height: `${vue.unref(state).windowData.windowHeight}px` })
@@ -2927,7 +2937,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
                 onScroll: handleScroll,
                 "scroll-into-view": vue.unref(state).type == 0 ? "" : `item-${vue.unref(state).currenIndex}`
               }, [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(testList.value, (item, index) => {
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(testList), (item, index) => {
                   return vue.openBlock(), vue.createElementBlock("view", {
                     class: "list-item",
                     key: index,
@@ -2960,8 +2970,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
                 vue.createElementVNode("view", {
                   class: "focus-block",
                   style: vue.normalizeStyle({ transform: `translateY(${vue.unref(state).currenMoveData.moveY}px)` })
-                }, vue.toDisplayString(testList.value[vue.unref(state).currenIndex].letter), 5),
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(testList.value, (item, index) => {
+                }, vue.toDisplayString(vue.unref(testList)[vue.unref(state).currenIndex].letter), 5),
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(testList), (item, index) => {
                   return vue.openBlock(), vue.createElementBlock("view", {
                     class: "block",
                     key: index
@@ -2977,9 +2987,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var indexList = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-09820f76"]]);
   const _sfc_main$k = {
     components: {
-      "index-list": indexList
-    },
-    setup(props) {
+      "index-list": indexList,
+      cricleProgress
     }
   };
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
@@ -4406,7 +4415,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       vue.onMounted(() => {
         setTimeout(() => {
           getImageColorData();
-        }, 2e3);
+        }, 5e3);
       });
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("view", { class: "image-all" }, [

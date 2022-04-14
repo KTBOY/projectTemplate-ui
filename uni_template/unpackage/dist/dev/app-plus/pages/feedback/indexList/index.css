@@ -79,3 +79,19 @@ body[data-v-09820f76] {
   color: #ffffff;
   border-radius: 50%;
 }
+
+
+body[data-v-e470bb1c] {
+}
+.circle-progress[data-v-e470bb1c] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.canvas-bg[data-v-e470bb1c] {
+  position: absolute;
+}
+.canvas[data-v-e470bb1c] {
+  position: absolute;
+}
