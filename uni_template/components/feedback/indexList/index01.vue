@@ -1,20 +1,26 @@
 <!--
  * @Author: zlc
  * @Date: 2022-04-02 17:31:52
- * @LastEditTime: 2022-04-13 18:04:40
+ * @LastEditTime: 2022-04-14 22:58:32
  * @LastEditors: zlc
  * @Description: 字母索引1.0版
- * @FilePath: \git项目\project-template\uni_template\components\feedback\indexList\index01.vue
+ * @FilePath: \gogogogo\project-template\uni_template\components\feedback\indexList\index01.vue
 -->
 <template>
   <view class="index-list">
     <view class="region" v-if="region.length">
       <view class="region-item" v-for="(item, index) in region"> {{ item.name }}</view>
     </view>
-    <view class="list-box state-container" :style="{ height: `${state.windowData.windowHeight}px` }" v-if="testList.length">
+    <view class="list-box state-container" :style="{ height: `${state.windowData.windowHeight}px` }" v-if="indexList.length">
       <view class="left-box">
-        <scroll-view class="scroll-box" :style="{ height: `${state.windowData.windowHeight}px` }"  :scroll-y="true" @scroll="handleScroll" :scroll-into-view="state.type == 0 ? '' : `item-${state.currenIndex}`">
-          <view class="list-item" v-for="(item, index) in testList" :key="index" :id="`item-${index}`">
+        <scroll-view
+          class="scroll-box"
+          :style="{ height: `${state.windowData.windowHeight}px` }"
+          :scroll-y="true"
+          @scroll="handleScroll"
+          :scroll-into-view="state.type == 0 ? '' : `item-${state.currenIndex}`"
+        >
+          <view class="list-item" v-for="(item, index) in indexList" :key="index" :id="`item-${index}`">
             <view class="data-list-title">{{ item.letter }}</view>
             <view>
               <view class="data-list-content-item" v-for="(k, l) in item.data" :key="l">{{ k }}</view>
@@ -23,10 +29,10 @@
           <view class="fill-last" :style="{ height: state.currenMoveData.fillHeight + 'px' }"></view>
         </scroll-view>
       </view>
-      <view class="right-box" >
-        <view class="block-list" @touchmove="handleTouchmove" @touchend="handleTouchend" @touchstart="handleTouchstart" >
-          <view class="focus-block" :style="{ transform: `translateY(${state.currenMoveData.moveY}px)` }">{{ testList[state.currenIndex].letter }}</view>
-          <view class="block" v-for="(item, index) in testList" :key="index">{{ item.letter }}</view>
+      <view class="right-box">
+        <view class="block-list" @touchmove="handleTouchmove" @touchend="handleTouchend" @touchstart="handleTouchstart">
+          <view class="focus-block" :style="{ transform: `translateY(${state.currenMoveData.moveY}px)` }">{{ indexList[state.currenIndex].letter }}</view>
+          <view class="block" v-for="(item, index) in indexList" :key="index">{{ item.letter }}</view>
         </view>
       </view>
     </view>
@@ -35,16 +41,19 @@
 
 <script setup>
 import { onMounted, defineProps, toRefs, computed, reactive, watch, ref, nextTick } from 'vue'
-import city from './city.js'
+
 const props = defineProps({
-  //列表
+  //地区列表
   region: {
     type: Array,
     default: [],
   },
+  indexList:{
+     type: Array,
+     default: [],
+  }
 })
-const testList = reactive(city)
-//const testList = ref([])
+
 const state = reactive({
   type: 0,
   currenIndex: 0, //索引
@@ -53,10 +62,39 @@ const state = reactive({
   regionData: {},
 })
 const query = uni.createSelectorQuery().in(this)
-
-watch(testList, async (newVal, oldVla) => {
+watch(()=>props.indexList, async (newVal, oldVla) => {
   await nextTick()
-
+  //增加500ms的延迟保证页面渲染完毕，才获取Dom
+  setTimeout(()=>{
+    query
+      .select('.block-list')
+      .boundingClientRect((data) => {
+        state.currenMoveData.ListTop = data.top //获取该dom距离屏幕顶部的距离
+      })
+      .exec()
+    query
+      .selectAll('.block')
+      .boundingClientRect((data) => {
+        state.currenMoveData.currenHeight = data[0].height //获取每一个item
+        state.currenMoveData.lastMoveY = data[0].height * (data.length - 1) //获取最后一个y轴
+      })
+      .exec()
+    query
+      .selectAll('.list-item')
+      .boundingClientRect((data) => {
+        state.currenMoveData.listTopArray = data.map((item) => {
+          return item.top
+        })
+        /*
+        * 此写法，适用商品分类等业务，普通的字母索引使用，如果最后一个数据较少会导致底部留白
+        * */
+        let last = data[data.length - 1].height
+        if (last < state.windowData.windowHeight) {
+          //state.currenMoveData.fillHeight = state.windowData.windowHeight - last
+        }
+      })
+      .exec()
+   },500) 
   console.log('获取成功')
 })
 
@@ -103,42 +141,13 @@ function getCityDomData() {
   query
     .select('.region')
     .boundingClientRect((data) => {
-      console.log(data);
+      console.log(data)
       state.regionData.height = data.height
     })
     .exec()
 }
 function getIndexListDomData() {
   return new Promise((resolve, reject) => {
-    query
-      .select('.block-list')
-      .boundingClientRect((data) => {
-        console.log(data);
-        state.currenMoveData.ListTop = data.top //获取该dom距离屏幕顶部的距离
-      })
-      .exec()
-    query
-      .selectAll('.block')
-      .boundingClientRect((data) => {
-        state.currenMoveData.currenHeight = data[0].height //获取每一个item
-        state.currenMoveData.lastMoveY = data[0].height * (data.length - 1) //获取最后一个y轴
-      })
-      .exec()
-    query
-      .selectAll('.list-item')
-      .boundingClientRect((data) => {
-        state.currenMoveData.listTopArray = data.map((item) => {
-          return item.top
-        })
-        /*
-         * 此写法，适用商品分类等业务，普通的字母索引使用，如果最后一个数据较少会导致底部留白
-         * */
-        let last = data[data.length - 1].height
-        if (last < state.windowData.windowHeight) {
-          //state.currenMoveData.fillHeight = state.windowData.windowHeight - last
-        }
-      })
-      .exec()
     resolve(state.currenMoveData)
   })
 }
@@ -150,10 +159,9 @@ onMounted(async () => {
   await getIndexListDomData()
   if (state.regionData.height) {
     state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height
-    console.log(state.regionData);
+    console.log(state.regionData)
   } else {
     state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight
-
   }
 })
 </script>
@@ -203,7 +211,7 @@ page {
     display: flex;
     padding: 0 60rpx 0 30rpx;
     box-sizing: border-box;
-    .scroll-box{
+    .scroll-box {
       height: 100%;
     }
     .list-item {
@@ -219,10 +227,10 @@ page {
   }
 
   .right-box {
-      position: absolute;
-			top: 100rpx;//用了想对定位，不用但是是否不居中，或者定位偏差过大的问题，用完相对于父元素定位了，而且用百分比定位导致获取高度错误，应该用px或者rpx
-			right: 10rpx;
-;
+    position: absolute;
+    top: 50%; //用了想对定位，不用但是是否不居中，或者定位偏差过大的问题，用完相对于父元素定位了，而且用百分比定位导致获取高度错误，应该用px或者rpx
+    right: 10rpx;
+    transform: translateY(-50%);
     .block-list {
       width: 40rpx;
       text-align: center;
@@ -240,7 +248,7 @@ page {
         line-height: 40rpx;
         position: absolute;
         top: 0;
-  
+
         background-color: #2878ff;
         color: #ffffff;
         border-radius: 50%;
