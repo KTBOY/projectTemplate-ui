@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-13 17:07:47
- * @LastEditTime: 2022-01-21 16:01:41
+ * @LastEditTime: 2022-04-19 22:49:45
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \git项目\project-template\uni_template\App.vue
+ * @FilePath: \gogogogo\project-template\uni_template\App.vue
 -->
 <script>
 export default {
@@ -28,6 +28,9 @@ page {
   background: #f7f8fa;
   --popover-white-background-color--: #2878ff;
   --page-padding--: 15px;
+}
+.demo{
+  padding:var(--page-padding--);
 }
 .demo-title {
   margin: 15rpx 0;

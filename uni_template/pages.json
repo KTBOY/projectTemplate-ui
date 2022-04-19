@@ -108,8 +108,18 @@
       "style": {
         "navigationBarTitleText": "imageColorRecognit图片颜色识别"
       }
-    }
+    },
     // ====================end图片颜色识别============================
+
+   // #####################start模板#################################
+   {
+    "path": "pages/template/share/qrcode/index",
+    "style": {
+      "navigationBarTitleText": "二维码生成"
+    }
+  }
+
+   // #####################end模板#################################
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

@@ -1,0 +1,27 @@
+{
+    "nav":[
+      {
+        "name": "分享相关",
+        "enName": "share",
+        "packages":[
+          {
+            "enName": "Qrcode",
+            "cName": "二维码",
+            "desc": "二维码",
+            "show": true,
+            "path":"",
+            "pathList": "/pages/index/list",
+            "packages":[
+              {
+                "name": "二维码生成多端",
+                "show": true,
+                "path":"/pages/template/share/qrcode/index"
+              }
+
+            ]
+          }
+
+        ]
+      }
+    ]
+}
