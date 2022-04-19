@@ -1824,6 +1824,172 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     ]);
   }
   var PagesFeedbackCricleProgressIndex = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$e]]);
+  const _sfc_main$l = {
+    props: {
+      region: {
+        type: Array,
+        default: []
+      },
+      indexList: {
+        type: Array,
+        default: []
+      }
+    },
+    setup(__props) {
+      const props = __props;
+      const state = vue.reactive({
+        type: 0,
+        currenIndex: 0,
+        windowData: {},
+        currenMoveData: {},
+        regionData: {}
+      });
+      const query = uni.createSelectorQuery().in(this);
+      vue.watch(() => props.indexList, async (newVal, oldVla) => {
+        await vue.nextTick();
+        setTimeout(() => {
+          query.select(".block-list").boundingClientRect((data) => {
+            state.currenMoveData.ListTop = data.top;
+          }).exec();
+          query.selectAll(".block").boundingClientRect((data) => {
+            state.currenMoveData.currenHeight = data[0].height;
+            state.currenMoveData.lastMoveY = data[0].height * (data.length - 1);
+          }).exec();
+          query.selectAll(".list-item").boundingClientRect((data) => {
+            state.currenMoveData.listTopArray = data.map((item) => {
+              return item.top;
+            });
+            let last = data[data.length - 1].height;
+            if (last < state.windowData.windowHeight)
+              ;
+          }).exec();
+        }, 500);
+        formatAppLog("log", "at components/feedback/indexList/index01.vue:98", "\u83B7\u53D6\u6210\u529F");
+      });
+      function handleTouchstart(e) {
+        state.type = 1;
+        let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight);
+        state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight);
+        state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight;
+      }
+      function handleTouchmove(e) {
+        state.type = 2;
+        let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight);
+        if (moveY >= state.currenMoveData.lastMoveY || moveY < 0)
+          return;
+        state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight);
+        state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight;
+      }
+      function handleTouchend() {
+        state.type = 0;
+      }
+      function handleScroll(e) {
+        if (state.type == 1 || state.type == 2)
+          return;
+        let scrollTop = e.detail.scrollTop;
+        for (let i = state.currenMoveData.listTopArray.length - 1; i >= 0; i--) {
+          if (scrollTop + 2 >= state.currenMoveData.listTopArray[i]) {
+            state.currenIndex = i;
+            state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight;
+            break;
+          }
+        }
+      }
+      function getCityDomData() {
+        query.select(".region").boundingClientRect((data) => {
+          formatAppLog("log", "at components/feedback/indexList/index01.vue:144", data);
+          state.regionData.height = data.height;
+        }).exec();
+      }
+      function getIndexListDomData() {
+        return new Promise((resolve, reject) => {
+          resolve(state.currenMoveData);
+        });
+      }
+      vue.onMounted(async () => {
+        if (props.region.length) {
+          getCityDomData();
+        }
+        await vue.nextTick();
+        await getIndexListDomData();
+        if (state.regionData.height) {
+          state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height;
+          formatAppLog("log", "at components/feedback/indexList/index01.vue:162", state.regionData);
+        } else {
+          state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight;
+        }
+      });
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", { class: "index-list" }, [
+          __props.region.length ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "region"
+          }, [
+            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(__props.region, (item, index) => {
+              return vue.openBlock(), vue.createElementBlock("view", { class: "region-item" }, vue.toDisplayString(item.name), 1);
+            }), 256))
+          ])) : vue.createCommentVNode("v-if", true),
+          __props.indexList.length ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 1,
+            class: "list-box state-container",
+            style: vue.normalizeStyle({ height: `${vue.unref(state).windowData.windowHeight}px` })
+          }, [
+            vue.createElementVNode("view", { class: "left-box" }, [
+              vue.createElementVNode("scroll-view", {
+                class: "scroll-box",
+                style: vue.normalizeStyle({ height: `${vue.unref(state).windowData.windowHeight}px` }),
+                "scroll-y": true,
+                onScroll: handleScroll,
+                "scroll-into-view": vue.unref(state).type == 0 ? "" : `item-${vue.unref(state).currenIndex}`
+              }, [
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(__props.indexList, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "list-item",
+                    key: index,
+                    id: `item-${index}`
+                  }, [
+                    vue.createElementVNode("view", { class: "data-list-title" }, vue.toDisplayString(item.letter), 1),
+                    vue.createElementVNode("view", null, [
+                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(item.data, (k, l) => {
+                        return vue.openBlock(), vue.createElementBlock("view", {
+                          class: "data-list-content-item",
+                          key: l
+                        }, vue.toDisplayString(k), 1);
+                      }), 128))
+                    ])
+                  ], 8, ["id"]);
+                }), 128)),
+                vue.createElementVNode("view", {
+                  class: "fill-last",
+                  style: vue.normalizeStyle({ height: vue.unref(state).currenMoveData.fillHeight + "px" })
+                }, null, 4)
+              ], 44, ["scroll-into-view"])
+            ]),
+            vue.createElementVNode("view", { class: "right-box" }, [
+              vue.createElementVNode("view", {
+                class: "block-list",
+                onTouchmove: handleTouchmove,
+                onTouchend: handleTouchend,
+                onTouchstart: handleTouchstart
+              }, [
+                vue.createElementVNode("view", {
+                  class: "focus-block",
+                  style: vue.normalizeStyle({ transform: `translateY(${vue.unref(state).currenMoveData.moveY}px)` })
+                }, vue.toDisplayString(__props.indexList[vue.unref(state).currenIndex].letter), 5),
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(__props.indexList, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock("view", {
+                    class: "block",
+                    key: index
+                  }, vue.toDisplayString(item.letter), 1);
+                }), 128))
+              ], 32)
+            ])
+          ], 4)) : vue.createCommentVNode("v-if", true)
+        ]);
+      };
+    }
+  };
+  var indexList = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-09820f76"]]);
   const citys = [
     {
       "letter": "A",
@@ -2827,174 +2993,26 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ]
     }
   ];
-  const _sfc_main$l = {
-    props: {
-      region: {
-        type: Array,
-        default: []
-      }
-    },
-    setup(__props) {
-      const props = __props;
-      const testList = vue.reactive(citys);
-      const state = vue.reactive({
-        type: 0,
-        currenIndex: 0,
-        windowData: {},
-        currenMoveData: {},
-        regionData: {}
-      });
-      const query = uni.createSelectorQuery().in(this);
-      vue.watch(testList, async (newVal, oldVla) => {
-        await vue.nextTick();
-        formatAppLog("log", "at components/feedback/indexList/index01.vue:60", "\u83B7\u53D6\u6210\u529F");
-      });
-      function handleTouchstart(e) {
-        state.type = 1;
-        let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight);
-        state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight);
-        state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight;
-      }
-      function handleTouchmove(e) {
-        state.type = 2;
-        let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight);
-        if (moveY >= state.currenMoveData.lastMoveY || moveY < 0)
-          return;
-        state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight);
-        state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight;
-      }
-      function handleTouchend() {
-        state.type = 0;
-      }
-      function handleScroll(e) {
-        if (state.type == 1 || state.type == 2)
-          return;
-        let scrollTop = e.detail.scrollTop;
-        for (let i = state.currenMoveData.listTopArray.length - 1; i >= 0; i--) {
-          if (scrollTop + 2 >= state.currenMoveData.listTopArray[i]) {
-            state.currenIndex = i;
-            state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight;
-            break;
-          }
-        }
-      }
-      function getCityDomData() {
-        query.select(".region").boundingClientRect((data) => {
-          state.regionData.height = data.height || 0;
-        }).exec();
-      }
-      function getIndexListDomData() {
-        return new Promise((resolve, reject) => {
-          query.select(".block-list").boundingClientRect((data) => {
-            state.currenMoveData.ListTop = data.top;
-          }).exec();
-          query.selectAll(".block").boundingClientRect((data) => {
-            state.currenMoveData.currenHeight = data[0].height;
-            state.currenMoveData.lastMoveY = data[0].height * (data.length - 1);
-          }).exec();
-          query.selectAll(".list-item").boundingClientRect((data) => {
-            state.currenMoveData.listTopArray = data.map((item) => {
-              return item.top;
-            });
-            let last = data[data.length - 1].height;
-            if (last < state.windowData.windowHeight)
-              ;
-          }).exec();
-          resolve(state.currenMoveData);
-        });
-      }
-      vue.onMounted(async () => {
-        if (props.region.length) {
-          getCityDomData();
-        }
-        await vue.nextTick();
-        await getIndexListDomData();
-        if (state.regionData.height) {
-          state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight - state.regionData.height;
-        } else {
-          state.windowData.windowHeight = uni.getSystemInfoSync().windowHeight;
-        }
-      });
-      return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view", { class: "index-list" }, [
-          __props.region.length ? (vue.openBlock(), vue.createElementBlock("view", {
-            key: 0,
-            class: "region"
-          }, [
-            (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(__props.region, (item, index) => {
-              return vue.openBlock(), vue.createElementBlock("view", { class: "region-item" }, vue.toDisplayString(item.name), 1);
-            }), 256))
-          ])) : vue.createCommentVNode("v-if", true),
-          vue.unref(testList).length ? (vue.openBlock(), vue.createElementBlock("view", {
-            key: 1,
-            class: "list-box state-container",
-            style: vue.normalizeStyle({ height: `${vue.unref(state).windowData.windowHeight}px` })
-          }, [
-            vue.createElementVNode("view", { class: "left-box" }, [
-              vue.createElementVNode("scroll-view", {
-                style: vue.normalizeStyle({ height: `${vue.unref(state).windowData.windowHeight}px` }),
-                "scroll-y": true,
-                onScroll: handleScroll,
-                "scroll-into-view": vue.unref(state).type == 0 ? "" : `item-${vue.unref(state).currenIndex}`
-              }, [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(testList), (item, index) => {
-                  return vue.openBlock(), vue.createElementBlock("view", {
-                    class: "list-item",
-                    key: index,
-                    id: `item-${index}`
-                  }, [
-                    vue.createElementVNode("view", { class: "data-list-title" }, vue.toDisplayString(item.letter), 1),
-                    vue.createElementVNode("view", null, [
-                      (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(item.data, (k, l) => {
-                        return vue.openBlock(), vue.createElementBlock("view", {
-                          class: "data-list-content-item",
-                          key: l
-                        }, vue.toDisplayString(k), 1);
-                      }), 128))
-                    ])
-                  ], 8, ["id"]);
-                }), 128)),
-                vue.createElementVNode("view", {
-                  class: "fill-last",
-                  style: vue.normalizeStyle({ height: vue.unref(state).currenMoveData.fillHeight + "px" })
-                }, null, 4)
-              ], 44, ["scroll-into-view"])
-            ]),
-            vue.createElementVNode("view", { class: "right-box" }, [
-              vue.createElementVNode("view", {
-                class: "block-list",
-                onTouchmove: handleTouchmove,
-                onTouchend: handleTouchend,
-                onTouchstart: handleTouchstart
-              }, [
-                vue.createElementVNode("view", {
-                  class: "focus-block",
-                  style: vue.normalizeStyle({ transform: `translateY(${vue.unref(state).currenMoveData.moveY}px)` })
-                }, vue.toDisplayString(vue.unref(testList)[vue.unref(state).currenIndex].letter), 5),
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(vue.unref(testList), (item, index) => {
-                  return vue.openBlock(), vue.createElementBlock("view", {
-                    class: "block",
-                    key: index
-                  }, vue.toDisplayString(item.letter), 1);
-                }), 128))
-              ], 32)
-            ])
-          ], 4)) : vue.createCommentVNode("v-if", true)
-        ]);
-      };
-    }
-  };
-  var indexList = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-09820f76"]]);
   const _sfc_main$k = {
     components: {
       "index-list": indexList,
       cricleProgress
+    },
+    setup(props) {
+      const state = vue.reactive({
+        list: []
+      });
+      return {
+        state
+      };
     }
   };
   function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_index_list = vue.resolveComponent("index-list");
     return vue.openBlock(), vue.createElementBlock("view", null, [
-      vue.createVNode(_component_index_list)
+      vue.createVNode(_component_index_list, {
+        indexList: $setup.state.list
+      }, null, 8, ["indexList"])
     ]);
   }
   var PagesFeedbackIndexListIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$d]]);
@@ -3003,41 +3021,52 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       "index-list": indexList
     },
     setup(props) {
-      const headerCitys = vue.ref([
-        {
-          name: "\u4E2D\u56FD"
-        },
-        {
-          name: "\u7F8E\u56FD"
-        },
-        {
-          name: "\u52A0\u62FF\u5927"
-        },
-        {
-          name: "\u6FB3\u5927\u5229\u4E9A"
-        },
-        {
-          name: "\u65E5\u672C"
-        },
-        {
-          name: "\u65B0\u52A0\u5761"
-        },
-        {
-          name: "\u897F\u73ED\u7259"
-        },
-        {
-          name: "\u82F1\u56FD"
-        }
-      ]);
+      const state = vue.reactive({
+        list: [],
+        headerCitys: [
+          {
+            name: "\u4E2D\u56FD"
+          },
+          {
+            name: "\u7F8E\u56FD"
+          },
+          {
+            name: "\u52A0\u62FF\u5927"
+          },
+          {
+            name: "\u6FB3\u5927\u5229\u4E9A"
+          },
+          {
+            name: "\u65E5\u672C"
+          },
+          {
+            name: "\u65B0\u52A0\u5761"
+          },
+          {
+            name: "\u897F\u73ED\u7259"
+          },
+          {
+            name: "\u82F1\u56FD"
+          }
+        ]
+      });
+      vue.onMounted(() => {
+        setTimeout(() => {
+          state.list = citys;
+        }, 100);
+      });
       return {
-        headerCitys
+        state
       };
     }
   };
   function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_index_list = vue.resolveComponent("index-list");
     return vue.openBlock(), vue.createElementBlock("view", { class: "region" }, [
-      vue.createVNode(_component_index_list, { region: $setup.headerCitys }, null, 8, ["region"])
+      vue.createVNode(_component_index_list, {
+        region: $setup.state.headerCitys,
+        indexList: $setup.state.list
+      }, null, 8, ["region", "indexList"])
     ]);
   }
   var PagesFeedbackIndexListIndexRegion = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$c]]);
@@ -4353,69 +4382,82 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
         var ctx = uni.createCanvasContext("imageCanvas");
         let imageUrl = props.imageUrl + "?" + new Date().getTime();
         query.select(".imageUrl").boundingClientRect((data) => {
+          formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:29", data);
           imgWidth = data.width;
           imgHeight = data.height;
           canvasWidth = data.width;
           canvasHeight = data.height;
-          ctx.drawImage(imageUrl, 0, 0, canvasWidth, canvasHeight);
         }).exec();
-        formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:40", ctx);
-        const leftSectionData = [];
-        const rightSectionData = [];
-        const onelineImgDataLen = canvasWidth * 4;
-        ctx.draw(true, () => {
-          uni.canvasGetImageData({
-            canvasId: ctx.id,
-            x: 0,
-            y: 0,
-            width: imgWidth,
-            height: imgHeight,
-            success: (res) => {
-              res.data.forEach((colorVal, i) => {
-                if (i % onelineImgDataLen <= 0.5 * onelineImgDataLen || i % onelineImgDataLen >= 0.6 * onelineImgDataLen) {
-                  const inLeft = i % onelineImgDataLen <= 0.5 * onelineImgDataLen;
-                  if (i % 4 === 0) {
-                    const curAverageRGB = (res.data[i] + res.data[i + 1] + res.data[i + 2]) / 3;
-                    let leftOrRightRef = inLeft ? leftSectionData : rightSectionData;
-                    leftOrRightRef[leftOrRightRef.length] = [curAverageRGB, res.data[i], res.data[i + 1], res.data[i + 2]];
-                  }
+        setTimeout(() => {
+          formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:39", canvasWidth, canvasHeight);
+          const leftSectionData = [];
+          const rightSectionData = [];
+          const onelineImgDataLen = canvasWidth * 4;
+          ctx.drawImage(imageUrl, 0, 0, canvasWidth, canvasHeight);
+          ctx.draw(true, () => {
+            uni.canvasGetImageData({
+              canvasId: ctx.id,
+              x: 0,
+              y: 0,
+              width: imgWidth,
+              height: imgHeight,
+              success: (res) => {
+                if (!res.data) {
+                  uni.showToast({
+                    title: "\u83B7\u53D6\u6570\u636E\u4E3A\u7A7A"
+                  });
                 }
-              });
-              const averageOfLeft = Math.round(leftSectionData.reduce((_cur, item) => {
-                return _cur + item[0];
-              }, 0) / leftSectionData.length);
-              const averageOfRight = Math.round(rightSectionData.reduce((_cur, item) => {
-                return _cur + item[0];
-              }, 0) / rightSectionData.length);
-              const findNearestIndex = (averageVal, arrBox) => {
-                let _gapValue = Math.abs(averageVal - arrBox[0]);
-                let _nearColorIndex = 0;
-                arrBox.forEach((item, index) => {
-                  const curGapValue = Math.abs(item - averageVal);
-                  if (curGapValue < _gapValue) {
-                    _gapValue = curGapValue;
-                    _nearColorIndex = index;
+                res.data.forEach((colorVal, i) => {
+                  if (i % onelineImgDataLen <= 0.5 * onelineImgDataLen || i % onelineImgDataLen >= 0.6 * onelineImgDataLen) {
+                    const inLeft = i % onelineImgDataLen <= 0.5 * onelineImgDataLen;
+                    if (i % 4 === 0) {
+                      const curAverageRGB = (res.data[i] + res.data[i + 1] + res.data[i + 2]) / 3;
+                      let leftOrRightRef = inLeft ? leftSectionData : rightSectionData;
+                      leftOrRightRef[leftOrRightRef.length] = [curAverageRGB, res.data[i], res.data[i + 1], res.data[i + 2]];
+                    }
                   }
                 });
-                return _nearColorIndex;
-              };
-              const leftNearestColor = leftSectionData[findNearestIndex(averageOfLeft, leftSectionData)];
-              const rightNearestColor = rightSectionData[findNearestIndex(averageOfRight, rightSectionData)];
-              formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:94", leftNearestColor, rightNearestColor);
-              var imageData = {
-                leftNearestColor,
-                rightNearestColor
-              };
-              formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:99", imageData);
-              emit("successColor", imageData);
-            }
+                const averageOfLeft = Math.round(leftSectionData.reduce((_cur, item) => {
+                  return _cur + item[0];
+                }, 0) / leftSectionData.length);
+                const averageOfRight = Math.round(rightSectionData.reduce((_cur, item) => {
+                  return _cur + item[0];
+                }, 0) / rightSectionData.length);
+                const findNearestIndex = (averageVal, arrBox) => {
+                  let _gapValue = Math.abs(averageVal - arrBox[0]);
+                  let _nearColorIndex = 0;
+                  arrBox.forEach((item, index) => {
+                    const curGapValue = Math.abs(item - averageVal);
+                    if (curGapValue < _gapValue) {
+                      _gapValue = curGapValue;
+                      _nearColorIndex = index;
+                    }
+                  });
+                  return _nearColorIndex;
+                };
+                const leftNearestColor = leftSectionData[findNearestIndex(averageOfLeft, leftSectionData)];
+                const rightNearestColor = rightSectionData[findNearestIndex(averageOfRight, rightSectionData)];
+                formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:99", leftNearestColor, rightNearestColor);
+                var imageData = {
+                  leftNearestColor,
+                  rightNearestColor
+                };
+                formatAppLog("log", "at components/features/imageColorRecognit/indexAll01.vue:104", imageData);
+                emit("successColor", imageData);
+              }
+            });
           });
-        });
+        }, 2e3);
       }
-      vue.onMounted(() => {
+      vue.onMounted(async () => {
+        uni.showLoading({
+          title: "\u52A0\u8F7D\u4E2D"
+        });
+        await vue.nextTick();
         setTimeout(() => {
+          uni.hideLoading();
           getImageColorData();
-        }, 5e3);
+        }, 2e3);
       });
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("view", { class: "image-all" }, [

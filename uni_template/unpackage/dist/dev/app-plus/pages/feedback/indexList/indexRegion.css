@@ -44,6 +44,9 @@ body[data-v-09820f76] {
   padding: 0 1.875rem 0 0.9375rem;
   box-sizing: border-box;
 }
+.list-box .left-box .scroll-box[data-v-09820f76] {
+  height: 100%;
+}
 .list-box .left-box .list-item .data-list-title[data-v-09820f76] {
   color: #909399;
   line-height: 1.875rem;
@@ -55,8 +58,8 @@ body[data-v-09820f76] {
 .list-box .right-box[data-v-09820f76] {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   right: 0.3125rem;
+  transform: translateY(-50%);
 }
 .list-box .right-box .block-list[data-v-09820f76] {
   width: 1.25rem;

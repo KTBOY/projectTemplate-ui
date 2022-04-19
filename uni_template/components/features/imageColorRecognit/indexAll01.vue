@@ -10,7 +10,7 @@
 	<view class="image-all"><canvas canvas-id="imageCanvas" class="canvas"></canvas></view>
 </template>
 <script setup>
-import { onMounted, defineProps, defineEmits, computed } from 'vue';
+import { onMounted, defineProps, defineEmits, computed ,nextTick} from 'vue';
 const query = uni.createSelectorQuery().in(this);
 const props = defineProps({
 	//只接受远端图片
@@ -25,22 +25,22 @@ function getImageColorData() {
 	let canvasWidth, canvasHeight;
 	var ctx = uni.createCanvasContext('imageCanvas');
 	let imageUrl = props.imageUrl + '?' + new Date().getTime();
-	query
-		.select('.imageUrl')
-		.boundingClientRect(data => {
-			///console.log(data)
+	query.select('.imageUrl').boundingClientRect(data => {
+			console.log(data)
 			imgWidth = data.width;
 			imgHeight = data.height;
 			canvasWidth = data.width;
 			canvasHeight = data.height;
-			ctx.drawImage(imageUrl, 0, 0, canvasWidth, canvasHeight);
-		}).exec();
+	}).exec();
 	
-
-	console.log(ctx)
+	setTimeout(()=>{
+		
+	
+	console.log(canvasWidth,canvasHeight)
 	const leftSectionData = [];
 	const rightSectionData = [];
 	const onelineImgDataLen = canvasWidth * 4;
+	ctx.drawImage(imageUrl, 0, 0, canvasWidth, canvasHeight);
 	ctx.draw(true, () => {
 		// 获取像素数据
 		uni.canvasGetImageData({
@@ -51,6 +51,11 @@ function getImageColorData() {
 			height: imgHeight,
 			success: res => {
 				//console.log(res)
+				if(!res.data){
+					uni.showToast({
+						title:'获取数据为空'
+					})
+				}
 				res.data.forEach((colorVal, i) => {
 					if (i % onelineImgDataLen <= 0.5 * onelineImgDataLen || i % onelineImgDataLen >= 0.6 * onelineImgDataLen) {
 						const inLeft = i % onelineImgDataLen <= 0.5 * onelineImgDataLen;
@@ -101,11 +106,18 @@ function getImageColorData() {
 			}
 		});
 	});
+
+	},2000)
 }
-onMounted(() => {
+onMounted(async () => {
+	uni.showLoading({
+		title:'加载中'
+	})
+	await nextTick()
 	setTimeout(()=>{
+		uni.hideLoading()
 		getImageColorData();
-	},5000)
+	},2000)
 	
 });
 </script>
