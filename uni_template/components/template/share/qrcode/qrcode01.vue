@@ -3,7 +3,7 @@
  * @Date: 2022-04-19 22:22:38
  * @LastEditTime: 2022-04-20 00:00:57
  * @LastEditors: zlc
- * @Description: 二维码生成以及分享1.0
+ * @Description: 二维码生成以及分享01
  * @FilePath: \gogogogo\project-template\uni_template\components\template\share\qrcode\index01.vue
 -->
 <template>
