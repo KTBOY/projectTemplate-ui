@@ -95,7 +95,7 @@ watch(()=>props.indexList, async (newVal, oldVla) => {
       })
       .exec()
    },500) 
-  console.log('获取成功')
+    console.log('获取成功')
 })
 
 function handleTouchstart(e) {
@@ -123,7 +123,7 @@ function handleTouchend() {
 function handleScroll(e) {
   /*
    * 防止触摸滚动的时候也运行scroll-view滚动函数，以免获取的索引不正确并且频繁更新页面
-   * 但在商品分类业务，比如有大量图片的时候，需要监听scroll-view滚动函数，点击的时候，改函数也是需要触发的
+   * 但在商品分类业务，比如有大量图片的时候，需要监听scroll-view滚动函数进行图片懒加载，点击的时候，改函数也是需要触发的
    * 所以这种情况下，需要禁用代码state.type
    * */
   if (state.type == 1 || state.type == 2) return
@@ -152,7 +152,9 @@ function getIndexListDomData() {
   })
 }
 onMounted(async () => {
+	console.log(props)
   if (props.region.length) {
+	  
     getCityDomData()
   }
   await nextTick()
@@ -165,7 +167,7 @@ onMounted(async () => {
   }
 })
 </script>
-<style lang="less">
+<style lang="less" scoped>
 page {
   // background-color: #ededed;
   height: 100%;

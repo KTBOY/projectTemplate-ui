@@ -37,7 +37,7 @@ export default {
   },
   setup(props) {
     const query = uni.createSelectorQuery().in(this)
-    const imageValue = ref('http://yd.ymyimi.cn:9001/api/yid/1629430898298.png')
+    const imageValue = ref('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1113%2F052420110515%2F200524110515-2-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653750305&t=7717e57b850fb9e3f1b78433017c3cfd')
     const state = reactive({
       imageStyleData: {},
       imageUrlData: {},

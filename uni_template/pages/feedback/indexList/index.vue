@@ -25,7 +25,11 @@ export default {
     const state = reactive({
       list: []
     })
-
+ onMounted(() => {
+      setTimeout(() => {
+        state.list = city
+      }, 100)
+    })
   
 
     return {
