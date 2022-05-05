@@ -20,7 +20,7 @@
       class="img-box"
       v-if="state.imageStyleData.leftNearestColor"
       :style="{
-        background:`linear-gradient(360deg, rgba(${state.imageStyleData.leftNearestColor[1]},${state.imageStyleData.leftNearestColor[2]},${state.imageStyleData.leftNearestColor[3]},1)0%, rgba(${state.imageStyleData.rightNearestColor[1]},${state.imageStyleData.rightNearestColor[2]},${state.imageStyleData.rightNearestColor[3]},1))100%`
+        background:`linear-gradient(360deg, rgba(${state.imageStyleData.leftNearestColor[0]},${state.imageStyleData.leftNearestColor[1]},${state.imageStyleData.leftNearestColor[2]},1)0%, rgba(${state.imageStyleData.leftNearestColor[1]},${state.imageStyleData.leftNearestColor[2]},${state.imageStyleData.leftNearestColor[3]},1))100%`
       }"
     ></view>
     <image-color-recognit :imageUrl="imageValue" @successColor="successColor"></image-color-recognit>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import imageColorRecognit from '@/components/features/imageColorRecognit/indexAll01.vue'
+import imageColorRecognit from '@/components/features/imageColorRecognit/imageColorRecognit03.vue'
 import { ref, reactive, toRefs, onMounted } from 'vue'
 export default {
   name: 'index',
@@ -49,6 +49,7 @@ export default {
 
     function successColor(val) {
       state.imageStyleData = val
+	  console.log(state.imageStyleData.leftNearestColor[1])
       
 	  
     }

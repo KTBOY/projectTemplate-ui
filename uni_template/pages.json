@@ -106,9 +106,15 @@
     {
       "path": "pages/features/imageColorRecognit/indexAll",
       "style": {
-        "navigationBarTitleText": "imageColorRecognit图片颜色识别"
+        "navigationBarTitleText": "图片颜色识别多端标准版"
       }
     },
+	{
+	  "path": "pages/features/imageColorRecognit/indexEasy",
+	  "style": {
+	    "navigationBarTitleText": "图片颜色识别简易版本"
+	  }
+	},
     // ====================end图片颜色识别============================
 
    // #####################start模板#################################

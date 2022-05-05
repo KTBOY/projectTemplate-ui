@@ -172,7 +172,12 @@
                 "name": "图片颜色识别 多端",
                 "show": true,
                 "path":"/pages/features/imageColorRecognit/indexAll"
-              }
+              },
+			  {
+			    "name": "图片颜色识别 简易版",
+			    "show": true,
+			    "path":"/pages/features/imageColorRecognit/indexEasy"
+			  }
             ]
           }
 
