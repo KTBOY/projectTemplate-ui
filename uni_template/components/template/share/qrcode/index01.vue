@@ -24,7 +24,7 @@ export default {
     })
     function couponQrcode() {
       let modules = uQRCode.getModules({
-        text: 'uQRCode 3.0',
+        text: 'https://zhyw.ymyimi.cn/wechat/public/aa',
         errorCorrectLevel: uQRCode.errorCorrectLevel.H,
       })
       console.log(modules);

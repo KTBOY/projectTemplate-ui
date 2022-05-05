@@ -1,10 +1,10 @@
 /*
  * @Author: zlc
  * @Date: 2022-04-14 16:34:12
- * @LastEditTime: 2022-04-15 10:26:16
+ * @LastEditTime: 2022-05-05 10:42:35
  * @LastEditors: zlc
  * @Description: 图片压缩
- * @FilePath: \git项目\project-template\案例\图片压缩\imagemin\src\app.js
+ * @FilePath: \git项目\project-template\案例\图片压缩\image\src\app.js
  */
 const fs = require("fs")
 const imagemin = require('imagemin');
@@ -25,8 +25,9 @@ let timeIndex = 0
 const setCompress = async () => {
     await setInputName();//输入内容
     await createTimeFile(positionDir);//创建文件
-    ready()//开始压缩
     await getReadFile()//读取文件
+    ready()//开始压缩
+    
     
 
 }
