@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2021-10-14 14:18:22
- * @LastEditTime: 2022-04-02 15:31:41
+ * @LastEditTime: 2022-06-28 15:49:33
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \git项目\project-template\uni_template\pages\index\components.vue
+ * @FilePath: \project-template\uni_template\pages\index\components.vue
 -->
 <template>
   <view class="index">
@@ -16,7 +16,7 @@
       </view>
     </view>
     <view class="index-components">
-      <view class="nav-item" v-for="nav in nav" :key="nav">
+       <view class="nav-item" v-for="nav in nav" :key="nav">
         <view class="nav-name">{{ nav.name }}</view>
           <template  v-for="packageItem in nav.packages"  :key="packageItem">
             <view  v-if="packageItem.show" @click="handleRouter(nav,packageItem)">
@@ -28,7 +28,7 @@
               </view>
             </view>
           </template>
-      </view>
+      </view> 
     </view>
   </view>
 </template>

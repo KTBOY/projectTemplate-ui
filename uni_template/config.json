@@ -43,7 +43,6 @@
                     "enName": "IndexList",
                     "cName": "字母索引",
                     "desc": "字母索引",
-					"name": "字母索引",
                     "show": true,
                     "path":"/pages/feedback/indexList/index",
                     "pathList": "/pages/index/list",
@@ -57,6 +56,11 @@
 						    "name": "字母索引地区模式",
 						    "show": true,
 						    "path":"/pages/feedback/indexList/indexRegion"
+						},
+                        {
+						    "name": "字母索引H5模式",
+						    "show": true,
+						    "path":""
 						}
 					]
                 }

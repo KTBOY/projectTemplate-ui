@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2022-04-02 17:31:52
- * @LastEditTime: 2022-04-14 22:58:32
+ * @LastEditTime: 2022-06-02 17:24:33
  * @LastEditors: zlc
  * @Description: 字母索引1.0版
- * @FilePath: \gogogogo\project-template\uni_template\components\feedback\indexList\index01.vue
+ * @FilePath: \git项目\project-template\uni_template\components\feedback\indexList\index01.vue
 -->
 <template>
   <view class="index-list">
@@ -112,7 +112,7 @@ function handleTouchstart(e) {
 function handleTouchmove(e) {
   state.type = 2
   let moveY = e.changedTouches[0].clientY - state.currenMoveData.ListTop - uni.upx2px(state.currenMoveData.currenHeight)
-  if (moveY >= state.currenMoveData.lastMoveY || moveY < 0) return
+  if (moveY >= state.currenMoveData.lastMoveY || moveY < 0) return//防止触摸超出当前滚动区域
   state.currenIndex = Math.round(moveY / state.currenMoveData.currenHeight)
   state.currenMoveData.moveY = state.currenIndex * state.currenMoveData.currenHeight
 }

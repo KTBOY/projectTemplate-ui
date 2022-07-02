@@ -1,15 +1,15 @@
 <!--
  * @Author: zlc
  * @Date: 2021-12-29 16:59:24
- * @LastEditTime: 2022-01-18 16:21:44
+ * @LastEditTime: 2022-06-28 15:48:10
  * @LastEditors: zlc
  * @Description: 业务-列表组件
- * @FilePath: \git项目\project-template\uni_template\components\list\listPages\index.vue
+ * @FilePath: \project-template\uni_template\components\list\listPages\index.vue
 -->
 <template>
 	<view class="list-pages">
 		<view class="nav-item">
-			<view class="nav-name">{{ nav.cName }}</view>
+			<view class="nav-name">{{ nav.cName||nav.name }}</view>
 			<template v-for="packageItem in nav.packages" :key="packageItem">
 				<view v-if="packageItem.show">
 					<view class="nav-info" :url="packageItem.path" @click="handlerPageRouter(packageItem)">
@@ -34,12 +34,13 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		console.log(props.nav.cName);
+		console.log(props.nav);
 		function handlerPageRouter(val) {
 			uni.navigateTo({
 				url: val.path
 			});
 		}
+
 		return {
 			handlerPageRouter
 		};

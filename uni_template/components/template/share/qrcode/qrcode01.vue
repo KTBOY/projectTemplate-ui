@@ -24,7 +24,7 @@ export default {
     })
     function couponQrcode() {
       let modules = uQRCode.getModules({
-        text: 'https://zhyw.ymyimi.cn/wechat?key=123',
+        text: 'https://xxx/wechat?key=123',
         errorCorrectLevel: uQRCode.errorCorrectLevel.H,
       })
       console.log(modules);
