@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "铺满弹出层",
+  "usingComponents": {
+    "picker-basic-usage": "/components/dohu/index"
+  }
+}

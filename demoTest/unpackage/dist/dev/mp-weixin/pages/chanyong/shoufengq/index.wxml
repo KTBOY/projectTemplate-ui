@@ -1,0 +1,1 @@
+<view class="box"><block wx:for="{{itemList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><shoufengq vue-id="{{'574c9eda-1-'+index}}" title="{{item.head}}" bind:__l="__l" vue-slots="{{['default']}}">{{''+item.body+''}}</shoufengq></block></view>

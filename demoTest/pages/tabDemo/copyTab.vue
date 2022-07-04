@@ -179,7 +179,7 @@ export default {
 					name: '娱乐',
 					id: 'yule'
 				},
-				{
+			/* 	{
 					name: '体育',
 					id: 'sports'
 				},
@@ -202,7 +202,7 @@ export default {
 				{
 					name: '汽车',
 					id: 'car'
-				}
+				} */
 			];
 			this.init();
 		}, 200);

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "手写日历",
+  "usingComponents": {
+    "uni-calendar": "/components/c-calendar/c-calendar"
+  }
+}

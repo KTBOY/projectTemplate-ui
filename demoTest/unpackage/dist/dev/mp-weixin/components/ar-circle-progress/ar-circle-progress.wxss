@@ -1,0 +1,16 @@
+
+page.data-v-3390aff8{
+}
+.circle-progress.data-v-3390aff8 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.canvas-bg.data-v-3390aff8 {
+    position: absolute;
+}
+.canvas.data-v-3390aff8 {
+    position: absolute;
+}
+

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "常用组件",
+  "usingComponents": {
+    "buzhoutiao": "/components/tab/buzhoutiao"
+  }
+}

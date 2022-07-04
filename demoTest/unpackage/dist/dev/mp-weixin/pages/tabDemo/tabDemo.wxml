@@ -1,0 +1,1 @@
+<view class="tui-tabs"><tab vue-id="51325664-1" newsData="{{newsData}}" tabBars="{{tabBars}}" bind:__l="__l"></tab></view>

@@ -1,0 +1,47 @@
+page.data-v-132d2ab4 {
+  background-color: #f2f4f6;
+}
+.upload_box.data-v-132d2ab4 {
+  width: 750rpx;
+}
+.myTransaction-header.data-v-132d2ab4 {
+  padding: 30rpx;
+}
+.myTransaction-header .myTransaction-header-title.data-v-132d2ab4 {
+  text-align: center;
+}
+.myTransaction-header .myTransaction-header-title .header-title-pointer.data-v-132d2ab4 {
+  color: #ff5d5d;
+}
+.myTransaction-header .myTransaction-header-content.data-v-132d2ab4 {
+  font-size: 24rpx;
+  color: #707070;
+}
+.upload_content.data-v-132d2ab4 {
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  margin: 0 15rpx;
+}
+.upload_content .upload_title.data-v-132d2ab4 {
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #d9d9d9;
+  padding: 10rpx 15rpx;
+}
+.upload_info .upload_item.data-v-132d2ab4 {
+  padding: 10rpx 15rpx;
+}
+.upload_info .upload_item .upload_item_img.data-v-132d2ab4 {
+  width: calc(100vw - 25px);
+  padding: 10rpx 0rpx;
+  display: flex;
+  white-space: nowrap;
+}
+.img_box.data-v-132d2ab4 {
+  display: inline-block;
+}
+.img_box_add.data-v-132d2ab4 {
+  display: inline-block;
+  width: 160rpx;
+}
+

@@ -20,12 +20,12 @@
 					@refresherrefresh="onrefresh"
 				>
 					<view v-for="(newsitem, index2) in tab.data" :key="newsitem.id">
-						<NewsItem :itemData="newsitem" @close="close(index1, index2)" :lastChild="index2 === tab.data.length - 1" @click="goDetail(newsitem)"></NewsItem>
+						<NewsItem :itemData="newsitem" @close="close(index1, index2)" :lastChild="index2 === tab.data.length - 1" @click="goDetail(newsitem)">
+							
+							
+						</NewsItem>
 					</view>
-					<view class="tui-loading-more" v-if="tab.isLoading || tab.pageIndex > 3">
-						<text class="tui-loadmore-line" v-if="tab.pageIndex > 3"></text>
-						<text class="tui-loading-more-text">{{ tab.loadingText }}</text>
-					</view>
+	
 				</scroll-view>
 			</swiper-item>
 		</swiper>

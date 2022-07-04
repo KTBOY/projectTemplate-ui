@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "图片上传",
+  "usingComponents": {
+    "upload-com": "/pages/upload/components/uploadCom"
+  }
+}

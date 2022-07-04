@@ -11,7 +11,7 @@
 			</navigator>
 		</view>
 		<view class="text-area">
-			<navigator class="imgbtn" url="../tabDemo/copyTab">
+			<navigator class="imgbtn" url="../tabDemo/tabDemo">
 				tab栏
 			</navigator>
 		</view>
@@ -38,6 +38,16 @@
 		<view class="text-area">
 			<navigator class="imgbtn" url="../data/jdt">
 				圆形进度条
+			</navigator>
+		</view>
+		<view class="text-area">
+			<navigator class="imgbtn" url="../luy/luy">
+				录音相关
+			</navigator>
+		</view>
+		<view class="text-area">
+			<navigator class="imgbtn" url="../cs/cssxiaog">
+				css相关
 			</navigator>
 		</view>
 	</view>

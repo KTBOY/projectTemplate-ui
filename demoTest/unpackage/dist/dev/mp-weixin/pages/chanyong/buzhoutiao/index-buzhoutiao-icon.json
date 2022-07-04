@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "index-buzhoutiao-icon": "/pages/chanyong/buzhoutiao/index-buzhoutiao-icon",
+    "buzhoutiao": "/components/tab/buzhoutiao"
+  }
+}

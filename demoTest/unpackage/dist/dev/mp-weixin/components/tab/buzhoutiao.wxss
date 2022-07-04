@@ -1,0 +1,42 @@
+.steps.data-v-44f58e02 {
+  display: flex;
+  padding: 40rpx;
+}
+.steps .steps_item.data-v-44f58e02 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.steps .steps_item.data-v-44f58e02:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  height: 6rpx;
+  width: 40%;
+  border-radius: 20px;
+  top: 25rpx;
+  right: -22.5%;
+  background: #DEDFE1;
+}
+.steps .steps_item_greater.data-v-44f58e02::after {
+  background: linear-gradient(to right, #2878ff 0%, #ff0000 50%, #DEDFE1 50.1%, #DEDFE1 100%) !important;
+}
+.steps .steps_item_to.data-v-44f58e02::after {
+  background: #2878ff !important;
+}
+.steps .steps_item-icon.data-v-44f58e02 {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.steps .steps_item-label.data-v-44f58e02 {
+  font-size: 14px;
+  font-family: "微软雅黑";
+  margin-top: 10rpx;
+}
+

@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/chanyong/chanyong",
+    "pages/chanyong/buzhoutiao/index",
+    "pages/chanyong/shoufengq/index",
+    "pages/upload/upload",
+    "pages/dohuemo/dohuemo",
+    "pages/tabDemo/copyTab",
+    "pages/tabDemo/tabDemo",
+    "pages/dohuemo/tipIcon",
+    "pages/dohuemo/popr",
+    "pages/data/rili",
+    "pages/data/jdt",
+    "pages/list/list",
+    "pages/luy/luy"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

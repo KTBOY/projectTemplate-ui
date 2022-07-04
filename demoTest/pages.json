@@ -50,6 +50,13 @@
 			}
 		},
 		{
+			"path": "pages/tabDemo/tabDemo",
+			"style": {
+				"navigationBarTitleText": "新闻"
+		
+			}
+		},
+		{
 			"path": "pages/dohuemo/tipIcon",
 			"style": {
 				"navigationBarTitleText": "滑动隐藏"
@@ -85,7 +92,23 @@
                 "navigationBarTitleText": "商品列表"
             }
             
-        }
+        },
+		{
+		    "path" : "pages/luy/luy",
+		    "style" : {
+		        "enablePullDownRefresh": true,
+		        "navigationBarTitleText": "录音相关"
+		    }
+		    
+		},
+		{
+		    "path" : "pages/cs/cssxiaog",
+		    "style" : {
+		        "enablePullDownRefresh": true,
+		        "navigationBarTitleText": "css相关"
+		    }
+		    
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

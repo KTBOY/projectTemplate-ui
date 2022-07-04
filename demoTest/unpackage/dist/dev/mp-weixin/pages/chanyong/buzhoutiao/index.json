@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "步骤条",
+  "usingComponents": {
+    "index-buzhoutiao-icon": "/pages/chanyong/buzhoutiao/index-buzhoutiao-icon",
+    "buzhoutiao": "/components/tab/buzhoutiao"
+  }
+}

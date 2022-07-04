@@ -1,0 +1,19 @@
+.shoufe_box.data-v-1797ce64 {
+  width: 750rpx;
+}
+.shoufe_head .shoufe_info.data-v-1797ce64 {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 20rpx;
+}
+.shoufe_body.data-v-1797ce64 {
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.shoufe_body .shoufe_content.data-v-1797ce64 {
+  overflow: hidden;
+  font-size: 28rpx;
+  color: red;
+  text-align: left;
+}
+
