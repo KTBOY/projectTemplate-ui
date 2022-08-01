@@ -183,7 +183,23 @@
 			    "path":"/pages/features/imageColorRecognit/indexEasy"
 			  }
             ]
-          }
+          },
+		  {
+		    "enName": "ShopMenu",
+		    "cName": "商城菜单",
+		    "desc": "商城菜单",
+		    "show": true,
+		    "path":"",
+		    "pathList": "/pages/index/list",
+		    "packages":[
+		      {
+		        "name": "商城菜单常规用法",
+		        "show": true,
+		        "path":"/pages/features/shopMenu/index"
+		      },
+
+		    ]
+		  }
 
         ]
       }
