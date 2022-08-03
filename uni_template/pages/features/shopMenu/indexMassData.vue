@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-02 11:28:54
+ * @LastEditTime: 2022-08-03 16:44:24
  * @LastEditors: zlc
- * @Description: 
- * @FilePath: \project-template\uni_template\pages\features\shopMenu\index.vue
+ * @Description: 商城菜单大量数据版
+ * @FilePath: \project-template\uni_template\pages\features\shopMenu\indexMassData.VUE
 -->
 <template>
   <view class="">

@@ -125,8 +125,14 @@
 	    "navigationBarTitleText": "商城菜单简易版本"
 	  }
 	},
+  {
+	  "path": "pages/features/shopMenu/indexMassData",
+	  "style": {
+	    "navigationBarTitleText": "商城菜单简易版本"
+	  }
+	},
 
-	// ====================end图片颜色识别============================
+	// ====================end商城模版============================
 	
 	
 

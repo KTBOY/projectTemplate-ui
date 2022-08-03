@@ -197,6 +197,12 @@
 		        "show": true,
 		        "path":"/pages/features/shopMenu/index"
 		      },
+              {
+		        "name": "商城菜单大量数据版",
+		        "show": true,
+		        "path":"/pages/features/shopMenu/indexMassData"
+		      }
+
 
 		    ]
 		  }
