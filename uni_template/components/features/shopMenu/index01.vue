@@ -1,16 +1,18 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-03 15:34:14
+ * @LastEditTime: 2022-08-04 11:02:39
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \project-template\uni_template\components\features\shopMenu\index01.vue
+缺点：依然没有针对分页或者虚拟长列表,需要获取列表数据的dom
+优点：定位准确、衔接性好
 -->
 <template>
   <view class="menu">
     <view class="scroll-panel">
       <view class="left">
-        <scroll-view :scroll-y="true" class="left-scroll" :style="{ height: `${defineLeft.scrollHeight}px` }" :scroll-into-view="leftIntoView" :scroll-with-animation="true">
+        <scroll-view :scroll-y="true" class="left-scroll" :style="{ height: `${state.windowHeight}px` }" :scroll-into-view="leftIntoView" :scroll-with-animation="true">
           <view class="info">
             <view class="item-active" :style="{ transform: `translateY(${defineLeft.currenMoveData.moveY}px)` }">
               <text class="active-name">{{ testIndex[defineLeft.index] }}</text>
@@ -27,7 +29,7 @@
         <scroll-view
           :scroll-y="true"
           class="right-scroll"
-          :style="{ height: `${defineLeft.scrollHeight}px` }"
+          :style="{ height: `${state.windowHeight}px` }"
           :scroll-top="defineRight.scrollTop"
           @scroll="rightClickButton"
           @scrolltolower="scrolltolower"
@@ -130,8 +132,8 @@ const defineRightFun = {
         return item.top - state.scrollTopSize
       })
       let last = res[res.length - 1]?.height
-      if (last - 20 < defineLeft.scrollHeight) {
-        state.fillHeight = defineLeft.scrollHeight - last + 30
+      if (last - 20 < state.windowHeight) {
+        state.fillHeight = state.windowHeight - last
       } else {
         state.fillHeight = 100
       }
@@ -158,12 +160,14 @@ const scrolltolower = (e) => {
   defineRight.isSole = true
 }
 const shopMenuFun = {
+  //获取当前可滚动区域，距离头部的距离
   initScrollView() {
     return new Promise((resolve, reject) => {
       query
         .select('.scroll-panel')
         .boundingClientRect((res) => {
-          state.scrollTopSize = res?.top
+          console.log(res);
+          state.scrollTopSize = res.top
           resolve()
         })
         .exec()
@@ -173,7 +177,7 @@ const shopMenuFun = {
 
 onMounted(async () => {
   const { windowHeight } = await getSystemInfo()
-  defineLeft.scrollHeight = windowHeight
+  state.windowHeight = windowHeight
   await shopMenuFun.initScrollView()
   await defineLeftFun.getClassifyElement()
   await defineRightFun.getElementTop()
@@ -181,6 +185,7 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
+
 .scroll-panel {
   display: flex;
   flex-direction: row;

@@ -1,21 +1,24 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-03 16:45:52
+ * @LastEditTime: 2022-08-04 11:04:27
  * @LastEditors: zlc
- * @Description: 
+ * @Description: 大量数据版
  * @FilePath: \project-template\uni_template\components\features\shopMenu\indexMassData.vue
+
+ 缺点：依然没有针对分页或者虚拟长列表
+ 优点：但不需要获取列表数据，只需要获取分类数据
 -->
 <template>
   <view class="menu">
     <view class="scroll-panel">
       <view class="left">
-        <scroll-view :scroll-y="true" class="left-scroll" :style="{ height: `${defineLeft.scrollHeight}px` }" :scroll-into-view="leftIntoView" :scroll-with-animation="true">
+        <scroll-view :scroll-y="true" class="left-scroll" :style="{ height: `${state.windowHeight}px` }" :scroll-into-view="leftIntoView" :scroll-with-animation="true">
           <view class="info">
             <view class="item-active" :style="{ transform: `translateY(${defineLeft.currenMoveData.moveY}px)` }">
               <text class="active-name">{{ testIndex[defineLeft.index] }}</text>
             </view>
-            <view class="item" v-for="(item, index) in testIndex" :key="index" :id="`left-${index}`" @click="leftClickButton(index)">
+            <view class="item left-elm-item" v-for="(item, index) in testIndex" :key="index" :id="`left-${index}`" @click="leftClickButton(index)">
               <text class="name">
                 {{ item }}
               </text>
@@ -27,14 +30,14 @@
         <scroll-view
           :scroll-y="true"
           class="right-scroll"
-          :style="{ height: `${defineLeft.scrollHeight}px` }"
-          :scroll-top="defineRight.scrollTop"
+          :style="{ height: `${state.windowHeight}px` }"
+          :scroll-into-view="`right-${defineLeft.index}`"
           @scroll="rightClickButton"
           @scrolltolower="scrolltolower"
           :scroll-with-animation="true"
         >
           <view class="info">
-            <view class="item-parent" :id="'right-' + index" v-for="(item, index) in test" :key="index">
+            <view class="item-parent" :class="{ 'right-last': index == test.length - 1 }" :id="`right-${index}`" v-for="(item, index) in test" :key="index">
               <view class="class-item">
                 <view class="item-title">
                   <text>{{ item.name }}</text>
@@ -72,14 +75,18 @@ const state = reactive({
   scrollTopSize: 0,
   fillHeight: 0,
 })
+//左侧定义
 const defineLeft = reactive({
   index: 0,
   scrollHeight: 0,
+  top: 0,
+  topArrList: [],
   currenMoveData: {
     moveY: 0,
     currenHeight: 0,
   },
 })
+//右侧定义
 const defineRight = reactive({
   scrollTop: 0,
   allScrollTopHeight: 0,
@@ -96,9 +103,10 @@ const leftClickButton = async (value) => {
   defineRight.scrollTop = defineRight.oldScrollTop
   await nextTick()
   defineRight.scrollTop = defineRight.topArrList[value]
+  await nextTick()
   setTimeout(() => {
     defineLeft.index = value
-  }, 500)
+  }, 200)
 }
 const defineLeftFun = {
   getClassifyElement() {
@@ -113,25 +121,28 @@ const defineLeftFun = {
         })
       })
       .exec()
+    query.selectAll('.left-elm-item').boundingClientRect((data) => {
+      defineLeft.topArrList = data.map((item) => {
+        return item.top - state.scrollTopSize
+      })
+    })
   },
 }
 
 const defineRightFun = {
-  getElementTop() {
+  //获取最后一项的高度,必须的，需要不补上最后一项，滚动定位就计算不准确
+  getElementLastHeight() {
     return new Promise((resolve, reject) => {
       query
-        .selectAll('.item-parent ')
+        .selectAll('.right-last ')
         .boundingClientRect((data) => {
           resolve(data)
         })
         .exec()
     }).then((res) => {
-      defineRight.topArrList = res.map((item) => {
-        return item.top - state.scrollTopSize
-      })
       let last = res[res.length - 1]?.height
-      if (last - 20 < defineLeft.scrollHeight) {
-        state.fillHeight = defineLeft.scrollHeight - last + 30
+      if (last - 20 < state.windowHeight) {
+        state.fillHeight = state.windowHeight - last
       } else {
         state.fillHeight = 100
       }
@@ -142,15 +153,10 @@ const defineRightFun = {
 //右侧滚动事件
 const rightClickButton = debounce((e) => {
   const { scrollTop, scrollHeight, deltaY } = e.detail
-  let index = 0
-  for (let i = defineRight.topArrList.length - 1; i >= 0; i--) {
-    if (scrollTop + 2 >= defineRight.topArrList[i]) {
-      index = i
-      break
-    }
-  }
-  defineRight.oldScrollTop = defineRight.topArrList[index]
-  defineLeft.index = index < 0 ? 0 : index
+  let index = Math.floor((scrollTop / (scrollHeight - state.windowHeight)) * props.testIndex.length)
+  index = index > props.testIndex.length - 1 ? props.testIndex.length - 1 : index
+  defineRight.oldScrollTop = defineLeft.topArrList[index]
+  defineLeft.index = index
   defineLeft.currenMoveData.moveY = defineLeft.index * defineLeft.currenMoveData.currenHeight
 })
 //右侧触底
@@ -158,12 +164,13 @@ const scrolltolower = (e) => {
   defineRight.isSole = true
 }
 const shopMenuFun = {
+  //获取当前可滚动区域，距离头部的距离
   initScrollView() {
     return new Promise((resolve, reject) => {
       query
         .select('.scroll-panel')
         .boundingClientRect((res) => {
-          state.scrollTopSize = res?.top
+          state.scrollTopSize = res.top
           resolve()
         })
         .exec()
@@ -173,10 +180,10 @@ const shopMenuFun = {
 
 onMounted(async () => {
   const { windowHeight } = await getSystemInfo()
-  defineLeft.scrollHeight = windowHeight
+  state.windowHeight = windowHeight
   await shopMenuFun.initScrollView()
   await defineLeftFun.getClassifyElement()
-  await defineRightFun.getElementTop()
+  await defineRightFun.getElementLastHeight()
 })
 </script>
 
@@ -230,9 +237,11 @@ onMounted(async () => {
     background-color: #f2f4f6;
     width: 100%;
   }
-  .item-parent + .item-parent {
+  .item-parent {
     width: 530rpx;
     height: 200rpx;
+  }
+  .item-parent + .item-parent {
     border-top: 2rpx solid #e3e4e6;
     .class-item {
       .item-title {

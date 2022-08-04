@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-03 16:44:24
+ * @LastEditTime: 2022-08-03 17:43:34
  * @LastEditors: zlc
  * @Description: 商城菜单大量数据版
  * @FilePath: \project-template\uni_template\pages\features\shopMenu\indexMassData.VUE
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import shopMenu from '@/components/features/shopMenu/index01.vue'
+import shopMenu from '@/components/features/shopMenu/indexMassData.vue'
 import { ref, reactive, toRefs ,onMounted} from 'vue'
 export default {
   components: {
