@@ -1,18 +1,39 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-04 11:02:39
+ * @LastEditTime: 2022-08-04 14:08:49
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \project-template\uni_template\components\features\shopMenu\index01.vue
 缺点：依然没有针对分页或者虚拟长列表,需要获取列表数据的dom
 优点：定位准确、衔接性好
+
+1.获取当前可以使用的高度
+  1.1屏幕的高度-其他模块高度height: calc(100vh - 45px（底部栏） - 44px顶部栏 - 45px其他);
+  1.1或者通过js获取dom的高度进行操作
+  1.2再获取可以使用的高度
+  1.3计算可滚动区域距离头部多大，因为需要获取的每一项目的距离头部的高度
+2.定义左侧布局
+  1.1通过scroll-into-view来滚动定位，id绑定每一项item，使用computed去计算当前滚动的类，`left-${defineLeft.index > 1 ? defineLeft.index - 2 : 0}`，减2是因为往上滚动的时候尽可能显示更多的数据
+  1.2不使用class切换效果，而使用transform，并没频繁的class切换引起重绘，甚至重排
+  1.3高度，scroll-view一定要设置高度才能生效
+  1.4 获取左侧数据的item高度
+  1.5切换的时候先使用当前的滚动值，再进行赋值（使用右侧数据每一项的dom）
+3.定义右侧布局
+  1.1通过scroll-top来滚动定位，点击左侧类别进行切换（id绑定每一项item)，必须使用防抖，避免滚动过快导致左侧定位不准确的问题
+  1.2 获取右侧数据每一项的dom
+  1.3或者最后一项的高度，剩余高度=使用的高度-最后一项的高度，创建一个空div撑开最后一项（必须的，如果没有，左侧滚动就不准确）
+  1.4 滚动的时候，如果滚动值>item的top则break循环，获取当前跳出循环的索引
+  1.5 偏移值=索引*左侧item高度，定位左侧
+  1.6 记录当前的滚动值
 -->
 <template>
   <view class="menu">
+    <!-- <view class="cc">ddd</view> -->
     <view class="scroll-panel">
       <view class="left">
-        <scroll-view :scroll-y="true" class="left-scroll" :style="{ height: `${state.windowHeight}px` }" :scroll-into-view="leftIntoView" :scroll-with-animation="true">
+        <!--  -->
+        <scroll-view :scroll-y="true" class="left-scroll" :style="{ height: `${state.windowHeight}px` }"  :scroll-into-view="leftIntoView" :scroll-with-animation="true">
           <view class="info">
             <view class="item-active" :style="{ transform: `translateY(${defineLeft.currenMoveData.moveY}px)` }">
               <text class="active-name">{{ testIndex[defineLeft.index] }}</text>
@@ -25,6 +46,7 @@
           </view>
         </scroll-view>
       </view>
+  
       <view class="right">
         <scroll-view
           :scroll-y="true"
@@ -53,6 +75,7 @@
         </scroll-view>
       </view>
     </view>
+    <!-- <view class="cc">ddd</view> -->
   </view>
 </template>
 
@@ -185,14 +208,25 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
-
+.cc{
+  height: 90rpx;
+}
+.menu{
+   height: calc(100vh - 45px - 44px);
+}
+.right-scroll,.left-scroll{
+   height: calc(100vh - 45px - 44px - 45px);
+}
 .scroll-panel {
+ 
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
+  background-color: red;
 }
 .left {
   width: 180rpx;
