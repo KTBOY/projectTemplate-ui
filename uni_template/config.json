@@ -198,7 +198,7 @@
 		        "path":"/pages/features/shopMenu/index"
 		      },
               {
-		        "name": "商城菜单大量数据版",
+		        "name": "商城菜单分类用法（适用数据量大）",
 		        "show": true,
 		        "path":"/pages/features/shopMenu/indexMassData"
 		      }

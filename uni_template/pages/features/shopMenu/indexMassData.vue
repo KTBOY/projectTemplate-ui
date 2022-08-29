@@ -33,7 +33,25 @@ export default {
       for (let index = 0; index < 20; index++) {
         state.test.push({
           name: `${index}人`,
-          data: [{ classify: `${index}号` }],
+          data: [
+			  { 
+				  classify: `${index}号` ,
+				  lazyLoad:true,
+				  defaut:"/static/image/commer/defaut.png",
+				  image:"/static/logo.png",
+				  id:index
+		  
+			},
+			{
+				  classify: `${index}号` ,
+				  lazyLoad:true,
+				  defaut:"/static/image/commer/defaut.png",
+				  image:"/static/logo.png",
+				  id:index
+					  
+			},
+
+		  ],
         })
         state.testIndex.push(`${index}号`)
       }
