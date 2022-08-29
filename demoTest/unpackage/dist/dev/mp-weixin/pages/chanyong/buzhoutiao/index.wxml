@@ -1,1 +1,0 @@
-<view><view class="title">步骤条</view><view class="head_steps"><buzhoutiao generic:scoped-slots-icon="index-buzhoutiao-icon" data-vue-generic="scoped" vue-id="c9b23918-1" numList="{{numList}}" steps="{{3}}" bind:__l="__l" vue-slots="{{['icon']}}"></buzhoutiao></view></view>

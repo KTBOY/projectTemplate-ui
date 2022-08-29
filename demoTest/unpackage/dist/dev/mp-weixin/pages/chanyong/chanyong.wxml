@@ -1,1 +1,0 @@
-<view><view class="box"><block wx:for="{{numList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="com_item"><view class="info_title">{{''+item.name+''}}</view><view data-event-opts="{{[['tap',[['goPage',['$0'],[[['numList','',index]]]]]]]}}" class="info_url" bindtap="__e">></view></view></block></view></view>

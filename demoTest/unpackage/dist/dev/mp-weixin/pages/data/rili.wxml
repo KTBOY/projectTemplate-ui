@@ -1,1 +1,0 @@
-<view><button data-event-opts="{{[['tap',[['dateUp',['$event']]]]]}}" bindtap="__e">上一个月</button><button data-event-opts="{{[['tap',[['dateDown',['$event']]]]]}}" bindtap="__e">下一个月</button><view class="content"><uni-calendar vue-id="cac20314-1" bind:__l="__l"></uni-calendar></view></view>

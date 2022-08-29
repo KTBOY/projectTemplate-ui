@@ -1,1 +1,0 @@
-<view class="{{['step_icon',(val.index>2)?'step_icon_no':'']}}">{{''+(val.index+1)+''}}</view>

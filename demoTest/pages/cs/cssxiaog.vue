@@ -17,7 +17,12 @@
              <view class="dot"></view>
              <view class="pulse"></view>
         </view>
-
+		<view>
+			 <view class="name">打点</view>
+			<view class='aa'>
+			   <text class='bb'>多行文本多行文本多行文本多行文本多行文本多行文本多行文本多行文本多行文本多行文本多行文本多行文本多行文本</text>
+			</view>
+		</view>
     </view>
 </template>
 <script>
@@ -53,5 +58,25 @@ export default {
 .shui{
 
 
+}
+.aa{
+ 
+ 
+}
+.bb{
+  width: 100%;   
+  
+  /* 超出部分隐藏 */
+  overflow: hidden;     
+  /* 末尾加省略号 */
+  text-overflow:ellipsis;  
+ 
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  /* 行数，也可以设为1，用来做单行 */
+  -webkit-line-clamp:2;
+ 
+  background: red;
 }
 </style>

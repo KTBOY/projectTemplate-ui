@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "手写进度条",
-  "usingComponents": {
-    "arprogress": "/components/ar-circle-progress/ar-circle-progress"
-  }
-}

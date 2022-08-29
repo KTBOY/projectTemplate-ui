@@ -2,13 +2,14 @@
 	<view>
 		<view class="title">步骤条</view>
 		<view class="head_steps">
-			<Buzhoutiao :numList="numList" :steps="3">
+		<!-- 	<Buzhoutiao :numList="numList" :steps="3">
 				<template slot='icon' slot-scope="val">
 					<view class="step_icon" :class="{step_icon_no:val.index>2}">
 						{{val.index+1}}
 					</view>
 				</template>
-		</Buzhoutiao></view>
+		</Buzhoutiao> -->
+		</view>
 	</view>
 </template>
 
