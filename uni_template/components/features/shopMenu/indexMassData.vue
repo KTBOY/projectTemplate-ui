@@ -44,12 +44,11 @@
 								<block v-for="(item1, index1) in item.data" :key="index1">
 									<view class="item-container">{{ item1.classify }}{{ index }}</view>
 									<image
-										:data-src="item1.image"
-										:data-lazyLoad="item1.lazyLoad"
-										:data-index="index"
-										:data-childerIndex="index1"
-										:src="item1.defaut"
-										class="item-image"
+									:src="(item1.lazyLoad&&state.showImg)?item1.image:item1.defaut "
+									:id="`uid-right-${index}`"
+									:data-id="item1.id"
+									class="item-image"	
+									@load="defineRightFun.loadImage"
 									></image>
 								</block>
 							</view>
@@ -86,7 +85,8 @@ const state = reactive({
 	scrollTopSize: 0,
 	fillHeight: 0,
 	deepTest: {},
-	uuId: ''
+	uId:'',
+	showImg:false
 });
 //左侧定义
 const defineLeft = reactive({
@@ -142,6 +142,20 @@ const defineLeftFun = {
 				return item.top - state.scrollTopSize;
 			});
 		});
+	},
+	onScrollIntersectionObserver() {
+		
+		uni.createIntersectionObserver(this)
+			 .relativeToViewport({bottom:100})	
+			.observe(`#uid-right-${defineLeft.index}`, res => {
+				console.log(res);
+				if (res.intersectionRatio) {
+					console.log(res);
+					const { lazyLoad, src, index, childerIndex } = res.dataset;
+					
+					//state.deepTest[index].data[childerIndex].defaut = state.deepTest[index].data[childerIndex].image;
+				}
+			});
 	}
 };
 

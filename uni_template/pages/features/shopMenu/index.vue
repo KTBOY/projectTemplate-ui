@@ -24,7 +24,7 @@ export default {
 		});
 
 		onMounted(() => {
-			for (let index = 0; index < 20; index++) {
+			for (let index = 0; index < 5; index++) {
 				state.test.push({
 					name: `${index}人`,
 					data: [

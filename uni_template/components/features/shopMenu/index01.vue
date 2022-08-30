@@ -68,13 +68,22 @@
 					:scroll-with-animation="true"
 				>
 					<view class="info">
+						
 						<view class="item-parent" :id="['right-' + index]" v-for="(item, index) in test" :key="index">
-							<view class="class-item">
+							<!-- 真实块 -->
+							<view class="class-item" :id="`class-item-${index}`">
 								<block v-for="(item1, index1) in item.data" :key="index1">
 									<view class="thumb-box item-food">
 										<view class="left-info" @click="hadlerShopDetail(item)">
-											<image
+										<!-- 	<image
 												:src="(item1.lazyLoad&&state.showImg)?item1.image:item1.defaut "
+												:id="`uid-right-${index}`"
+												:data-id="item1.id"
+												class="item-image"	
+												@load="defineRightFun.loadImage"
+											></image> -->
+											<image
+												:src="item1.image"
 												:id="`uid-right-${index}`"
 												:data-id="item1.id"
 												class="item-image"	
@@ -86,8 +95,23 @@
 										</view>
 									</view>
 								</block>
+
 							</view>
+								<!-- 虚拟块 -->
+							<view class="class-item2">
+								
+								
+								<block>
+									
+									
+								</block>
+							</view>
+							
 						</view>
+						
+						
+						
+						
 					</view>
 					<view class="fill-last" :style="{ height: state.fillHeight + 'px' }"></view>
 				</scroll-view>
@@ -122,7 +146,11 @@ const state = reactive({
 	scrollTopSize: 0,
 	fillHeight: 0,
 	uId:'',
-	showImg:false
+	showImg:false,
+	currenHeight:{
+		number:[2,2,2,2,2],
+		height:130
+	}
 });
 const defineLeft = reactive({
 	index: 0,
@@ -242,6 +270,20 @@ const shopMenuFun = {
 		  return v.toString(16)
 		})
 	},
+	/* onScrollIntersectionObserver() {
+		
+		uni.createIntersectionObserver(this)
+			 .relativeToViewport({bottom:100})	
+			.observe(`#uid-right-${defineLeft.index}`, res => {
+				console.log(res);
+				if (res.intersectionRatio) {
+					console.log(res);
+					const { lazyLoad, src, index, childerIndex } = res.dataset;
+					
+					state.deepTest[index].data[childerIndex].defaut = state.deepTest[index].data[childerIndex].image;
+				}
+			});
+	}, */
 	onScrollIntersectionObserver() {
 		
 		uni.createIntersectionObserver(this)
@@ -252,10 +294,12 @@ const shopMenuFun = {
 					console.log(res);
 					const { lazyLoad, src, index, childerIndex } = res.dataset;
 					
-					//state.deepTest[index].data[childerIndex].defaut = state.deepTest[index].data[childerIndex].image;
+					state.deepTest[index].data[childerIndex].defaut = state.deepTest[index].data[childerIndex].image;
 				}
 			});
-	}
+	},
+	
+	
 };
 
 onMounted(async () => {
@@ -266,7 +310,7 @@ onMounted(async () => {
 	await defineRightFun.getElementTop();
 	await nextTick();
 	setTimeout(()=>{
-		//shopMenuFun.onScrollIntersectionObserver();
+		shopMenuFun.onScrollIntersectionObserver();
 	},100)
 		
 });
