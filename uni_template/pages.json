@@ -131,6 +131,12 @@
 	    "navigationBarTitleText": "商城菜单简易版本"
 	  }
 	},
+  {
+	  "path": "pages/features/shopMenu/indexMoreData",
+	  "style": {
+	    "navigationBarTitleText": "商城菜单长列表"
+	  }
+	},
 
 	// ====================end商城模版============================
 	

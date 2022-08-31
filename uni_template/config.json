@@ -198,9 +198,14 @@
 		        "path":"/pages/features/shopMenu/index"
 		      },
               {
-		        "name": "商城菜单分类用法（适用数据量大）",
+		        "name": "商城菜单分类用法（大量数据版本）",
 		        "show": true,
 		        "path":"/pages/features/shopMenu/indexMassData"
+		      },
+              {
+		        "name": "商城菜单长列表渲染",
+		        "show": true,
+		        "path":"/pages/features/shopMenu/indexMoreData"
 		      }
 
 

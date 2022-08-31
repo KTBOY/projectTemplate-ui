@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-31 16:19:06
+ * @LastEditTime: 2022-08-31 16:18:30
  * @LastEditors: zlc
  * @Description: 
- * @FilePath: \project-template\uni_template\components\features\shopMenu\index01.vue
+ * @FilePath: \project-template\uni_template\components\features\shopMenu\indexMoreData.vue
 缺点：依然没有针对分页或者虚拟长列表,需要获取列表数据的dom
 优点：定位准确、衔接性好
 
@@ -71,15 +71,24 @@
         >
           <view class="info">
             <view class="item-parent" :id="['right-' + index]" v-for="(item, index) in test" :key="item.id">
+              <!-- 真实块 -->
               <view class="class-item" :id="`uid-class-${index}`" :data-index="index">
-                <block v-for="(item1, index1) in item.data" :key="index1">
-                  <view class="thumb-box item-food">
-                    <view class="left-info" @click="hadlerShopDetail(item)">
-                      <image :src="item1.image" class="item-image" @load="defineRightFun.loadImage"></image>
+                <block v-if="state.currenHeight.isLookList[index]">
+                  <block v-for="(item1, index1) in item.data" :key="index1">
+                    <view class="thumb-box item-food">
+                      <view class="left-info" @click="hadlerShopDetail(item)">
+                        <image :src="item1.image" class="item-image" @load="defineRightFun.loadImage"></image>
+                      </view>
+                      <view class="right-info">
+                        <view class="goods-title" @click="hadlerShopDetail(item)">{{ item.name }}</view>
+                      </view>
                     </view>
-                    <view class="right-info">
-                      <view class="goods-title" @click="hadlerShopDetail(item)">{{ item.name }}</view>
-                    </view>
+                  </block>
+                </block>
+                <!-- 虚拟块 -->
+                <block v-else>
+                  <view :style="{ height: `${state.currenHeight.number[index] * 130}px` }">
+                    <block> </block>
                   </view>
                 </block>
               </view>
@@ -114,6 +123,13 @@ const state = reactive({
   windowHeight: 0,
   scrollTopSize: 0,
   fillHeight: 0,
+  uId: '',
+  showImg: false,
+  currenHeight: {
+    number: [2, 2, 2, 2, 2, 2, 2, 2],
+    isLookList: new Array().fill(false, 0, props.test.length - 1),
+    height: 130,
+  },
 })
 const defineLeft = reactive({
   index: 0,
@@ -182,6 +198,13 @@ const defineRightFun = {
       }
     })
   },
+
+  /*
+   * 图片加载
+   */
+  loadImage(e) {
+    state.showImg = true
+  },
 }
 
 //右侧滚动事件
@@ -197,6 +220,7 @@ const rightClickButton = debounce((e) => {
   defineRight.oldScrollTop = defineRight.topArrList[index]
   defineLeft.index = index < 0 ? 0 : index
   defineLeft.currenMoveData.moveY = defineLeft.index * defineLeft.currenMoveData.currenHeight
+  shopMenuFun.onScrollIntersectionObserverBlock()
 }, 10)
 //右侧触底
 const scrolltolower = (e) => {
@@ -216,6 +240,26 @@ const shopMenuFun = {
         .exec()
     })
   },
+
+  onScrollIntersectionObserverBlock() {
+    uni
+      .createIntersectionObserver(this)
+      .relativeToViewport({ top: 100, bottom: 100 })
+      .observe(`#uid-class-${defineLeft.index}`, async (res) => {
+        //总高度/item=item数
+        const itemHeightNum = Math.ceil(state.windowHeight / (state.currenHeight.number[defineLeft.index] * 130))
+        if (res.intersectionRatio) {
+          const currenIndex = defineLeft.index
+          let end = currenIndex + itemHeightNum
+          for (let index = defineLeft.index; index < end; index++) {
+            await nextTick()
+            state.currenHeight.isLookList[index] = true
+          }
+        } else {
+          state.currenHeight.isLookList[res.dataset.index] = false
+        }
+      })
+  },
 }
 
 onMounted(async () => {
@@ -224,6 +268,8 @@ onMounted(async () => {
   await shopMenuFun.initScrollView()
   await defineLeftFun.getClassifyElement()
   await defineRightFun.getElementTop()
+  await nextTick()
+  shopMenuFun.onScrollIntersectionObserverBlock()
 })
 </script>
 

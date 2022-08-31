@@ -1,10 +1,10 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-31 16:25:14
+ * @LastEditTime: 2022-08-31 16:22:26
  * @LastEditors: zlc
  * @Description: 商城菜单大量数据版
- * @FilePath: \project-template\uni_template\pages\features\shopMenu\indexMassData.vue
+ * @FilePath: \project-template\uni_template\pages\features\shopMenu\indexMoreData.vue
 -->
 <template>
   <view class="">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import shopMenu from '@/components/features/shopMenu/indexMassData.vue'
+import shopMenu from '@/components/features/shopMenu/indexMoreData.vue'
 import { ref, reactive, toRefs, onMounted } from 'vue'
 export default {
   components: {
@@ -26,22 +26,22 @@ export default {
     })
 
     onMounted(() => {
-      for (let index = 0; index < 20; index++) {
+      for (let index = 0; index < 8; index++) {
         state.test.push({
           name: `${index}人`,
           data: [
             {
               classify: `${index}号`,
-              lazyLoad: true,
+              lazyLoad: false,
               defaut: '/static/image/commer/defaut.png',
-              image: '/static/logo.png',
+              image: 'https://img2.baidu.com/it/u=3995102021,1242293358&fm=253&fmt=auto&app=138&f=JPEG?w=774&h=500',
               id: index,
             },
             {
               classify: `${index}号`,
-              lazyLoad: true,
+              lazyLoad: false,
               defaut: '/static/image/commer/defaut.png',
-              image: '/static/logo.png',
+              image: 'https://img2.baidu.com/it/u=3995102021,1242293358&fm=253&fmt=auto&app=138&f=JPEG?w=774&h=500',
               id: index,
             },
           ],
