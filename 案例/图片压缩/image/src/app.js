@@ -1,136 +1,113 @@
-/*
- * @Author: zlc
- * @Date: 2022-04-14 16:34:12
- * @LastEditTime: 2022-05-05 10:42:35
- * @LastEditors: zlc
- * @Description: 图片压缩
- * @FilePath: \git项目\project-template\案例\图片压缩\image\src\app.js
- */
 const fs = require("fs")
 const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const path = require("path")
 const images = require("images")
-const readline = require("readline");
-const { resolve } = require("path");
-const inputVlaue = readline.createInterface({
+const readline = require("readline")
+
+var pngArray = []
+var jpgArray = []
+let positionDir;
+let outputDir = path.join(process.cwd(), "compress_images")
+let testDirStrArray = []
+const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-let outputDir = path.join(process.cwd(), "imagesTest")
-let reg = /^[a-zA-Z]+$/
 
-let positionDir, timeId, pngArrayList = [], jpgArrayList = []
-let timeIndex = 0
-const setCompress = async () => {
-    await setInputName();//输入内容
-    await createTimeFile(positionDir);//创建文件
-    await getReadFile()//读取文件
-    ready()//开始压缩
-    
-    
-
-}
-
-//判断是否已经有这个文件路径
-function setInputName() {
-    return new Promise((resolve, reject) => {
-        inputVlaue.question('请输入需要压缩文件夹名称：', async (val) => {
-            let asr = val.replace(/\s+/g, "");
-            if (asr == 'imagesTest') {
-                console.log("不可以与默认输出文件夹重名");
-                return setFileName("请重新输入！\n")
-            } else if (!reg.test(asr)) {
-                console.log("只能输入英文");
-                return setFileName("请重新输入！\n")
-            }
-            positionDir = path.join(process.cwd(), asr)
-            console.log(positionDir);
-            resolve(positionDir)
-
-        })
-    })
-
-}
-//创建图片文件
-function createTimeFile(positionDir) {
-    let time_PATH = path.resolve(__dirname, positionDir);//获取是否已经存在这个文件
-    return new Promise((resolve, reject) => {
-        fs.stat(time_PATH, (err, stat) => {
-            if (err) {
-                fs.mkdir(positionDir, { recursive: true }, (err) => {
-                    resolve(err)
-                    console.log(`创建${positionDir}成功！`);
-                })
-            } else {
-                resolve(stat)
-
-            }
-
-
-        })
-
-    })
-
-
-}
-
-
-//读取需要压缩的文件夹
-function getReadFile() {
-    fs.readdir(positionDir, "utf-8", (err, data) => {
-        console.log(data.length);
-
-        if (data.length == 0) {
-            console.log("还没有图片，请添加");
+let welcome_word = "欢迎使用阿政压缩图片工具！\n本工具只适用压缩png,jpg图片\n目前只支持windows系统！\n在使用之前，确认你需要压缩的图片放入一个文件夹里！\n压缩后的图片将放入compress_images文件夹里，请注意查看！\n请输入你需要压缩的文件夹名：（例如：img，pic）...\n"
+let re = /^[0-9a-zA-Z]+$/
+function questions(str) {
+    rl.question(str, (answer) => {
+        let asr = answer.replace(/\s+/g, "");
+        if (asr == "compress_images") {
+            console.log("不可以与默认输出文件夹重名！");
+            return questions("请重新输入！\n")
+        } else if (!re.test(asr)) {
+            console.log("只能输入英文和数字");
+            return questions("请重新输入！\n")
         }
-        data.forEach((item, index) => {
-            let filePath = path.join(positionDir, item)
-            let filename = filePath.replace(/\\/g, "/");//把 \ 替换为 /
-            let output = filename.replace(positionDir.replace(/\\/g, "/"), outputDir.replace(/\\/g, "/"));//输出位置
-            if (path.extname(item) == ".png") {
-                pngArrayList.push({ filename, output })
-            } else if (path.extname(item) == ".jpg") {
-                jpgArrayList.push({ filename, output })
-            } else if (fs.statSync(filePath).isDirectory()) {
-                readfile(filePath)
-            }
-
-        })
-
-
-
+        positionDir = path.join(process.cwd(), asr)
+        testDir(positionDir)
+        ready(`请把所需压缩图片放入${positionDir}输入ok，开始压缩图片！\n`)
     })
 }
+questions(welcome_word)
 
-function ready() {
-    let msg=`请把所需压缩图片放入${positionDir}输入yes，开始压缩图片！\n`
-    inputVlaue.question(msg, answers => {
+function ready(str) {
+    rl.question(str, answers => {
         let asr = answers.trim().toLocaleLowerCase()
-        if (asr == "yes") {
+        if (asr == "ok") {
             console.log("开始压缩...\n");
-            setImageData()
+            main()
         } else {
-            ready("指令错误请重新输入,输入yes开始压缩图片\n")
+            ready("指令错误请重新输入,输入ok开始压缩图片\n")
+        }
+    })
+}
+//读取文件
+function readfile(dir) {
+    let arr = fs.readdirSync(dir)
+    arr.forEach(item => {
+        let filePath = path.join(dir, item)
+        if (path.extname(item) == ".png") {
+            let filename = filePath.replace(/\\/g, "/")
+            let output = filename.replace(positionDir.replace(/\\/g, "/"), outputDir.replace(/\\/g, "/"))
+            pngArray.push({ filename, output })
+        } else if (path.extname(item) == ".jpg") {
+            let filename = filePath.replace(/\\/g, "/")
+            let output = filename.replace(positionDir.replace(/\\/g, "/"), outputDir.replace(/\\/g, "/"))
+            jpgArray.push({ filename, output })
+        } else if (fs.statSync(filePath).isDirectory()) {
+            readfile(filePath)
         }
     })
 }
 
-function setImageData() {
-    if (jpgArrayList.length != 0) {
-        jpgArrayList = rmSame(jpgArrayList)
+//主入口
+function main() {
+    console.time("共耗时：")
+    readfile(positionDir)
+    if (jpgArray.length == 0 && pngArray.length == 0) {
+        console.log("未检测到图片，请检查压缩目标文件路径是否正确！\n本窗口在5秒后自动关闭！")
+        setTimeout(() => {
+            rl.close()
+        }, 5000)
+        return
+    }
+
+
+    if (jpgArray.length != 0) {
+        jpgArray = rmSame(jpgArray)
         //压缩jpg
-        console.log(jpgArrayList);
-        jpgArrayList.forEach(item => {
-            createTimeFile(path.dirname(item.output))
+        jpgArray.forEach(item => {
+            testDir(path.dirname(item.output))
             images(item.filename).save(item.output, { quality: 60 })
         })
     }
+
+
     //压缩png
-    pngArrayList = rmSame(pngArrayList)
-    pngCompress(pngArrayList, pngArrayList.length - 1)
+    pngArray = rmSame(pngArray)
+    pngCompress(pngArray, pngArray.length - 1)
 
 }
+
+//检查文件是否存在
+function testDir(dir) {
+    if (testDirStrArray.indexOf(dir) != -1) {
+        return
+    }
+    testDirStrArray.push(dir)
+    if (fs.existsSync(dir)) {
+        console.log("已存在该路径：" + dir);
+    } else {
+        fs.mkdirSync(dir, { recursive: true })
+        console.log(`创建${dir}路径成功！`);
+    }
+}
+
+//去重
 function rmSame(arr) {
     let newArray = []
     let arrObj = []
@@ -141,7 +118,7 @@ function rmSame(arr) {
             arrObj.push(element)
         } else if (newArray.indexOf(element['filename']) == -1 && (fs.statSync(element['filename']).size <= 1024)) {
             let pathDir = path.dirname(element['output'])
-            createTimeFile(pathDir)//判断存放压缩的文件夹是否已经存在，不存在则创建
+            testDir(pathDir)
             fs.createReadStream(element['filename']).pipe(fs.createWriteStream(element['output']))
             console.log(`图片${element['filename']}内存过小，直接转移到${element['output']}`)
         }
@@ -149,20 +126,15 @@ function rmSame(arr) {
     return arrObj
 }
 
+
 //png压缩图片
 function pngCompress(arr, index) {
     //压缩结束
-    if (index < 0) {
-        console.log("\n本窗口在5秒后关闭！")
-        setTimeout(() => {
-            inputVlaue.close()
-        }, 5000)
-        return
-    }
+    if (index < 0) return over()
 
     let pathDir = path.dirname(arr[index]['output'])
     let filename = arr[index]['filename']
-    createTimeFile(pathDir)
+    testDir(pathDir)
     imagemin([filename], {
         destination: pathDir,
         plugins: [
@@ -180,4 +152,35 @@ function pngCompress(arr, index) {
     });
 
 }
-setCompress()
+
+//压缩结束
+
+function over() {
+    console.log("     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   \n")
+    console.log("                        _oo0oo_                  ");
+    console.log("                       o8888888o                 ");
+    console.log(`                       88" . "88                 `);
+    console.log("                      (|  -_-  |)                 ");
+    console.log("                       0\\  =  /0                 ");
+    console.log("                     ___/`---'\\___               ");
+    console.log("                   .' \\\\|     |// '.             ");
+    console.log("                  / \\\\|||  :  |||// \\            ");
+    console.log("                 / _||||| -:- |||||- \\           ");
+    console.log("                |   | \\\\\\  - /// |   |           ");
+    console.log("                | \\_|  ''\\---/''  |_/ |          ");
+    console.log("                \\  .-\\__  '-'  ___/-. /          ");
+    console.log("              ___'. .'  /--.--\\  `. .'___        ");
+    console.log(`           ."" '<  '.___\\_<|>_/___.' >' "".      `);
+    console.log("          | | :  `- \\`.;`\\ _ /`;.`/ - ` : | |    ");
+    console.log("          \\  \\ `_.   \\_ __\\ /__ _/   .-` /  /    ");
+    console.log("      =====`-.____`.___ \\_____/___.-`___.-'===== ");
+    console.log("                        `=---='                  ");
+    console.log("     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   \n")
+    console.log("--------------------------------------------------")
+    console.log(`压缩图片完成，请到目录：\n ${outputDir} \n查看`)
+    console.timeEnd("共耗时：")
+    console.log("\n本窗口在5秒后关闭！")
+    setTimeout(() => {
+        rl.close()
+    }, 5000)
+}

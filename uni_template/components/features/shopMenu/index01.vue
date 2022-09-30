@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-31 16:19:06
+ * @LastEditTime: 2022-08-31 17:14:28
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \project-template\uni_template\components\features\shopMenu\index01.vue
@@ -66,7 +66,6 @@
           :style="{ height: `${state.windowHeight}px` }"
           :scroll-top="defineRight.scrollTop"
           @scroll="rightClickButton"
-          @scrolltolower="scrolltolower"
           :scroll-with-animation="true"
         >
           <view class="info">
@@ -117,7 +116,6 @@ const state = reactive({
 })
 const defineLeft = reactive({
   index: 0,
-  scrollHeight: 0,
   currenMoveData: {
     moveY: 0,
     currenHeight: 0,
@@ -125,9 +123,6 @@ const defineLeft = reactive({
 })
 const defineRight = reactive({
   scrollTop: 0,
-  allScrollTopHeight: 0,
-  deltaY: 0,
-  isSole: false,
   oldScrollTop: 0,
   topArrList: [],
 })
@@ -186,7 +181,7 @@ const defineRightFun = {
 
 //右侧滚动事件
 const rightClickButton = debounce((e) => {
-  const { scrollTop, scrollHeight, deltaY } = e.detail
+  const { scrollTop, scrollHeight } = e.detail
   let index = 0
   for (let i = defineRight.topArrList.length - 1; i >= 0; i--) {
     if (scrollTop + 2 >= defineRight.topArrList[i]) {
@@ -198,10 +193,6 @@ const rightClickButton = debounce((e) => {
   defineLeft.index = index < 0 ? 0 : index
   defineLeft.currenMoveData.moveY = defineLeft.index * defineLeft.currenMoveData.currenHeight
 }, 10)
-//右侧触底
-const scrolltolower = (e) => {
-  defineRight.isSole = true
-}
 const shopMenuFun = {
   //获取当前可滚动区域，距离头部的距离
   initScrollView() {
@@ -209,7 +200,6 @@ const shopMenuFun = {
       query
         .select('.scroll-panel')
         .boundingClientRect((res) => {
-          console.log(res)
           state.scrollTopSize = res.top
           resolve()
         })
@@ -220,7 +210,7 @@ const shopMenuFun = {
 
 onMounted(async () => {
   const { windowHeight } = await getSystemInfo()
-  state.windowHeight = 500
+  state.windowHeight = windowHeight
   await shopMenuFun.initScrollView()
   await defineLeftFun.getClassifyElement()
   await defineRightFun.getElementTop()

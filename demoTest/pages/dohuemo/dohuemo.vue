@@ -15,21 +15,20 @@
 			<view :style="styleObject">
 				<text>{{msg[0].name}}</text>
 			</view>
-			<view :style="styleObject">
+			 <view :style="styleObject">
 				<text>{{msg[1].name}}</text>
 			</view>
 		</view>
-		<view class="nav">
-			<!-- <view  v-for="item in msg" :class="{anim:animate==true}" :style="styleObject" ref='rollul' >
-				<text>{{item.name}}</text>
-			</view> -->
+<!-- 		<view class="nav">
+		
+			</view>
 			<view :style="styleObject2">
 				<text>{{msg2[0].name}}</text>
 			</view>
 			<view :style="styleObject">
 				<text>{{msg2[1].name}}</text>
 			</view>
-		</view>
+		</view> -->
 		<view :animation="animationData" style="background:red;height:100rpx;width:100rpx" @click="declick"></view>
 
 		<view>按钮动画</view>
@@ -119,7 +118,7 @@
 		},
 		onLoad() {
 			this.gund()
-			this.gund2()
+			//this.gund2()
 			//setInterval(this.scroll,2000) 
 		},
 		onShow: function() {
@@ -176,8 +175,8 @@
 							transition: 'none',
 							transform: `translateY(-${0}%)`
 						}
-					}, 500)
-				}, 3000)
+					}, 600)
+				}, 2000)
 
 
 			},

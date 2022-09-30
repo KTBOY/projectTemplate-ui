@@ -108,6 +108,14 @@
 		        "navigationBarTitleText": "css相关"
 		    }
 		    
+		},
+		{
+		    "path" : "pages/image/scaling",
+		    "style" : {
+		        "enablePullDownRefresh": true,
+		        "navigationBarTitleText": "图片相关"
+		    }
+		    
 		}
     ],
 	"globalStyle": {

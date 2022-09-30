@@ -50,6 +50,11 @@
 				css相关
 			</navigator>
 		</view>
+		<view class="text-area">
+			<navigator class="imgbtn" url="../image/scaling">
+				图片相关
+			</navigator>
+		</view>
 	</view>
 </template>
 

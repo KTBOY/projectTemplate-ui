@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2021-12-29 16:59:24
- * @LastEditTime: 2022-06-28 15:48:10
+ * @LastEditTime: 2022-09-07 17:00:42
  * @LastEditors: zlc
  * @Description: 业务-列表组件
  * @FilePath: \project-template\uni_template\components\list\listPages\index.vue
@@ -34,8 +34,7 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		console.log(props.nav);
-		function handlerPageRouter(val) {
+		function handlerPageRouter() {
 			uni.navigateTo({
 				url: val.path
 			});

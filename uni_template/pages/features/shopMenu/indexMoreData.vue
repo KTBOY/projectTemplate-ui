@@ -1,15 +1,13 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-31 16:22:26
+ * @LastEditTime: 2022-08-31 16:38:21
  * @LastEditors: zlc
  * @Description: 商城菜单大量数据版
  * @FilePath: \project-template\uni_template\pages\features\shopMenu\indexMoreData.vue
 -->
 <template>
-  <view class="">
-    <shop-menu :test="state.test" :testIndex="state.testIndex"></shop-menu>
-  </view>
+  <view class=""><shop-menu :test="state.test" :testIndex="state.testIndex"></shop-menu></view>
 </template>
 
 <script>
