@@ -124,7 +124,6 @@ const state = reactive({
   scrollTopSize: 0,
   fillHeight: 0,
   uId: '',
-  showImg: false,
   currenHeight: {
     number: [2, 2, 2, 2, 2, 2, 2, 2],
     isLookList: [],
@@ -168,12 +167,6 @@ const synthesizeItemHeight= computed(() => {
          const len = element.data[index].length
           data.list.push(len * state.currenHeight.itemHeight)
           data.count = data.list.length * state.currenHeight.itemHeight
-       /*  for (let childI = 0; childI < element.foods.length; childI++) {
-          const len = element.foods[childI].foods.length
-          data.list.push(len * state.currenHeight.itemHeight)
-          data.count = data.list.length * state.currenHeight.itemHeight
-        } 
-        countList.push(data)*/
       }
       console.log(countList);
       return countList
@@ -291,7 +284,7 @@ const shopMenuFun = {
             state.currenHeight.isLookList[index] = true
           }
         } else {
-          state.currenHeight.isLookList[res.dataset.index] = false
+         // state.currenHeight.isLookList[res.dataset.index] = false
         }
       })
   },
@@ -300,15 +293,11 @@ const shopMenuFun = {
 onMounted(async () => {
   const { windowHeight } = await getSystemInfo()
   state.windowHeight = windowHeight
-  console.log(state.currenHeight)
-  state.currenHeight.isLookList = Array(state.currenHeight.itemHeightNum).fill(true)
+   state.currenHeight.isLookList = Array(state.currenHeight.itemHeightNum).fill(true)
   await shopMenuFun.initScrollView()
-  console.log(state.currenHeight.itemHeightNum);
   await defineLeftFun.getClassifyElement()
   await defineRightFun.getElementTop()
   await shopMenuFun.getElementItemHeight()
-  await nextTick()
-  shopMenuFun.onScrollIntersectionObserverBlock()
 })
 </script>
 

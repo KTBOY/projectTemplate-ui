@@ -34,7 +34,7 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		function handlerPageRouter() {
+		function handlerPageRouter(val) {
 			uni.navigateTo({
 				url: val.path
 			});
