@@ -1,14 +1,22 @@
+<!--
+ * @Author: zlc
+ * @Date: 2021-08-19 14:33:58
+ * @LastEditTime: 2022-10-10 17:08:00
+ * @LastEditors: zlc
+ * @Description: 
+ * @FilePath: \demoTest\pages\chanyong\buzhoutiao\index.vue
+-->
 <template>
 	<view>
 		<view class="title">步骤条</view>
 		<view class="head_steps">
-		<!-- 	<Buzhoutiao :numList="numList" :steps="3">
+			<Buzhoutiao :numList="numList" :steps="3">
 				<template slot='icon' slot-scope="val">
 					<view class="step_icon" :class="{step_icon_no:val.index>2}">
 						{{val.index+1}}
 					</view>
 				</template>
-		</Buzhoutiao> -->
+		</Buzhoutiao>
 		</view>
 	</view>
 </template>

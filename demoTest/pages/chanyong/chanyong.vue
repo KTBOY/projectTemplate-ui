@@ -1,3 +1,11 @@
+<!--
+ * @Author: zlc
+ * @Date: 2021-08-13 13:46:23
+ * @LastEditTime: 2022-10-10 17:08:21
+ * @LastEditors: zlc
+ * @Description: 
+ * @FilePath: \demoTest\pages\chanyong\chanyong.vue
+-->
 <template>
 	<view>
 		<view class="box">
@@ -31,7 +39,7 @@ export default {
 				},
 				{
 					name: '手风琴',
-					url:''
+					url:'/pages/chanyong/shoufengq/index'
 					
 				},
 				{
