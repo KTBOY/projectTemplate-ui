@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-09-05 11:50:05
+ * @LastEditTime: 2022-10-13 14:32:11
  * @LastEditors: zlc
  * @Description: 
  * @FilePath: \project-template\uni_template\components\features\shopMenu\indexMoreData.vue
@@ -72,26 +72,24 @@
           <view class="info">
             <view class="item-parent" :id="['right-' + index]" v-for="(item, index) in test" :key="item.id">
               <!-- 真实块 -->
-              <view class="class-item" :id="`uid-class-${index}`" :data-index="index">
-                <block v-if="state.currenHeight.isLookList[index]">
-                  <block v-for="(item1, index1) in item.data" :key="index1">
+              <block v-for="(item1, index1) in item.data" :key="index1">
+                <view v-if="state.currenHeight.isLookList[index]">
+                  <view class="class-item" >
                     <view class="thumb-box item-food">
                       <view class="left-info" @click="hadlerShopDetail(item)">
                         <image :src="item1.image" class="item-image"></image>
                       </view>
                       <view class="right-info">
-                        <view class="goods-title" @click="hadlerShopDetail(item)">{{ item.name }}</view>
+                        <view class="goods-title" @click="hadlerShopDetail(item)"> {{ item.name }}</view>
                       </view>
                     </view>
-                  </block>
-                </block>
+                  </view>
+                </view>
                 <!-- 虚拟块 -->
                 <block v-else>
-                  <view :style="{ height: `${state.currenHeight.number[index] * 130}px` }">
-                    <block> </block>
-                  </view>
+                  <view :style="{ height: `${synthesizeItemHeight[index].list[index1]}px` }"> </view>
                 </block>
-              </view>
+              </block>
             </view>
           </view>
           <view class="fill-last" :style="{ height: state.fillHeight + 'px' }"></view>
@@ -123,16 +121,10 @@ const state = reactive({
   windowHeight: 0,
   scrollTopSize: 0,
   fillHeight: 0,
-  uId: '',
   currenHeight: {
     number: [2, 2, 2, 2, 2, 2, 2, 2],
     isLookList: [],
     itemHeight: 130,
-    itemHeightNum: computed(() => {
-      console.log(synthesizeItemHeight);
-      return synthesizeItemHeight
-     // return Math.ceil(state.windowHeight / (synthesizeItemHeight.list[defineLeft.index]))
-    }),
   },
 })
 const defineLeft = reactive({
@@ -154,23 +146,30 @@ const defineRight = reactive({
 const leftIntoView = computed(() => {
   return `left-${defineLeft.index > 1 ? defineLeft.index - 2 : 0}`
 })
-const synthesizeItemHeight= computed(() => {
-      if (!props.test.length) return
-      let countList = []
-      for (let index = 0; index < props.test.length; index++) {
-        const element = props.test[index]
-        let data = {
-          list: [],
-          count: 0,
-        }
-        console.log('a',  element);
-         const len = element.data[index].length
-          data.list.push(len * state.currenHeight.itemHeight)
-          data.count = data.list.length * state.currenHeight.itemHeight
-      }
-      console.log(countList);
-      return countList
-    })
+const synthesizeItemHeight = computed(() => {
+  if (!props.test.length) return
+  let countList = []
+  for (let index = 0; index < props.test.length; index++) {
+    let data = {
+      list: [],
+      count: 0,
+    }
+    const element = props.test[index]
+    console.log(element.data[index])
+    const len = element.data.length
+    data.list.push(len * state.currenHeight.itemHeight)
+    data.count = data.list.length * state.currenHeight.itemHeight
+    countList.push(data)
+  }
+
+  console.log('虚拟高度', countList)
+  return countList
+})
+const windowItemCount=computed(()=>{
+
+
+  return Math.ceil(state.windowHeight / synthesizeItemHeight.value[defineLeft.index].count)
+})
 
 //左侧切换分类
 const leftClickButton = async (value) => {
@@ -241,10 +240,6 @@ const scrolltolower = (e) => {
   defineRight.isSole = true
 }
 const shopMenuFun = {
-
-  
-
-
   //获取当前可滚动区域，距离头部的距离
   initScrollView() {
     return new Promise((resolve, reject) => {
@@ -259,33 +254,39 @@ const shopMenuFun = {
   },
 
   //获取当前itemHeigh的高度
-  getElementItemHeight(){
-     return new Promise((resolve,reject)=>{
-      query.select('.thumb-box').boundingClientRect((res)=>{
-        state.currenHeight.itemHeight=res.height
-        resolve()
-      }).exec()
-     })
+  getElementItemHeight() {
+    return new Promise((resolve, reject) => {
+      query
+        .select('.thumb-box')
+        .boundingClientRect((res) => {
+          state.currenHeight.itemHeight = res.height
+          resolve()
+        })
+        .exec()
+    })
   },
-  
 
   onScrollIntersectionObserverBlock() {
     uni
       .createIntersectionObserver(this)
       .relativeToViewport({ top: 100, bottom: 100 })
-      .observe(`#uid-class-${defineLeft.index}`, async (res) => {
+      .observe(`#right-${defineLeft.index}`, async (res) => {
         //总高度/item=item数
         //const itemHeightNum = Math.ceil(state.windowHeight / (state.currenHeight.number[defineLeft.index] * 130))
 
         if (res.intersectionRatio) {
           const currenIndex = defineLeft.index
-          let end = currenIndex + state.currenHeight.itemHeightNum
+          let end = currenIndex + windowItemCount.value
+          console.log(end);
           for (let index = defineLeft.index; index < end; index++) {
             state.currenHeight.isLookList[index] = true
+            
           }
         } else {
-         // state.currenHeight.isLookList[res.dataset.index] = false
+           state.currenHeight.isLookList[res.dataset.index] = false
         }
+
+        console.log( state.currenHeight);
       })
   },
 }
@@ -293,11 +294,12 @@ const shopMenuFun = {
 onMounted(async () => {
   const { windowHeight } = await getSystemInfo()
   state.windowHeight = windowHeight
-   state.currenHeight.isLookList = Array(state.currenHeight.itemHeightNum).fill(true)
+  state.currenHeight.isLookList = Array(windowItemCount.value).fill(true)
   await shopMenuFun.initScrollView()
   await defineLeftFun.getClassifyElement()
   await defineRightFun.getElementTop()
   await shopMenuFun.getElementItemHeight()
+
 })
 </script>
 

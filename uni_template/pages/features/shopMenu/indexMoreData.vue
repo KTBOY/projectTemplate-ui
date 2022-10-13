@@ -1,7 +1,7 @@
 <!--
  * @Author: zlc
  * @Date: 2022-08-01 18:01:02
- * @LastEditTime: 2022-08-31 16:38:21
+ * @LastEditTime: 2022-10-13 10:22:00
  * @LastEditors: zlc
  * @Description: 商城菜单大量数据版
  * @FilePath: \project-template\uni_template\pages\features\shopMenu\indexMoreData.vue
@@ -29,7 +29,7 @@ export default {
           name: `${index}人`,
           data: [
             {
-              classify: `${index}号`,
+              classify: `${index}号2`,
               lazyLoad: false,
               defaut: '/static/image/commer/defaut.png',
               image: 'https://img2.baidu.com/it/u=3995102021,1242293358&fm=253&fmt=auto&app=138&f=JPEG?w=774&h=500',
